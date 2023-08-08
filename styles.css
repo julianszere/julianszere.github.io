@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+main {
+    margin: 4em;
+}
+
+.blog-post {
+    padding: 4em;
+    margin-bottom: 2em;
+    text-align: justify; /* Add this line to justify the text */
+}
+
+.blog-post h2 {
+    margin-top: 0; /* Remove top margin from h2 elements */
+}
+
+img {
+    max-width: 100%;
+    max-height: 100vh; /* Set a maximum height based on viewport height */
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}
+
+.image-subtitle {
+    font-style: italic;
+}
+
+.tab-container {
+    text-align: center;
+    margin: 1em 0;
+}
+
+.tab-button {
+    background-color: #f2f2f2;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab-button.active {
+    background-color: #333;
+    color: white;
+    /* Add extra highlight to the active button */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.tab-content {
+    display: none;
+}
+
+

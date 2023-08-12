@@ -4,25 +4,39 @@ class Blog {
         this.textPostsContainer = document.getElementById('textPosts');
         this.imageTabButton = document.getElementById('imageTab');
         this.textTabButton = document.getElementById('textTab');
+        this.floatingThoughtsContainer = document.getElementById('floatingThoughts');
+        this.floatingThoughtsTabButton = document.getElementById('floatingThoughtsTab'); // Add this line
     }
+    
 
     init() {
-        this.fetchAndDisplayPosts('texts_data.json');
-        this.fetchAndDisplayPosts('images_data.json');
-
+        this.fetchAndDisplayPosts('data/texts_data.json');
+        this.fetchAndDisplayPosts('data/images_data.json');
+    
         this.imageTabButton.addEventListener('click', () => {
             this.imagePostsContainer.style.display = 'block';
             this.textPostsContainer.style.display = 'none';
-            this.activateTab(this.imageTabButton, this.textTabButton);
+            this.floatingThoughtsContainer.style.display = 'none';
+            this.activateTab(this.imageTabButton, this.textTabButton, this.floatingThoughtsTabButton);
         });
-
+    
         this.textTabButton.addEventListener('click', () => {
             this.imagePostsContainer.style.display = 'none';
             this.textPostsContainer.style.display = 'block';
-            this.activateTab(this.textTabButton, this.imageTabButton);
+            this.floatingThoughtsContainer.style.display = 'none';
+            this.activateTab(this.textTabButton, this.imageTabButton, this.floatingThoughtsTabButton);
+        });
+    
+        this.floatingThoughtsTabButton.addEventListener('click', () => {
+            this.imagePostsContainer.style.display = 'none';
+            this.textPostsContainer.style.display = 'none';
+            this.floatingThoughtsContainer.style.display = 'block';
+            this.activateTab(this.floatingThoughtsTabButton, this.imageTabButton, this.textTabButton);
+            this.createFloatingThoughts();
         });
     }
-
+    
+    
     fetchAndDisplayPosts(data) {
         const postType = data;
         fetch(data)
@@ -36,9 +50,9 @@ class Blog {
                     title.textContent = item.title;
                     postElement.appendChild(title);
                     
-                    if (postType === 'texts_data.json') {
+                    if (postType === 'data/texts_data.json') {
                         this.addTextPost(postElement, item);
-                    } else if (postType === 'images_data.json') {
+                    } else if (postType === 'data/images_data.json') {
                         this.addImagePost(postElement, item);
                     }
                 });
@@ -88,11 +102,18 @@ class Blog {
         this.textPostsContainer.style.display = 'block';
     }
 
-    activateTab(activeTab, inactiveTab) {
+    activateTab(activeTab, ...inactiveTabs) {
+        // Remove 'active' class from all tab buttons
+        for (const tab of [activeTab, ...inactiveTabs]) {
+            tab.classList.remove('active');
+        }
+        
+        // Add 'active' class to the active tab button
         activeTab.classList.add('active');
-        inactiveTab.classList.remove('active');
-    }
+    }    
 }
 
 const blog = new Blog();
 blog.init();
+
+

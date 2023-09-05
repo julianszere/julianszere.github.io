@@ -5,7 +5,7 @@ class Blog {
         this.imageTabButton = document.getElementById('imageTab');
         this.textTabButton = document.getElementById('textTab');
         this.floatingThoughtsContainer = document.getElementById('floatingThoughts');
-        this.floatingThoughtsTabButton = document.getElementById('floatingThoughtsTab'); // Add this line
+        this.floatingThoughtsTabButton = document.getElementById('floatingThoughtsTab');
     }
     
 

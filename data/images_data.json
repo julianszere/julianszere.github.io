@@ -59,8 +59,14 @@
     },
     {
         "title": "Cielo azul cansado",
-        "subtitle": "Cansado está el mar de que las gentes vayan a sentirlo; rompe las olas con pereza",
+        "subtitle": "Cansado está el mar de que vayan a sentirlo; rompe las olas con pereza",
         "image": "azulcansado.JPG"
+    },
+    {
+        "image": "carcel.JPG"
+    },
+    {
+        "image": "cienaga2.JPG"
     }
 ]
   

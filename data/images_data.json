@@ -4,9 +4,6 @@
         "image": "P1260840.JPG"
     },
     {
-        "image": "P1260535.JPG"
-    },
-    {
         "image": "P1260594.JPG"
     },
     {
@@ -23,9 +20,6 @@
     },
     {
         "image": "P1260591.JPG"
-    },
-    {
-        "image": "P1260629.JPG"
     },
     {
         "image": "P1260687.JPG"
@@ -49,18 +43,24 @@
         "image": "P1260825.JPG"
     },
     {
-        "title": "La raja entre los mundos", 
+        "subtitle": "La raja entre los mundos", 
         "image": "P1250230.JPG"
     },
     {
-        "title": "La ciénaga",
+        "subtitle": "La ciénaga",
         "image": "P1250716.JPG"
     },
     {
         "image": "P1250629.JPG"
     },
     {
-        "image": "P1250601.JPG"
+        "subtitle": "El Perseguidor",
+        "image": "perseguidor.JPG"
+    },
+    {
+        "title": "Cielo azul cansado",
+        "subtitle": "Cansado está el mar de que las gentes vayan a sentirlo; rompe las olas con pereza",
+        "image": "azulcansado.JPG"
     }
 ]
   

@@ -34,6 +34,8 @@ class Blog {
             this.activateTab(this.floatingThoughtsTabButton, this.imageTabButton, this.textTabButton);
             this.createFloatingThoughts();
         });
+
+        this.floatingThoughtsTabButton.click();
     }
     
     
@@ -42,10 +44,13 @@ class Blog {
         fetch(data)
             .then(response => response.json())
             .then(data => {
+                // Shuffle the data array to randomize the order
+                data = shuffleArray(data);
+    
                 data.forEach(item => {
                     const postElement = document.createElement('div');
                     postElement.classList.add('blog-post');
-
+    
                     const title = document.createElement('h2');
                     title.textContent = item.title;
                     postElement.appendChild(title);
@@ -59,7 +64,6 @@ class Blog {
             })
             .catch(error => console.error('Error fetching data:', error));
         
-        this.activateDefaultTab();
     }
 
     addTextPost(container, item) {
@@ -89,17 +93,12 @@ class Blog {
             const subtitle = document.createElement('p');
             subtitle.classList.add('image-subtitle');
             subtitle.textContent = item.subtitle;
+            subtitle.style.textAlign = "right"; // Align text to the right
+            subtitle.style.maxWidth = "80%"; // Set a maximum width (adjust as needed)
             container.appendChild(subtitle);
-        }
+        }        
 
         this.imagePostsContainer.appendChild(container);
-    }
-
-    activateDefaultTab() {
-        this.textTabButton.classList.add('active');
-        this.imageTabButton.classList.remove('active');
-        this.imagePostsContainer.style.display = 'none';
-        this.textPostsContainer.style.display = 'block';
     }
 
     activateTab(activeTab, ...inactiveTabs) {
@@ -111,6 +110,15 @@ class Blog {
         // Add 'active' class to the active tab button
         activeTab.classList.add('active');
     }    
+}
+
+// Function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
 }
 
 const blog = new Blog();

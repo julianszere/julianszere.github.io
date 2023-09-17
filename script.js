@@ -1,47 +1,58 @@
 import { Texts } from './texts.js'; // Import the Texts class from the texts.js file
 import { Images } from './images.js';
+import { Thoughts } from './thoughts.js';
+import { Phrases } from './phrases.js';
 
 class Blog {
     constructor() {
         this.imagePostsContainer = document.getElementById('imagePosts');
         this.textPostsContainer = document.getElementById('textPosts');
-        this.floatingThoughtsContainer = document.getElementById('floatingThoughts');
-        this.imageTabButton = document.getElementById('imageTab');
-        this.textTabButton = document.getElementById('textTab');
-        this.floatingThoughtsTabButton = document.getElementById('floatingThoughtsTab');
+        this.thoughtsContainer = document.getElementById('thoughtsPosts');
+        this.phrasesContainer = document.getElementById('phrasesPosts');
+        this.postContainers = [this.imagePostsContainer, this.textPostsContainer, this.thoughtsContainer, this.phrasesContainer];
 
-        this.tabButtons = [this.imageTabButton, this.textTabButton, this.floatingThoughtsTabButton]
-        this.postContainers = [this.imagePostsContainer, this.textPostsContainer, this.floatingThoughtsContainer]
+        this.imageTab = document.getElementById('imageTab');
+        this.textTab = document.getElementById('textTab');
+        this.thoughtsTab = document.getElementById('thoughtsTab');
+        this.phrasesTab = document.getElementById('phrasesTab');
+        this.tabs = [this.imageTab, this.textTab, this.thoughtsTab, this.phrasesTab];
 
         this.textsHandler = new Texts();
         this.imageshandler = new Images();
+        this.thoughtsHandler = new Thoughts();
+        this.phrasesHandler = new Phrases();
     }
     
 
     init() {
-        this.imageTabButton.addEventListener('click', () => {
+        this.imageTab.addEventListener('click', () => {
             this.blockPostContainer(this.imagePostsContainer)
-            this.activateTab(this.imageTabButton);
+            this.activateTab(this.imageTab);
         });
     
-        this.textTabButton.addEventListener('click', () => {
+        this.textTab.addEventListener('click', () => {
             this.blockPostContainer(this.textPostsContainer)
-            this.activateTab(this.textTabButton);
+            this.activateTab(this.textTab);
         });
     
-        this.floatingThoughtsTabButton.addEventListener('click', () => {
-            this.blockPostContainer(this.floatingThoughtsContainer)
-            this.activateTab(this.floatingThoughtsTabButton);
-            this.createFloatingThoughts();
+        this.thoughtsTab.addEventListener('click', () => {
+            this.blockPostContainer(this.thoughtsContainer)
+            this.activateTab(this.thoughtsTab);
         });
 
+        this.phrasesTab.addEventListener('click', () => {
+            this.blockPostContainer(this.phrasesContainer)
+            this.activateTab(this.phrasesTab);
+        });
+
+
         // The default is floating thoughts
-        this.floatingThoughtsTabButton.click();
+        this.thoughtsTab.click();
     }
 
     activateTab(tab) {
-        for (const tabButton of this.tabButtons) {
-            tabButton.classList.remove('active');
+        for (const tab of this.tabs) {
+            tab.classList.remove('active');
         }
         tab.classList.add('active');
     }

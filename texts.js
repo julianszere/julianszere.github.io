@@ -17,7 +17,7 @@ export class Texts {
 
     addTextPost(item) {
         const container = document.createElement('div');
-        container.classList.add('blog-post');
+        container.classList.add('text-post');
 
         const title = document.createElement('h2');
         title.textContent = item.title;

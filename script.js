@@ -1,6 +1,6 @@
-import { Texts } from './texts.js'; // Import the Texts class from the texts.js file
-import { Images } from './images.js';
-import { Thoughts } from './thoughts.js';
+import { TextBuilder } from './texts/TextBuilder.js'; // Import the Texts class from the texts.js file
+import { ImageBuilder } from './images/ImageBuilder.js';
+import { ThoughtBuilder } from './thoughts/ThoughtBuilder.js';
 import { Phrases } from './phrases.js';
 
 class Blog {
@@ -17,9 +17,9 @@ class Blog {
         this.phrasesTab = document.getElementById('phrasesTab');
         this.tabs = [this.imageTab, this.textTab, this.thoughtsTab, this.phrasesTab];
 
-        this.textsHandler = new Texts();
-        this.imageshandler = new Images();
-        this.thoughtsHandler = new Thoughts();
+        this.textBuilder = new TextBuilder();
+        this.imageBuilder = new ImageBuilder();
+        this.thoughtsHandler = new ThoughtBuilder();
         this.phrasesHandler = new Phrases();
     }
     

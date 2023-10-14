@@ -1,7 +1,12 @@
+import { Babel } from './Babel.js'
+
 export class TextBuilder {
     constructor() {
         this.textPostsContainer = document.getElementById('textPosts');
         this.fetchPosts('texts/data.json')
+        
+        let babelHelper = new Babel();
+        this.addTextPost(babelHelper.newCombination(babelHelper.titleVariables), babelHelper.newCombination(babelHelper.textVariables), babelHelper.newCombination(babelHelper.authorVariables))
     }
 
     fetchPosts(data) {
@@ -9,33 +14,46 @@ export class TextBuilder {
             .then(response => response.json())
             .then(data => {
                 data.forEach(item => {
-                    this.addTextPost(item)
+                    this.getContentAndPost(item.title, item.file)
                 })
             })
         .catch(error => console.error('Error fetching data:', error));
     }
 
-    addTextPost(item) {
-        const container = document.createElement('div');
-        container.classList.add('text-post');
-
-        const title = document.createElement('h2');
-        title.textContent = item.title;
-        container.appendChild(title);
-
-        const filePath = `texts/content/${item.file}`;
+    getContentAndPost(title, file) {
+        const filePath = `texts/content/${file}`;
         fetch(filePath)
             .then(response => response.text())
             .then(text => {
-                const paragraphs = text.split('\n');
-                paragraphs.forEach(paragraph => {
-                    const content = document.createElement('p');
-                    content.textContent = paragraph;
-                    container.appendChild(content);
-                });
-
-                this.textPostsContainer.appendChild(container);
+                this.addTextPost(title, text)
             })
             .catch(error => console.error('Error fetching text post:', error));
     }
+
+    addTextPost(title, text, author) {
+        const container = document.createElement('div');
+        container.classList.add('text-post');
+    
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = title;
+        container.appendChild(titleElement);
+    
+        const paragraphs = text.split('\n');
+        paragraphs.forEach(paragraph => {
+            const content = document.createElement('p');
+            content.textContent = paragraph;
+            container.appendChild(content);
+        });
+    
+        // Create an element for the author in italics and align it to the right
+        if (author) {
+            const authorElement = document.createElement('p');
+            authorElement.innerHTML = `<em>${author}</em>`;
+            authorElement.style.textAlign = 'right';
+            container.appendChild(authorElement);
+        }
+    
+        this.textPostsContainer.appendChild(container);
+    }
+    
 }

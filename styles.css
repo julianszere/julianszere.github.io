@@ -5,8 +5,9 @@ body {
     background-color: #ffffee; /* Set a warm background color */
 }
 
+
 main {
-    margin: 4em;
+    text-align: center; /* Center align all content in the main element */
 }
 
 .blog-post {

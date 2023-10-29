@@ -1,4 +1,4 @@
-export class Babel {
+export class BibliotecaTotal {
     constructor() {
         this.titleVariables = [
             ['La'],

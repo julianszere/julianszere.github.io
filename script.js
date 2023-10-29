@@ -5,63 +5,38 @@ import { Phrases } from './phrases.js';
 
 class Blog {
     constructor() {
-        this.imagesPostsContainer = document.getElementById('imagesPosts');
-        this.textsPostsContainer = document.getElementById('textsPosts');
-        this.thoughtsContainer = document.getElementById('thoughtsPosts');
-        this.phrasesContainer = document.getElementById('phrasesPosts');
-        this.postContainers = [this.imagesPostsContainer, this.textsPostsContainer, this.thoughtsContainer, this.phrasesContainer];
+        const textsBuilder = new TextBuilder();
+        const imagesBuilder = new ImageBuilder();
+        const thoughtsBuilder = new ThoughtBuilder();
+        const phrasesBuilder = new Phrases();
+        this.builders = [textsBuilder, imagesBuilder, thoughtsBuilder, phrasesBuilder];
 
-        this.imagesTab = document.getElementById('imageTab');
-        this.textsTab = document.getElementById('textsTab');
-        this.thoughtsTab = document.getElementById('thoughtsTab');
-        this.phrasesTab = document.getElementById('phrasesTab');
-        this.tabs = [this.imagesTab, this.textsTab, this.thoughtsTab, this.phrasesTab];
-
-        this.textsBuilder = new TextBuilder();
-        this.imagesBuilder = new ImageBuilder();
-        this.thoughtsHandler = new ThoughtBuilder();
-        this.phrasesHandler = new Phrases();
+        // The default is floating thoughts
+        imagesBuilder.tab.click();
     }
     
 
     init() {
-        this.imagesTab.addEventListener('click', () => {
-            this.blockPostContainer(this.imagesPostsContainer)
-            this.activateTab(this.imagesTab);
-        });
-    
-        this.textsTab.addEventListener('click', () => {
-            this.blockPostContainer(this.textsPostsContainer)
-            this.activateTab(this.textsTab);
-        });
-    
-        this.thoughtsTab.addEventListener('click', () => {
-            this.blockPostContainer(this.thoughtsContainer)
-            this.activateTab(this.thoughtsTab);
-        });
-
-        this.phrasesTab.addEventListener('click', () => {
-            this.blockPostContainer(this.phrasesContainer)
-            this.activateTab(this.phrasesTab);
-        });
-
-
-        // The default is floating thoughts
-        this.imagesTab.click();
+        this.builders.forEach(builder => {
+            builder.tab.addEventListener('click', () => {
+                this.blockPostContainer(builder.container);
+                this.activateTab(builder.tab);
+            })
+        })
     }
 
     activateTab(tab) {
-        for (const tab of this.tabs) {
-            tab.classList.remove('active');
+        for (const builder of this.builders) {
+            builder.tab.classList.remove('active');
         }
         tab.classList.add('active');
     }
 
-    blockPostContainer(tab) {
-        for (const postContainer of this.postContainers) {
-            postContainer.style.display = 'none';
+    blockPostContainer(container) {
+        for (const builder of this.builders) {
+            builder.container.style.display = 'none';
         }
-        tab.style.display = 'block';
+        container.style.display = 'block';
     }
 }
 

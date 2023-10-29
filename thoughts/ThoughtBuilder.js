@@ -1,6 +1,7 @@
 export class ThoughtBuilder {
     constructor() {
-        this.thoughtsContainer = document.getElementById('thoughtsPosts');
+        this.container = document.getElementById('thoughtsPosts');
+        this.tab = document.getElementById('thoughtsTab');
         this.fetchThoughts('thoughts/data.json');
         this.startAnimation();
     }
@@ -36,7 +37,7 @@ export class ThoughtBuilder {
         thought.dataset.horizontalSpeed = randomHorizontalSpeed;
         thought.dataset.verticalSpeed = randomVerticalSpeed;
 
-        this.thoughtsContainer.appendChild(thought);
+        this.container.appendChild(thought);
     }
 
     animateThoughts() {

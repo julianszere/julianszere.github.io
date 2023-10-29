@@ -1,11 +1,12 @@
-import { Babel } from './Babel.js'
+import { BibliotecaTotal } from './BibliotecaTotal.js'
 
 export class TextBuilder {
     constructor() {
-        this.textsPostsContainer = document.getElementById('textsPosts');
+        this.container = document.getElementById('textsPosts');
+        this.tab = document.getElementById('textsTab');
         this.fetchPosts('texts/data.json')
         
-        let babelHelper = new Babel();
+        let babelHelper = new BibliotecaTotal();
         this.addTextPost(babelHelper.newCombination(babelHelper.titleVariables), babelHelper.newCombination(babelHelper.textVariables), babelHelper.newCombination(babelHelper.authorVariables))
     }
 
@@ -53,7 +54,7 @@ export class TextBuilder {
             container.appendChild(authorElement);
         }
     
-        this.textsPostsContainer.appendChild(container);
+        this.container.appendChild(container);
     }
     
 }

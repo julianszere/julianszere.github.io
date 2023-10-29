@@ -41,13 +41,14 @@ main {
 }
 
 img {
-    max-width: 90vw;
-    max-height: 90vh; /* Set a maximum height based on viewport height */
+    max-width: 100%; /* Set the maximum width to 100% of the container */
+    max-height: 100vh; /* Set the maximum height to 100% of the viewport height */
     width: auto;
     height: auto;
     display: block;
-    margin: auto;
+    margin: 0 auto; /* Center horizontally by setting left and right margins to 'auto' */
 }
+
 
 .image-subtitle {
     font-style: italic;

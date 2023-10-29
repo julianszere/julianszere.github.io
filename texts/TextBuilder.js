@@ -2,7 +2,7 @@ import { Babel } from './Babel.js'
 
 export class TextBuilder {
     constructor() {
-        this.textPostsContainer = document.getElementById('textPosts');
+        this.textsPostsContainer = document.getElementById('textsPosts');
         this.fetchPosts('texts/data.json')
         
         let babelHelper = new Babel();
@@ -53,7 +53,7 @@ export class TextBuilder {
             container.appendChild(authorElement);
         }
     
-        this.textPostsContainer.appendChild(container);
+        this.textsPostsContainer.appendChild(container);
     }
     
 }

@@ -5,34 +5,34 @@ import { Phrases } from './phrases.js';
 
 class Blog {
     constructor() {
-        this.imagePostsContainer = document.getElementById('imagePosts');
-        this.textPostsContainer = document.getElementById('textPosts');
+        this.imagesPostsContainer = document.getElementById('imagesPosts');
+        this.textsPostsContainer = document.getElementById('textsPosts');
         this.thoughtsContainer = document.getElementById('thoughtsPosts');
         this.phrasesContainer = document.getElementById('phrasesPosts');
-        this.postContainers = [this.imagePostsContainer, this.textPostsContainer, this.thoughtsContainer, this.phrasesContainer];
+        this.postContainers = [this.imagesPostsContainer, this.textsPostsContainer, this.thoughtsContainer, this.phrasesContainer];
 
-        this.imageTab = document.getElementById('imageTab');
-        this.textTab = document.getElementById('textTab');
+        this.imagesTab = document.getElementById('imageTab');
+        this.textsTab = document.getElementById('textsTab');
         this.thoughtsTab = document.getElementById('thoughtsTab');
         this.phrasesTab = document.getElementById('phrasesTab');
-        this.tabs = [this.imageTab, this.textTab, this.thoughtsTab, this.phrasesTab];
+        this.tabs = [this.imagesTab, this.textsTab, this.thoughtsTab, this.phrasesTab];
 
-        this.textBuilder = new TextBuilder();
-        this.imageBuilder = new ImageBuilder();
+        this.textsBuilder = new TextBuilder();
+        this.imagesBuilder = new ImageBuilder();
         this.thoughtsHandler = new ThoughtBuilder();
         this.phrasesHandler = new Phrases();
     }
     
 
     init() {
-        this.imageTab.addEventListener('click', () => {
-            this.blockPostContainer(this.imagePostsContainer)
-            this.activateTab(this.imageTab);
+        this.imagesTab.addEventListener('click', () => {
+            this.blockPostContainer(this.imagesPostsContainer)
+            this.activateTab(this.imagesTab);
         });
     
-        this.textTab.addEventListener('click', () => {
-            this.blockPostContainer(this.textPostsContainer)
-            this.activateTab(this.textTab);
+        this.textsTab.addEventListener('click', () => {
+            this.blockPostContainer(this.textsPostsContainer)
+            this.activateTab(this.textsTab);
         });
     
         this.thoughtsTab.addEventListener('click', () => {
@@ -47,7 +47,7 @@ class Blog {
 
 
         // The default is floating thoughts
-        this.thoughtsTab.click();
+        this.imagesTab.click();
     }
 
     activateTab(tab) {

@@ -1,6 +1,6 @@
 export class ImageBuilder {
     constructor() {
-        this.imagePostsContainer = document.getElementById('imagePosts');
+        this.imagesPostsContainer = document.getElementById('imagesPosts');
         this.fetchPosts('images/data.json')
     }
 
@@ -38,7 +38,7 @@ export class ImageBuilder {
             container.appendChild(subtitle);
         }        
 
-        this.imagePostsContainer.appendChild(container);
+        this.imagesPostsContainer.appendChild(container);
     }
 }
 

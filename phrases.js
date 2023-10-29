@@ -1,6 +1,6 @@
 export class Phrases {
     constructor() {
-        this.textPostsContainer = document.getElementById('phrasesPosts');
+        this.textsPostsContainer = document.getElementById('phrasesPosts');
         this.fetchPosts('data/phrases_data.json')
     }
 
@@ -32,7 +32,7 @@ export class Phrases {
                 author.innerHTML = `<em>${item.author}</em>`;
                 container.appendChild(author);
 
-                this.textPostsContainer.appendChild(container);
+                this.textsPostsContainer.appendChild(container);
             })
             .catch(error => console.error('Error fetching text post:', error));
     }

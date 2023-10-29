@@ -11,7 +11,7 @@ class Blog {
         const phrasesBuilder = new Phrases();
         this.builders = [textsBuilder, imagesBuilder, thoughtsBuilder, phrasesBuilder];
 
-        // The default is floating thoughts
+        // The default is images
         imagesBuilder.tab.click();
     }
     

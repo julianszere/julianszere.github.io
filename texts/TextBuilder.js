@@ -1,4 +1,5 @@
 import { BibliotecaTotal } from './BibliotecaTotal.js'
+import { SayNothing} from './SayNothing.js'
 
 export class TextBuilder {
     constructor() {
@@ -8,6 +9,8 @@ export class TextBuilder {
         
         let babelHelper = new BibliotecaTotal();
         this.addTextPost(babelHelper.newCombination(babelHelper.titleVariables), babelHelper.newCombination(babelHelper.textVariables), babelHelper.newCombination(babelHelper.authorVariables))
+        let nothingHelper = new SayNothing()
+        this.addTextPost('Mi opinión', nothingHelper.generateSentences())
     }
 
     fetchPosts(data) {

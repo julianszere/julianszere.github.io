@@ -12,7 +12,7 @@ class Blog {
         this.builders = [textsBuilder, imagesBuilder, thoughtsBuilder, phrasesBuilder];
 
         // The default is images
-        imagesBuilder.tab.click();
+        this.activateTab(imagesBuilder.tab);
     }
     
 

@@ -1,4 +1,4 @@
-export class BibliotecaTotal {
+export class LibraryHelper {
     constructor() {
         this.titleVariables = [
             ['La'],

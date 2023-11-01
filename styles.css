@@ -10,20 +10,13 @@ main {
     text-align: center; /* Center align all content in the main element */
 }
 
-.blog-post {
-    padding: 4em;
-    margin-bottom: 2em;
-    text-align: justify; /* Add this line to justify the text */
-}
 
-.blog-post h2 {
-    margin-top: 0; /* Remove top margin from h2 elements */
-}
 
 .text-post {
     font-size: 18px;
     margin-left: 10vw; /* Increase left margin */
     margin-right: 10vw; /* Increase right margin */
+    text-align: justify; /* Add this line to justify the text */
 }
 
 .phrase-post p {
@@ -47,6 +40,7 @@ img {
     height: auto;
     display: block;
     margin: 0 auto; /* Center horizontally by setting left and right margins to 'auto' */
+    margin-top: 5em;
 }
 
 

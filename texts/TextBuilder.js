@@ -1,5 +1,5 @@
-import { BibliotecaTotal } from './BibliotecaTotal.js'
-import { SayNothing} from './SayNothing.js'
+import { LibraryHelper } from './LibraryHelper.js'
+import { NothingHelper } from './NothingHelper.js'
 
 export class TextBuilder {
     constructor() {
@@ -7,9 +7,9 @@ export class TextBuilder {
         this.tab = document.getElementById('textsTab');
         this.fetchPosts('texts/data.json')
         
-        let babelHelper = new BibliotecaTotal();
-        this.addTextPost(babelHelper.newCombination(babelHelper.titleVariables), babelHelper.newCombination(babelHelper.textVariables), babelHelper.newCombination(babelHelper.authorVariables))
-        let nothingHelper = new SayNothing()
+        let libraryHelper = new LibraryHelper();
+        this.addTextPost(libraryHelper.newCombination(libraryHelper.titleVariables), libraryHelper.newCombination(libraryHelper.textVariables), libraryHelper.newCombination(libraryHelper.authorVariables))
+        let nothingHelper = new NothingHelper()
         this.addTextPost('Mi opinión', nothingHelper.generateSentences())
     }
 
@@ -59,5 +59,4 @@ export class TextBuilder {
     
         this.container.appendChild(container);
     }
-    
 }

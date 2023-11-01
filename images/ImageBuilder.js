@@ -19,7 +19,7 @@ export class ImageBuilder {
 
     addImagePost(item) {
         const container = document.createElement('div');
-        container.classList.add('blog-post');
+        container.classList.add('img');
 
         const title = document.createElement('h2');
         title.textContent = item.title;

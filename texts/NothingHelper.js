@@ -1,4 +1,4 @@
-export class SayNothing {
+export class NothingHelper {
     constructor() {
         this.data = {
             I: [

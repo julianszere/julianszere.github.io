@@ -1,15 +1,15 @@
 import { TextBuilder } from './texts/TextBuilder.js'; // Import the Texts class from the texts.js file
 import { ImageBuilder } from './images/ImageBuilder.js';
 import { ThoughtBuilder } from './thoughts/ThoughtBuilder.js';
-import { Phrases } from './phrases.js';
+import { RepeatBuilder } from './repeats/RepeatBuilder.js';
 
 class Blog {
     constructor() {
         const textsBuilder = new TextBuilder();
         const imagesBuilder = new ImageBuilder();
         const thoughtsBuilder = new ThoughtBuilder();
-        const phrasesBuilder = new Phrases();
-        this.builders = [textsBuilder, imagesBuilder, thoughtsBuilder, phrasesBuilder];
+        const repeatsBuilder = new RepeatBuilder();
+        this.builders = [textsBuilder, imagesBuilder, thoughtsBuilder, repeatsBuilder];
 
         // The default is images
         this.activateTab(imagesBuilder.tab);

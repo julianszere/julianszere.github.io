@@ -1,16 +1,8 @@
-import { LibraryHelper } from './LibraryHelper.js'
-import { NothingHelper } from './NothingHelper.js'
-
 export class TextBuilder {
     constructor() {
         this.container = document.getElementById('textsPosts');
         this.tab = document.getElementById('textsTab');
         this.fetchPosts('texts/data.json')
-        
-        let libraryHelper = new LibraryHelper();
-        this.addTextPost(libraryHelper.newCombination(libraryHelper.titleVariables), libraryHelper.newCombination(libraryHelper.textVariables), libraryHelper.newCombination(libraryHelper.authorVariables))
-        let nothingHelper = new NothingHelper()
-        this.addTextPost('Mi opinión', nothingHelper.generateSentences())
     }
 
     fetchPosts(data) {

@@ -19,6 +19,20 @@ main {
     text-align: justify; /* Add this line to justify the text */
 }
 
+.title-reload-container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    align-items: center; /* Center vertically */
+}
+
+.reload-button {
+    font-size: 16px; /* Adjust the font size */
+    background: none; /* Make the button background transparent */
+    border: none; /* Remove borders */
+    margin-left: 10px; /* Add margin between title and button */
+    cursor: pointer;
+}
+
+
 .phrase-post p {
     margin: 20px;
     text-align: right;
@@ -35,7 +49,7 @@ main {
 
 img {
     max-width: 100%; /* Set the maximum width to 100% of the container */
-    max-height: 100vh; /* Set the maximum height to 100% of the viewport height */
+    max-height: 90vh; /* Set the maximum height to 100% of the viewport height */
     width: auto;
     height: auto;
     display: block;

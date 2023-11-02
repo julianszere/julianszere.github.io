@@ -1,6 +1,6 @@
 export class NothingHelper {
     constructor() {
-        this.data = {
+        this.textVariables = {
             I: [
                 'Queridos compañeros,',
                 'Por otra parte, y dados los condicionamientos actuales',
@@ -73,26 +73,30 @@ export class NothingHelper {
         this.repeatCount = 10;
     }
 
-    generateSentences() {
+    newCombination(data) {
+        const variables = { ...data }; // Create a copy of the data
         const sentences = [];
         for (let i = 0; i < this.repeatCount; i++) {
-            let s1 = this.rand(this.data.I);
-            console.log(s1)
-            let s2 = this.rand(this.data.II);
-            let s3 = this.rand(this.data.III);
-            let s4 = this.rand(this.data.IV);
-            const sentence = `${s1} ${s2} ${s3} ${s4}`
+            let s1 = this.rand([...variables.I]); // Create a copy of the array
+            let s2 = this.rand([...variables.II]); // Create a copy of the array
+            let s3 = this.rand([...variables.III]); // Create a copy of the array
+            let s4 = this.rand([...variables.IV]); // Create a copy of the array
+            const sentence = `${s1} ${s2} ${s3} ${s4}`;
             sentences.push(sentence);
         }
-
+    
         return sentences.join(' ');
     }
-
+    
     rand(array) {
         const randomIndex = Math.floor(Math.random() * array.length);
-        const randomElement = array.splice(randomIndex, 1)[0];
+        const randomElement = array[randomIndex];
         return randomElement;
-    }    
+    }
+    
+    getTitleTextAndAuthor() {
+        return ['Mi opinión', this.newCombination(this.textVariables), 'General José de San Martín']
+    }
 }
 
 

@@ -203,4 +203,8 @@ export class LibraryHelper {
         }
         return text;
     }
+
+    getTitleTextAndAuthor() {
+        return [this.newCombination(this.titleVariables), this.newCombination(this.textVariables), this.newCombination(this.authorVariables)]
+    }
 }

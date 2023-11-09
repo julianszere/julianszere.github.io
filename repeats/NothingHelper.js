@@ -95,7 +95,7 @@ export class NothingHelper {
     }
     
     getTitleTextAndAuthor() {
-        return ['Mi opinión', this.newCombination(this.textVariables), 'General José de San Martín']
+        return ['Mi opinión', this.newCombination(this.textVariables), false]
     }
 }
 

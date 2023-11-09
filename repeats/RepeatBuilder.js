@@ -1,3 +1,4 @@
+import { PhrasesHelper } from '../repeats/PhrasesHelper.js';
 import { LibraryHelper } from '../repeats/LibraryHelper.js';
 import { NothingHelper } from '../repeats/NothingHelper.js';
 
@@ -6,9 +7,11 @@ export class RepeatBuilder {
         this.container = document.getElementById('repeatsPosts');
         this.tab = document.getElementById('repeatsTab');
 
+        const phrasesHelper = new PhrasesHelper();
         const libraryHelper = new LibraryHelper();
         const nothingHelper = new NothingHelper();
 
+        this.createAndAddTextPost(phrasesHelper);
         this.createAndAddTextPost(libraryHelper);
         this.createAndAddTextPost(nothingHelper);
     }
@@ -31,8 +34,7 @@ export class RepeatBuilder {
             container.appendChild(content);
         });
 
-        const authorElement = this.createAuthorElement(author);
-        container.appendChild(authorElement);
+        const authorElement = this.createAuthorElement(author, container);
 
         this.container.appendChild(container);
     }
@@ -64,19 +66,6 @@ export class RepeatBuilder {
         return reloadButton;
     }
 
-    createParagraph(paragraph) {
-        const content = document.createElement('p');
-        content.textContent = paragraph;
-        return content;
-    }
-
-    createAuthorElement(author) {
-        const authorElement = document.createElement('p');
-        authorElement.innerHTML = `<em>${author}</em>`;
-        authorElement.style.textAlign = 'right';
-        return authorElement;
-    }
-
     updateTextPost(container, title, text, author) {
         const titleElement = container.querySelector('h2');
         titleElement.textContent = title;
@@ -92,10 +81,22 @@ export class RepeatBuilder {
             container.appendChild(content);
         });
 
-        const authorElement = document.createElement('p');
-        authorElement.innerHTML = `<em>${author}</em>`;
-        authorElement.style.textAlign = 'right';
-        container.appendChild(authorElement); // Append the new author element
+        this.createAuthorElement(author, container)
+    }
+
+    createParagraph(paragraph) {
+        const content = document.createElement('p');
+        content.textContent = paragraph;
+        return content;
+    }
+
+    createAuthorElement(author, container) {
+        if (author) {
+            const authorElement = document.createElement('p');
+            authorElement.innerHTML = `<em>${author}</em>`;
+            authorElement.style.textAlign = 'right';
+            container.appendChild(authorElement);
+        }
     }
 }
 

@@ -60,11 +60,12 @@ export class RepeatBuilder {
 
     createReloadButton(onReload) {
         const reloadButton = document.createElement('button');
-        reloadButton.innerHTML = '&#x21ba;'; // Unicode for reload icon
+        reloadButton.innerHTML = '<img src="repeats/icon.png" alt="Reload">';
         reloadButton.classList.add('reload-button');
         reloadButton.addEventListener('click', onReload);
         return reloadButton;
     }
+    
 
     updateTextPost(container, title, text, author) {
         const titleElement = container.querySelector('h2');

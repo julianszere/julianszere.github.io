@@ -1,111 +1,109 @@
-body {
-    font-family: Arial, sans-serif;
+body, html {
     margin: 0;
     padding: 0;
-    background-color: #ffffee; /* Set a warm background color */
+    height: 100%;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-
-main {
-    text-align: center; /* Center align all content in the main element */
+.container {
+    text-align: left; /* Align contents to the right */
+    padding-top: 20px; /* Add padding to create space for the icon */
+    padding-left: 100px;
 }
 
-
-
-.text-post {
-    font-size: 18px;
-    margin-left: 10vw; /* Increase left margin */
-    margin-right: 10vw; /* Increase right margin */
-    text-align: justify; /* Add this line to justify the text */
+.icon-container {
+    text-align: center; /* Center the icon */
 }
 
-.title-reload-container {
-    display: flex;
-    align-items: center;
+.icon {
+    width: 100px; /* Set width of the icon */
+    height: 100px; /* Set height of the icon */
+    border-radius: 50%; /* Make the image circular */
 }
 
-.reload-button {
-    background: none;
-    border: none;
-    display: flex; /* Add display flex */
-    align-items: center; /* Center items vertically */
-    margin-left: 5px;
-    cursor: pointer;
-    padding: 0;
-    opacity: 0.7;
+.icon-line {
+    position: absolute;
+    left: 50%; /* Position it in the center */
+    transform: translateX(-25%); /* Center horizontally */
+    width: 200px; /* Adjust width as needed */
+    
 }
 
-
-.reload-button img {
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
+.links {
+    flex: 1;
+    text-align: left;
 }
 
-
-
-.phrase-post p {
-    margin: 20px;
-    text-align: right;
-    font-size: 18px; 
-    font-style: italic; 
-    margin-left: 10vw; /* Increase left margin */
-    margin-right: 10vw; /* Increase right margin */
+.link-item {
+    margin-bottom: 50px;
 }
 
-.phrase-post .author {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-img {
-    max-width: 100%; /* Set the maximum width to 100% of the container */
-    max-height: 90vh; /* Set the maximum height to 100% of the viewport height */
-    width: auto;
-    height: auto;
+a {
+    margin-top:20px;
     display: block;
-    margin: 0 auto; /* Center horizontally by setting left and right margins to 'auto' */
-    margin-top: 5em;
+    margin-bottom: 10px; /* Increase the margin between links */
+    font-size: 24px; /* Increase font size */
+    color: black; /* Set text color to black */
+    text-decoration: none; /* Remove underline */
+    outline: none; /* Remove browser default outline */
+    color: blue;
 }
 
-
-.image-subtitle {
-    font-style: italic;
+a:hover {
+    text-decoration: underline; /* Underline on hover */
 }
 
-.thought {
-    /* Add word wrap and set maximum width for thoughts */
-    max-width: 200px; /* Adjust the value as needed */
-    word-wrap: break-word;
-    white-space: normal;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 4px;
-    padding: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.link-text {
+    font-size: 16px; /* Adjust font size */
+    color: gray; /* Set text color for link text */
+    padding-left: 20px;
+}
+
+.leer-container {
     text-align: center;
+    margin-top: 20px;
 }
 
-.tab-container {
-    text-align: center;
-    margin: 1em 0;
-}
-
-.tab-button {
-    background-color: #f2f2f2;
+#leerButton {
+    padding: 0px;
+    font-size: 24px; /* Increase font size */
+    color: blue; /* Set text color to blue */
+    text-decoration: none; /* Remove underline */
+    outline: none; /* Remove browser default outline */
     border: none;
-    color: #333;
-    padding: 10px 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: transparent;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-.tab-button.active {
+#leerButton:hover {
+    text-decoration: underline; /* Underline text on hover */
+}
+
+/* Style the tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style the tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
     background-color: #333;
-    color: white;
-    /* Add extra highlight to the active button */
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+
+    left: 100%;
+    opacity: 0;
+    transition: opacity 1s;
 }
 
-.tab-content {
-    display: none;
+/* Show the tooltip text when hovering over the container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

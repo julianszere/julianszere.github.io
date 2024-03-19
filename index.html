@@ -5,36 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>julianszere</title>
     <link rel="icon" type="images/icon/x-icon" href="favicon.ico">
-    <link rel="icon" type="images/icon/png" sizes="32x32" href="images/icon/favicon-32x32.png">
-    <link rel="icon" type="images/icon/png" sizes="16x16" href="images/icon/favicon-16x16.png">
-    <link rel="icon" type="images/icon/png" sizes="192x192" href="images/icon/android-chrome-192x192.png">
-    <link rel="icon" type="images/icon/png" sizes="512x512" href="images/icon/android-chrome-512x512.png">
-    <link rel="icon" type="images/icon/png" sizes="180x180" href="images/icon/apple-touch-icon.png">
+    <link rel="icon" type="images/icon/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="images/icon/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="icon" type="images/icon/png" sizes="192x192" href="icon/android-chrome-192x192.png">
+    <link rel="icon" type="images/icon/png" sizes="512x512" href="icon/android-chrome-512x512.png">
+    <link rel="icon" type="images/icon/png" sizes="180x180" href="icon/apple-touch-icon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1></h1>
-    </header>
-    <main>
-        <section id="blog-posts">
-            <!-- Blog posts will be displayed here -->
-        </section>
-    </main>
-    <div id="tabs" class="tab-container">
-        <button id="imageTab" class="tab-button">Mirar</button>
-        <button id="repeatsTab" class="tab-button">Repetir</button>
-        <button id="thoughtsTab" class="tab-button">Pensar</button>
-        <!--
-        <button id="textsTab" class="tab-button">Escribir</button>
-        -->
-    </div>    
-    <div id="imagesPosts" class="tab-content" style="display: block; background-color: #ffffff;"></div>
-    <div id="repeatsPosts" class="tab-content"></div>
-    <div id="thoughtsPosts" class="tab-content"></div>
-    <!--
-    <div id="textsPosts" class="tab-content"></div>
-    -->
-    <script type="module" src="script.js"></script>
+    <div class="container">
+        <div class="icon-container">
+            <img src="icon/android-chrome-512x512.png" alt="Icon" class="icon">
+            <hr class="icon-line">
+        </div>
+        <div class="links">
+            <div class="link-item">
+                <a href="https://julianszere.github.io/mirar/">Mirar</a>
+            </div>
+            <div class="link-item">
+                <a href="https://julianszere.github.io/pensar/">Pensar</a>
+            </div>
+            <div class="link-item">
+                <button id="leerButton">Leer</button>
+                <div class="leer" style="display: none;">
+                    <div class="leer-item">
+                        <div class="tooltip">
+                            <a class="link-text" href="https://julianszere.github.io/Biblioteca-Total/">La biblioteca total</a>
+                            <span class="tooltiptext">Todos los sinónimos para cada palabra del cuento <span style="font-style: italic;">La biblioteca total</span> de Jorge Luis Borges. En total, un octodecillón (10^57) de cuentos posibles.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

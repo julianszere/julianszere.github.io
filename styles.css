@@ -6,27 +6,25 @@ body, html {
 }
 
 .container {
-    text-align: left; /* Align contents to the right */
-    padding-top: 20px; /* Add padding to create space for the icon */
-    padding-left: 100px;
+    text-align: center; 
+    padding-top: 20px; 
 }
 
 .icon-container {
-    text-align: center; /* Center the icon */
+    text-align: center;
 }
 
 .icon {
-    width: 100px; /* Set width of the icon */
-    height: 100px; /* Set height of the icon */
-    border-radius: 50%; /* Make the image circular */
+    width: 100px;
+    height: 100px; 
+    border-radius: 50%;
 }
 
 .icon-line {
     position: absolute;
-    left: 50%; /* Position it in the center */
-    transform: translateX(-25%); /* Center horizontally */
-    width: 200px; /* Adjust width as needed */
-    
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 200px; 
 }
 
 .links {

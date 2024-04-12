@@ -22,9 +22,7 @@ body, html {
 }
 
 .icon-line {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%); 
+    position: relative;
     width: 200px; 
 }
 
@@ -92,6 +90,7 @@ a:hover {
 }
 
 .info-icon {
+    position:relative;
     margin-left: 5px; /* Adjust as needed to create space between the icon and text */
     cursor: pointer; /* Change cursor to pointer on hover */
     vertical-align: middle; /* Align the icon vertically */

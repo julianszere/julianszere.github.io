@@ -78,11 +78,6 @@ a:hover {
     text-decoration: underline; /* Underline text on hover */
 }
 
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
 .link-container {
     display: flex; /* Use flexbox */
     align-items: center; /* Center items vertically */
@@ -96,21 +91,32 @@ a:hover {
     vertical-align: middle; /* Align the icon vertically */
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 300px;
+    max-width: 80vw; /* Set maximum width to 80% of viewport width */
     background-color: #333;
     color: #fff;
     text-align: center;
     border-radius: 6px;
     position: absolute;
     z-index: 1;
-    left: 100%; /* Position tooltip to the right of the icon */
+    top: calc(100% + 10px); /* Position tooltip below the link with a 10px gap */
+    left: 50%; /* Position tooltip horizontally centered */
+    transform: translateX(-50%); /* Adjust horizontal alignment */
     opacity: 0;
-    transition: opacity 1s;
+    transition: opacity 0.3s;
+    white-space: normal; /* Allow text to wrap within the tooltip */
 }
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
+
+

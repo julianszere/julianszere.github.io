@@ -119,4 +119,20 @@ a:hover {
     opacity: 1;
 }
 
+#jugarButton {
+    display: block;
+    margin: 20px auto 10px; /* Center the button horizontally and provide spacing */
+    font-size: 24px; /* Increase font size */
+    color: blue; /* Set text color to blue */
+    text-decoration: none; /* Remove underline */
+    outline: none; /* Remove browser default outline */
+    background-color: transparent; /* Set background color to transparent */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor to pointer */
+    font-family: "Comic Sans MS"; /* Set font family */
+}
+
+#jugarButton:hover {
+    text-decoration: underline; /* Underline text on hover */
+}
 

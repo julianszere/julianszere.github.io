@@ -5,6 +5,10 @@ body {
     background-color: #ffffee; /* Set a warm background color */
 }
 
+main, .title-reload-container, .title-reload-container h2, .reload-button, .reload-button img, .text-post, #scrollingImage {
+    background-color: #ffffee; /* Set the same background color */
+}
+
 main {
     text-align: center; /* Center align all content in the main element */
 }
@@ -22,7 +26,6 @@ main {
     margin: 0; /* Remove default margin */
 }
 
-/* Adjustments to the reload button */
 .reload-button {
     align-self: flex-start; /* Align the reload button to the start of the container */
     background: none;
@@ -42,12 +45,11 @@ main {
 
 .text-post {
     font-size: 22px;
-    margin-left: 15vw; /* Increase left margin */
-    margin-right: 15vw; /* Increase right margin */
+    margin-left: 10vw; /* Increase left margin */
+    margin-right: 10vw; /* Increase right margin */
     line-height: 1.5; /* Increase line spacing */
     text-align: justify; /* Justify the text */
 }
-
 
 #scrollingImage {
     position: fixed;

@@ -19,6 +19,7 @@ main {
     text-align: right;
     flex-grow: 1; 
     margin: 0; /* Remove default margin */
+    font-size: 40px;
 }
 
 .reload-button {

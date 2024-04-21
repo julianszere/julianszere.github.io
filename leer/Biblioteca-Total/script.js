@@ -3,7 +3,7 @@ class LibraryHelper {
         this.titleVariables = [
             ['La'],
             ['biblioteca'],
-            ['total', 'completa', 'extensa', 'omnisciente', 'integral', 'entera', 'cabal', 'general', 'universal', 'absoluta', 'exhaustiva', 'global']
+            ['total', 'completa', 'extensa', 'integral', 'cabal', 'general', 'universal', 'absoluta', 'exhaustiva', 'global']
         ];
         this.textVariables = [
             ['Todo'], 
@@ -196,7 +196,8 @@ class LibraryHelper {
 
         this.container = document.getElementById('repeatsPosts');
         this.createAndAddTextPost();
-        // this.numberOfCombinations = this.getNumberOfCombinations(this.titleVariables) * this.getNumberOfCombinations(this.textVariables) * this.getNumberOfCombinations(this.authorVariables);
+        this.numberOfCombinations = this.getNumberOfCombinations(this.titleVariables) * this.getNumberOfCombinations(this.textVariables) * this.getNumberOfCombinations(this.authorVariables);
+        console.log(this.numberOfCombinations)
     }
 
     newCombination(synonyms) {

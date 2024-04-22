@@ -61,6 +61,7 @@ main {
     margin-right: 10vw; /* Increase right margin */
     line-height: 1.5; /* Increase line spacing */
     text-align: justify; /* Justify the text */
+    word-spacing: 0.01px; /* Reset word spacing to the default */
 }
 
 #scrollingImage {

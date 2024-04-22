@@ -84,7 +84,7 @@ class LibraryHelper {
             ['las'], 
             ['paradojas', 'contradicciones'], 
             ['que'], 
-            ['ideó', 'pensó', 'imaginó', 'concibió', 'discurrió', 'proyectó', 'inventó', 'esbozó', 'creó', 'desarrolló', 'elaboró', 'diseñó', 'formuló', 'planteó'], 
+            ['ideó', 'pensó', 'imaginó', 'concibió', 'proyectó', 'inventó', 'esbozó', 'creó', 'desarrolló', 'elaboró', 'diseñó', 'formuló', 'planteó'], 
             ['Berkeley'], 
             ['acerca'], 
             ['del'], 

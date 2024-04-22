@@ -32,7 +32,7 @@ main {
     margin-top: 15px; /* Add some top margin */
     transition: opacity 0.3s ease; /* Add a smooth transition for opacity */
     animation: rotateButton 2s linear infinite; /* Start the rotation animation */
-
+    user-select: none; /* Prevent the image from being selected */
 }
 
 .reload-button:hover {

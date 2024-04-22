@@ -33,7 +33,9 @@ main {
     transition: opacity 0.3s ease; /* Add a smooth transition for opacity */
     animation: rotateButton 2s linear infinite; /* Start the rotation animation */
     user-select: none; /* Prevent the image from being selected */
+    -webkit-tap-highlight-color: transparent; /* Prevent tap highlight color */
 }
+
 
 .reload-button:hover {
     opacity: 1; /* Change opacity on hover */

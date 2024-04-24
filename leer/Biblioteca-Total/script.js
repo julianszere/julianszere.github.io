@@ -100,7 +100,7 @@ class LibraryHelper {
             ['de'], 
             ['Urizen,'], 
             ['las'], 
-            ['prematuras', 'precoces', 'precipitadas', 'tempranas', 'adleantadas', 'anticipadas'], 
+            ['prematuras', 'precoces', 'precipitadas', 'tempranas', 'adelantadas', 'anticipadas'], 
             ['epifanías', 'revelaciones'], 
             ['de'], 
             ['Stephen Dedalus', 'James Joyce'], 

@@ -1,9 +1,15 @@
+/* styles.css */
+:root {
+    --primary-color: blue;
+    --text-color: black;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: "Comic Sans MS";
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
 }
 
 .container {
@@ -37,58 +43,55 @@ body, html {
 }
 
 a {
-    margin-top:20px;
+    margin-top: 20px;
     display: block;
-    margin-bottom: 10px; /* Increase the margin between links */
-    font-size: 24px; /* Increase font size */
-    color: black; /* Set text color to black */
-    text-decoration: none; /* Remove underline */
-    outline: none; /* Remove browser default outline */
-    color: blue;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: var(--primary-color);
+    text-decoration: none;
+    outline: none;
 }
 
 a:hover {
-    text-decoration: underline; /* Underline on hover */
+    text-decoration: underline;
 }
 
 .link-text {
-    font-size: 16px; /* Adjust font size */
-    color: gray; /* Set text color for link text */
+    font-size: 16px;
+    color: gray;
     padding-left: 20px;
 }
 
-.leer-container {
-    text-align: center;
-    margin-top: 20px;
+.hidden {
+    display: none;
 }
 
-#leerButton {
-    padding: 0px;
-    font-size: 24px; /* Increase font size */
-    color: blue; /* Set text color to blue */
-    text-decoration: none; /* Remove underline */
-    outline: none; /* Remove browser default outline */
+.toggle-button {
+    font-size: 24px;
+    color: var(--primary-color);
+    text-decoration: none;
+    outline: none;
     border: none;
     cursor: pointer;
     background-color: transparent;
     font-family: "Comic Sans MS";
 }
 
-#leerButton:hover {
-    text-decoration: underline; /* Underline text on hover */
+.toggle-button:hover {
+    text-decoration: underline;
 }
 
 .link-container {
-    display: flex; /* Use flexbox */
-    align-items: center; /* Center items vertically */
-    vertical-align: middle; /* Align items vertically */
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
 }
 
 .info-icon {
-    position:relative;
-    margin-left: 5px; /* Adjust as needed to create space between the icon and text */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    vertical-align: middle; /* Align the icon vertically */
+    position: relative;
+    margin-left: 5px;
+    cursor: pointer;
+    vertical-align: middle;
 }
 
 .tooltip {
@@ -99,40 +102,22 @@ a:hover {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 300px;
-    max-width: 80vw; /* Set maximum width to 80% of viewport width */
+    max-width: 80vw;
     background-color: #333;
     color: #fff;
     text-align: center;
     border-radius: 6px;
     position: absolute;
     z-index: 1;
-    top: calc(100% + 10px); /* Position tooltip below the link with a 10px gap */
-    left: 50%; /* Position tooltip horizontally centered */
-    transform: translateX(-50%); /* Adjust horizontal alignment */
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s;
-    white-space: normal; /* Allow text to wrap within the tooltip */
+    white-space: normal;
 }
 
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
-
-#jugarButton {
-    display: block;
-    margin: 20px auto 10px; /* Center the button horizontally and provide spacing */
-    font-size: 24px; /* Increase font size */
-    color: blue; /* Set text color to blue */
-    text-decoration: none; /* Remove underline */
-    outline: none; /* Remove browser default outline */
-    background-color: transparent; /* Set background color to transparent */
-    border: none; /* Remove border */
-    cursor: pointer; /* Change cursor to pointer */
-    font-family: "Comic Sans MS"; /* Set font family */
-}
-
-#jugarButton:hover {
-    text-decoration: underline; /* Underline text on hover */
-}
-

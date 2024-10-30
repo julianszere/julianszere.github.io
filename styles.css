@@ -1,16 +1,16 @@
-/* styles.css */
-:root {
-    --primary-color: blue;
-    --text-color: black;
-}
-
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: "Comic Sans MS";
     overflow-x: hidden;
+    background-image: url('icon/background.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-repeat: no-repeat; /* Prevents tiling */
+    background-attachment: fixed; /* Keeps the background in place on scroll */
+    background-position: center; /* Centers the image */
 }
+
 
 .container {
     text-align: center; 
@@ -46,8 +46,8 @@ a {
     margin-top: 20px;
     display: block;
     margin-bottom: 10px;
-    font-size: 24px;
-    color: var(--primary-color);
+    font-size: 32px; /* Increase font size */
+    color: black; /* Set text color to black */
     text-decoration: none;
     outline: none;
 }
@@ -58,7 +58,7 @@ a:hover {
 
 .link-text {
     font-size: 16px;
-    color: gray;
+    color: black;
     padding-left: 20px;
 }
 
@@ -66,9 +66,8 @@ a:hover {
     display: none;
 }
 
+
 .toggle-button {
-    font-size: 24px;
-    color: var(--primary-color);
     text-decoration: none;
     outline: none;
     border: none;

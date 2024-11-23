@@ -4,7 +4,6 @@ body, html {
     height: 100%;
     font-family: "Comic Sans MS";
     overflow-x: hidden;
-    background-image: url('icon/background.jpg'); /* Replace with your image path */
     background-size: cover; /* Ensures the image covers the entire viewport */
     background-repeat: no-repeat; /* Prevents tiling */
     background-attachment: fixed; /* Keeps the background in place on scroll */

@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     const sections = [
-        { title: "fotos", url: "https://julianszere.github.io/mirar/" },
-        { title: "ideas", url: "https://julianszere.github.io/pensar/" },
+        { title: "placas", url: "https://julianszere.github.io/mirar/" },
+        { title: "fortunas", url: "https://julianszere.github.io/pensar/" },
     ];
 
     const toggleSections = [
         {
-            title: "textos",
+            title: "palabras",
             buttonId: "leerButton",
             contentClass: "leer",
             links: [

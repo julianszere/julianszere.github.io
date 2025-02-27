@@ -71,7 +71,7 @@ function updateChart() {
   const lastProbElement = document.getElementById('last-probability');
 
   if (attacker < 2 || defender < 1 || isNaN(attacker) || isNaN(defender)) {
-    lastProbElement.textContent = 'Enter valid army counts (Attacker ≥ 2, Defender ≥ 1)';
+    lastProbElement.textContent = 'Ingrese el número de ejércitos atacantes y defensores';
     if (chart) chart.destroy();
     return;
   }
@@ -88,7 +88,7 @@ function updateChart() {
   }
 
   const data = showingAttacker ? attData : defData;
-  const labelPrefix = showingAttacker ? 'Attacker' : 'Defender';
+  const labelPrefix = showingAttacker ? 'atacante' : 'defensor';
   const color = showingAttacker ? '#0066cc' : '#cc0000';
   const borderColor = showingAttacker ? '#004d99' : '#990000';
   const winProb = showingAttacker ? totalProb : 1 - totalProb;
@@ -104,7 +104,7 @@ function updateChart() {
   const totalDistProb = probs.reduce((sum, p) => sum + p, 0);
   const normalizedProbs = probs.map(p => p / totalDistProb || 0);
 
-  lastProbElement.textContent = `${labelPrefix} Win Probability: ${(winProb * 100).toFixed(2)}%`;
+  lastProbElement.textContent = `Probabilidad de que gane el ${labelPrefix}: ${(winProb * 100).toFixed(2)}%`;
   lastProbElement.style.color = showingAttacker ? '#0066cc' : '#cc0000';
 
   const ctx = document.getElementById('barChart').getContext('2d');
@@ -115,7 +115,7 @@ function updateChart() {
     data: {
       labels: filteredLosses,
       datasets: [{
-        label: `${labelPrefix} Losses`,
+        label: `Pérdidas del ${labelPrefix}`,
         data: normalizedProbs,
         backgroundColor: color,
         borderColor: borderColor,
@@ -129,11 +129,11 @@ function updateChart() {
       maintainAspectRatio: false,
       scales: {
         x: { 
-          title: { display: true, text: `${labelPrefix} Armies Lost` }, 
+          title: { display: true, text: `Ejércitos perdidos por el ${labelPrefix}` }, 
           ticks: { font: { size: 10 } }
         },
         y: { 
-          title: { display: true, text: 'Probability' }, 
+          title: { display: true, text: 'Probabilidad' }, 
           beginAtZero: true, 
           ticks: { font: { size: 10 } }
         }

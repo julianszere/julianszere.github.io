@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Risk Battle Probabilities</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>Risk Battle Probabilities</h1>
+
+    <div class="input-wrapper">
+      <div class="input-container">
+        <div class="input-group">
+          <label for="attacker" id="attacker-label">Attacking Armies:</label>
+          <input type="number" id="attacker" class="dynamic-input" min="2" />
+        </div>
+
+        <span class="vs">vs</span>
+
+        <div class="input-group">
+          <label for="defender" id="defender-label">Defending Armies:</label>
+          <input type="number" id="defender" class="dynamic-input" min="1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="probability-container">
+      <p id="last-probability"></p>
+      <div class="toggle-container">
+        <label class="switch">
+          <input type="checkbox" id="toggleSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

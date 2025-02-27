@@ -69,9 +69,13 @@ function updateChart() {
   const attacker = parseInt(document.getElementById('attacker').value) || 0;
   const defender = parseInt(document.getElementById('defender').value) || 0;
   const lastProbElement = document.getElementById('last-probability');
+  const probabilityContainer = document.querySelector('.probability-container');
+  const chartContainer = document.querySelector('.chart-container');
 
   if (attacker < 2 || defender < 1 || isNaN(attacker) || isNaN(defender)) {
     lastProbElement.textContent = 'Ingrese el número de ejércitos atacantes y defensores';
+    probabilityContainer.style.display = 'none';
+    chartContainer.style.display = 'none';
     if (chart) chart.destroy();
     return;
   }
@@ -82,7 +86,9 @@ function updateChart() {
   const totalProb = probabilityData[attacker]?.[defender];
 
   if (!attData || !defData || totalProb === undefined) {
-    lastProbElement.textContent = `No data for ${attacker} vs ${defender}`;
+    lastProbElement.textContent = `No hay datos para ${attacker} vs ${defender}`;
+    probabilityContainer.style.display = 'block';
+    chartContainer.style.display = 'none';
     if (chart) chart.destroy();
     return;
   }
@@ -93,19 +99,21 @@ function updateChart() {
   const borderColor = showingAttacker ? '#004d99' : '#990000';
   const winProb = showingAttacker ? totalProb : 1 - totalProb;
 
-  // Process distribution, limiting x-axis to non-zero points
   const allLosses = Object.keys(data).map(Number).sort((a, b) => a - b);
   let maxLoss = -1;
   for (const loss of allLosses) {
-    if (data[loss] > 0) maxLoss = loss; // Last non-zero loss
+    if (data[loss] > 0) maxLoss = loss;
   }
-  const filteredLosses = allLosses.filter(loss => loss <= maxLoss); // Include all up to maxLoss
+  const filteredLosses = allLosses.filter(loss => loss <= maxLoss);
   const probs = filteredLosses.map(loss => data[loss]);
   const totalDistProb = probs.reduce((sum, p) => sum + p, 0);
   const normalizedProbs = probs.map(p => p / totalDistProb || 0);
 
-  lastProbElement.textContent = `Probabilidad de que gane el ${labelPrefix}: ${(winProb * 100).toFixed(2)}%`;
-  lastProbElement.style.color = showingAttacker ? '#0066cc' : '#cc0000';
+  lastProbElement.textContent = `${(winProb * 100).toFixed(2)}%`;
+  lastProbElement.style.backgroundColor = showingAttacker ? '#0066cc' : '#cc0000';
+  lastProbElement.style.color = '#fff';
+  probabilityContainer.style.display = 'flex';
+  chartContainer.style.display = 'block';
 
   const ctx = document.getElementById('barChart').getContext('2d');
   if (chart) chart.destroy();
@@ -130,15 +138,17 @@ function updateChart() {
       scales: {
         x: { 
           title: { display: true, text: `Ejércitos perdidos por el ${labelPrefix}` }, 
-          ticks: { font: { size: 10 } }
+          ticks: { font: { size: 10 }, color: '#000' },
+          grid: { color: 'rgba(0, 0, 0, 0.3)' }
         },
         y: { 
           title: { display: true, text: 'Probabilidad' }, 
-          beginAtZero: true, 
-          ticks: { font: { size: 10 } }
+          ticks: { font: { size: 10 }, color: '#000' },
+          grid: { color: 'rgba(0, 0, 0, 0.3)' },
+          beginAtZero: true
         }
       },
-      plugins: { legend: { display: false } }, // Remove legend
+      plugins: { legend: { display: false } },
       devicePixelRatio: window.devicePixelRatio
     }
   });

@@ -149,7 +149,9 @@ input:checked + .slider:before {
   position: relative;
   width: 90vw;
   max-width: 500px;
-  height: calc(100vh - 230px);
+  height: 70vh;
+  min-height: 300px;
+  max-height: 600px;
   margin: 15px auto 50px auto;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
@@ -213,7 +215,9 @@ input:checked + .slider:before {
   .chart-container {
     width: 95vw;
     max-width: 320px;
-    height: calc(100vh - 250px);
+    height: 40vh;
+    min-height: 150px;
+    max-height: 300px;
     margin: 10px auto 30px auto;
   }
 }

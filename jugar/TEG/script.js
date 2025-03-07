@@ -1,5 +1,3 @@
-console.log('Script loaded');
-
 let chart = null;
 let attackerData = {};
 let defenderData = {};
@@ -7,7 +5,6 @@ let probabilityData = {};
 let showingAttacker = true;
 
 window.onload = () => {
-  console.log('hola');
   setupEventListeners();
   Promise.all([
     fetch('./attacker_distributions.csv').then(response => response.text()),
@@ -21,7 +18,6 @@ window.onload = () => {
       updateChart();
     })
     .catch(error => {
-      console.error('Fetch error:', error);
       document.getElementById('last-probability').textContent = `Error: ${error.message}`;
     });
 };
@@ -39,7 +35,6 @@ function parseCSV(csvText, dataStore) {
       dataStore[key][loss] = parseFloat(cols[j]) || 0;
     }
   }
-  console.log('Parsed data:', dataStore);
 }
 
 function parseProbabilitiesCSV(csvText, dataStore) {
@@ -51,11 +46,9 @@ function parseProbabilitiesCSV(csvText, dataStore) {
       dataStore[attacker][defender] = prob;
     });
   });
-  console.log('Parsed probabilities:', dataStore);
 }
 
 function setupEventListeners() {
-  console.log('Setting up listeners');
   document.getElementById('attacker').addEventListener('input', updateChart);
   document.getElementById('defender').addEventListener('input', updateChart);
   const toggleSwitch = document.getElementById('toggleSwitch');

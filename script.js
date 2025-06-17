@@ -58,4 +58,4 @@ function animate() {
 }
 
 draw();
-setInterval(animate, 50);
+setInterval(animate, 200);

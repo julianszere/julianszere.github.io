@@ -1,72 +1,61 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const sections = [
-        { title: "placas", url: "https://julianszere.github.io/mirar/" },
-        { title: "fortunas", url: "https://julianszere.github.io/pensar/" },
-    ];
+const width = 120;
+const height = 40;
+const grid = Array.from({ length: height }, () => Array(width).fill(' '));
 
-    const toggleSections = [
-        {
-            title: "palabras",
-            buttonId: "leerButton",
-            contentClass: "leer",
-            links: [
-                {
-                    url: "https://julianszere.github.io/leer/Biblioteca-Total/",
-                    text: "La biblioteca total",
-                    tooltip: "Todos los sinónimos para cada palabra del cuento La biblioteca total de Jorge Luis Borges. En total, un decillón (10^60) de cuentos posibles."
-                }
-            ]
-        },
-        {
-            title: "juegos",
-            buttonId: "jugarButton",
-            contentClass: "jugar",
-            links: [
-                {
-                    url: "https://julianszere.github.io/jugar/Péndulos",
-                    text: "Péndulos",
-                    tooltip: "Péndulos de longitudes específicas que forman un lindo patrón."
-                }
-            ]
-        }
-    ];
+// Create multiple walkers with random starting positions
+const walkers = [
+    { x: Math.floor(Math.random() * width), y: Math.floor(Math.random() * height), symbol: 'A' },
+    { x: Math.floor(Math.random() * width), y: Math.floor(Math.random() * height), symbol: 'B' },
+    { x: Math.floor(Math.random() * width), y: Math.floor(Math.random() * height), symbol: 'C' },
+    { x: Math.floor(Math.random() * width), y: Math.floor(Math.random() * height), symbol: 'D' },
+    { x: Math.floor(Math.random() * width), y: Math.floor(Math.random() * height), symbol: 'E' }
+];
 
-    const linksContainer = document.querySelector(".links");
+function randomLetter() {
+    return String.fromCharCode(65 + Math.floor(Math.random() * 26)); // A-Z
+}
 
-    // Add static sections
-    sections.forEach(section => {
-        const linkItem = document.createElement("div");
-        linkItem.className = "link-item";
-        linkItem.innerHTML = `<a href="${section.url}">${section.title}</a>`;
-        linksContainer.appendChild(linkItem);
+function draw() {
+    const tempGrid = grid.map(row => row.slice()); // clone grid
+    walkers.forEach(w => {
+        tempGrid[w.y][w.x] = w.symbol;
     });
+    document.getElementById('random-walk').textContent =
+        tempGrid.map(row => row.join('')).join('\n');
+}
 
-    // Add toggle sections with dynamic links and tooltips
-    toggleSections.forEach(section => {
-        const linkItem = document.createElement("div");
-        linkItem.className = "link-item";
-        linkItem.innerHTML = `
-            <a href="#" id="${section.buttonId}" class="toggle-button">${section.title}</a>
-            <div class="${section.contentClass} hidden">
-                ${section.links.map(link => `
-                    <div class="leer-item">
-                        <div class="tooltip">
-                            <div class="link-container">
-                                <a class="link-text" href="${link.url}">${link.text}</a>
-                                <i class="info-icon">ℹ️</i>
-                            </div>
-                            <span class="tooltiptext">${link.tooltip}</span>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-        linksContainer.appendChild(linkItem);
+function step(walker) {
+    // Leave a trail of random letters
+    grid[walker.y][walker.x] = randomLetter();
 
-        // Add event listener for toggle button
-        document.getElementById(section.buttonId).addEventListener("click", (event) => {
-            event.preventDefault();
-            document.querySelector(`.${section.contentClass}`).classList.toggle("hidden");
-        });
-    });
-});
+    // Random movement
+    const direction = Math.floor(Math.random() * 4);
+    switch (direction) {
+        case 0: // up
+            if (walker.y > 0) walker.y--;
+            break;
+        case 1: // down
+            if (walker.y < height - 1) walker.y++;
+            break;
+        case 2: // left
+            if (walker.x > 0) walker.x--;
+            break;
+        case 3: // right
+            if (walker.x < width - 1) walker.x++;
+            break;
+    }
+
+    // Occasionally teleport to a random position
+    if (Math.random() < 0.05) {
+        walker.x = Math.floor(Math.random() * width);
+        walker.y = Math.floor(Math.random() * height);
+    }
+}
+
+function animate() {
+    walkers.forEach(step);
+    draw();
+}
+
+draw();
+setInterval(animate, 50);

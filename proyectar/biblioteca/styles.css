@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 5vh 0 0; /* Add top margin */
+    padding: 0;
+    background-color: #ffffee; /* Set a warm background color */
+}
+
+main {
+    text-align: center; /* Center align all content in the main element */
+}
+
+.title-reload-container {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+}
+
+.title-reload-container h2 {
+    justify-content: flex-end; /* Align items to the right */
+    text-align: right;
+    flex-grow: 1; 
+    margin: 0; /* Remove default margin */
+    font-size: 40px;
+}
+
+.reload-button {
+    align-self: flex-start; /* Align the reload button to the start of the container */
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    margin-left: 10px;
+    margin-top: 15px; /* Add some top margin */
+    transition: opacity 0.3s ease; /* Add a smooth transition for opacity */
+    animation: rotateButton 2s linear infinite; /* Start the rotation animation */
+    user-select: none; /* Prevent the image from being selected */
+    -webkit-tap-highlight-color: transparent; /* Prevent tap highlight color */
+}
+
+
+.reload-button:hover {
+    opacity: 1; /* Change opacity on hover */
+}
+
+@keyframes rotateButton {
+    from {
+        transform: rotate(0deg); /* Rotate from 0 degrees */
+    }
+    to {
+        transform: rotate(360deg); /* Rotate to 360 degrees (one full rotation) */
+    }
+}
+
+.reload-button img {
+    width: 32px;
+    height: 32px;
+    opacity: 1;
+    background-color: transparent;
+}
+
+.text-post {
+    font-size: 18px;
+    margin-left: 10vw; /* Increase left margin */
+    margin-right: 10vw; /* Increase right margin */
+    line-height: 1.5; /* Increase line spacing */
+    text-align: justify; /* Justify the text */
+    word-spacing: -2px;
+    hyphens: auto;
+}
+
+#scrollingImage {
+    position: fixed;
+    top: 5%;
+    left: 3%;
+    width: 50px;
+    height: 50px;
+    z-index: 9999; /* Ensure it's above other elements */
+    background-color: transparent; /* Set background color to transparent */
+}

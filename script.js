@@ -1,10 +1,10 @@
-document.querySelectorAll('.toggle-arrow').forEach(button => {
+document.querySelectorAll('.project-title').forEach(button => {
 button.addEventListener('click', () => {
     const expanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', String(!expanded));
-    button.textContent = expanded ? '▶' : '▼';
+    const targetId = button.getAttribute('aria-controls');
+    const desc = document.getElementById(targetId);
 
-    const content = button.nextElementSibling;
-    content.classList.toggle('expanded');
+    button.setAttribute('aria-expanded', String(!expanded));
+    desc.classList.toggle('hidden');
 });
 });

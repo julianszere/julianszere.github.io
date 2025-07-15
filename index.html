@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,16 +10,14 @@
   <link rel="apple-touch-icon" href="icon/apple-touch-icon.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="loading">
   <main class="container">
-    <section class="icon-container">
-      <img src="icon/android-chrome-512x512.png" alt="" class="icon" aria-hidden="true" />
-      <hr class="icon-line" />
-    </section>
+    <div id="menu-placeholder"></div>
 
-    <ul id="project-list" class="project-list">
-      <!-- Project items will be inserted here via script.js -->
-    </ul>
+    <!-- Content containers for each tab -->
+    <div id="proyectos" class="tab-content active">
+      <ul id="project-list" class="project-list"></ul>
+    </div>
   </main>
 
   <script src="script.js"></script>

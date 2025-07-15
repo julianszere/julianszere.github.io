@@ -1,76 +1,88 @@
+async function loadMenu() {
+  const placeholder = document.getElementById("menu-placeholder");
+  try {
+    const res = await fetch("/menu.html");
+    if (!res.ok) throw new Error("Failed to load menu");
+    placeholder.innerHTML = await res.text();
+
+    // Remove loading class so page shows content with styles
+    document.body.classList.remove("loading");
+
+    // Setup tab click handlers AFTER menu is loaded
+    setupTabs();
+  } catch (e) {
+    console.error(e);
+    document.body.classList.remove("loading"); // show anyway if error
+  }
+}
+
+function setupTabs() {
+  const tabs = document.querySelectorAll(".tab");
+  tabs.forEach(tab => {
+    tab.addEventListener("click", e => {
+      e.preventDefault();
+
+      // Remove active from all tabs
+      tabs.forEach(t => t.classList.remove("active"));
+
+      // Add active to clicked tab
+      tab.classList.add("active");
+
+      // Show related tab content
+      const tabName = tab.getAttribute("data-tab");
+      document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+
+      const content = document.getElementById(tabName);
+      if(content) content.classList.add("active");
+    });
+  });
+}
+
 const projects = [
   {
     id: "teg",
+    date: "Nov. 2025",
     title: "Calculadora del Plan Táctico y Estratégico de la Guerra",
     link: "https://julianszere.github.io/proyectar/TEG",
-    description: "en el juego de mesa TEG, dado un país atacante y uno defensor con N y M ejércitos, ¿cuál es la probabilidad de conquistar el país tras sucesivos ataques? Calculado de manera analítica."
   },
   {
     id: "biblioteca",
+    date: "Abr. 2024",
     title: "La Biblioteca Total",
     link: "https://julianszere.github.io/proyectar/biblioteca",
-    description: "todos los sinónimos posibles de cada palabra en el cuento La biblioteca total de Jorge Luis Borges. Por cada click un cuento nuevo. En total, un decillón (10^60) de cuentos posibles."
   },
   {
     id: "resortes",
+    date: "Jun. 2023",
     title: "Resortes Mínimos",
     link: "https://julianszere.github.io/proyectar/resortes",
-    description: "La ecuación a minimizar en un ajuste lineal es matemáticamente idéntica al potencial elástico de una serie de resortes que se estiran entre una barra y un punto fijo. Como las leyes de Newton se pueden expresar como la minimización del lagrangiano que contiene a esa expresión, el problema de resolver la dinámica de una barra enganchada a resortes es idéntico al de ajustar una recta."
   },
   {
     id: "pendulos",
-    title: "Péndulos orquestrados",
+    date: "May. 2023",
+    title: "Péndulos Orquestrados",
     link: "https://julianszere.github.io/proyectar/péndulos",
-    description: "péndulos desacoplados de longitudes específicas que forman un lindo patrón."
-  },
-  {
-    id: "fortunas",
-    title: "Galletas de la fortuna",
-    link: "https://julianszere.github.io/proyectar/fortunas",
-    description: "pensamientos flotantes"
-  },
-  {
-    id: "fotos",
-    title: "Fotografías",
-    link: "https://julianszere.github.io/mirar",
-    description: "una colección de imágenes."
   }
 ];
 
-function createProject({ id, title, link, description }) {
-  const li = document.createElement('li');
-  li.className = 'project-item';
-
+function createProject({ date, title, link }) {
+  const li = document.createElement("li");
+  li.className = "project-item";
   li.innerHTML = `
     <div class="project-header">
-      <button class="project-title" aria-expanded="false" aria-controls="desc-${id}">
-        ${title}
-      </button>
-      <a class="project-link" href="${link}" target="_blank" rel="noopener noreferrer" aria-label="Abrir ${title}"></a>
-    </div>
-    <div class="project-description hidden" id="desc-${id}">
-      ${description}
+      <span class="project-date">${date}</span>
+      <a class="project-title" href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
     </div>
   `;
-
   return li;
 }
 
-const projectList = document.getElementById('project-list');
-projects.forEach(project => {
-  projectList.appendChild(createProject(project));
-});
+function loadProjects() {
+  const projectList = document.getElementById("project-list");
+  projects.forEach(project => {
+    projectList.appendChild(createProject(project));
+  });
+}
 
-
-document.querySelectorAll('.project-title').forEach(button => {
-button.addEventListener('click', () => {
-    const expanded = button.getAttribute('aria-expanded') === 'true';
-    const targetId = button.getAttribute('aria-controls');
-    const desc = document.getElementById(targetId);
-
-    button.setAttribute('aria-expanded', String(!expanded));
-    desc.classList.toggle('hidden');
-});
-});
-
-
+loadMenu();
+loadProjects();

@@ -14,9 +14,28 @@
   <main class="container">
     <div id="menu-placeholder"></div>
 
+    <section class="icon-container">
+      <img src="icon/julianszere.png" alt="" class="icon" aria-hidden="true" />
+    </section>
+
+    <section class="tabs">
+      <a href="/" class="tab active" data-tab="proyectos">Proyectos</a>
+      <a href="/fotografias/" class="tab" data-tab="fotografias">Fotografías</a>
+      <a href="/contacto/" class="tab" data-tab="contacto">Contacto</a>
+    </section>
+
+
     <!-- Content containers for each tab -->
     <div id="proyectos" class="tab-content active">
       <ul id="project-list" class="project-list"></ul>
+      <div id="project-detail" class="project-detail" style="display:none;"></div>
+    </div>
+
+    <div id="fotografias" class="tab-content">
+      <p>Contenido de Fotografías...</p>
+    </div>
+    <div id="contacto" class="tab-content">
+      <p>Contenido de Contacto...</p>
     </div>
   </main>
 

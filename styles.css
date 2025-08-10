@@ -68,7 +68,6 @@ body.loading * {
   list-style: none;
   padding-top: 10px;
   padding-left: 0;
-  margin: 0;
   width: 100%;
 }
 
@@ -115,6 +114,28 @@ body.loading * {
   display: none;
 }
 
+
+.tab.active {
+  color: #1d4ed8;
+  font-weight: bold;
+  /* underline is toggled dynamically */
+}
+
+
 .tab-content.active {
   display: block;
+}
+
+.project-detail {
+  padding: 1rem;
+  width: 100%;
+  font-size: 12px;
+  color: #444;
+}
+
+.project-detail h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-style: italic;
+  color: #000000;
 }

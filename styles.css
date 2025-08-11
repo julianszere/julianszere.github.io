@@ -6,10 +6,9 @@ body, html {
   background-color: #f9f9f9;
   color: #111;
   overflow-x: hidden;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
-/* Hide everything while loading */
 body.loading * {
   visibility: hidden;
 }
@@ -23,47 +22,6 @@ body.loading * {
   align-items: flex-start;
 }
 
-.icon-container {
-  margin-bottom: 20px;
-}
-
-.icon {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-/* === MENU STYLES === */
-
-.tabs {
-  display: flex;
-  gap: 2rem;
-  padding: 1rem;
-  background: #f9f9f9;
-}
-
-.tab {
-  text-decoration: none;
-  font-family: inherit;
-  font-size: 16px;
-  color: #444;
-  transition: color 0.3s, border-bottom 0.3s;
-  padding-bottom: 1px;
-  border-bottom: 1px solid transparent;
-  cursor: pointer;
-}
-
-.tab:hover {
-  color: #1d4ed8;
-  border-bottom: 2px solid #1d4ed8;
-}
-
-.tab.active {
-  color: #1d4ed8;
-  font-weight: bold;
-  border-bottom: 2px solid #1d4ed8;
-}
-
 .project-list {
   list-style: none;
   padding-top: 10px;
@@ -75,14 +33,12 @@ body.loading * {
   margin-bottom: 24px;
 }
 
-/* Header layout: date left, title slightly indented */
 .project-header {
   display: flex;
   align-items: baseline;
   gap: 12px;
 }
 
-/* Date styling */
 .project-date {
   flex-shrink: 0;
   font-size: 1em;
@@ -91,7 +47,6 @@ body.loading * {
   text-align: right;
 }
 
-/* Title as blue hyperlink */
 .project-title {
   font-size: 1em;
   color: #2563ea;
@@ -103,27 +58,26 @@ body.loading * {
   text-decoration: underline;
 }
 
-.project-description {
-  font-size: 16px;
-  color: #444;
-  margin: 4px 0 0 92px;
+.back-arrow {
+  color: #2563ea;
+  cursor: pointer;
+  font-size: 28px;
+  transition: color 0.2s;
 }
 
-/* Tab content */
-.tab-content {
-  display: none;
-}
-
-
-.tab.active {
+.back-arrow:hover {
   color: #1d4ed8;
-  font-weight: bold;
-  /* underline is toggled dynamically */
 }
 
+.project-title-link {
+  color: #2563ea;
+  text-decoration: none;
+  transition: color 0.2s;
+}
 
-.tab-content.active {
-  display: block;
+.project-title-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
 }
 
 .project-detail {
@@ -136,6 +90,5 @@ body.loading * {
 .project-detail h2 {
   margin-top: 0;
   font-size: 24px;
-  font-style: italic;
   color: #000000;
 }

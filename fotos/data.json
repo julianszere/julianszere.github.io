@@ -30,9 +30,6 @@
         "image": "little-miss-sunshine.jpg"
     },
     {
-        "image": "gato-marco-verde.jpg"
-    },
-    {
         "image": "puerta-blanco-negro.jpg"
     },
     {
@@ -46,6 +43,9 @@
     },
     {
         "image": "tres-plaza-film.jpg"
+    },
+    {
+	"image": "mile-auto-abandonado.jpg"
     }
 ]
 

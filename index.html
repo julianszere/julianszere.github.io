@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>julianszere</title>
 
-  <link rel="icon" href="favicon.ico" />
-  <link rel="icon" type="image/png" href="icon/favicon-32x32.png" />
+  <link rel="icon" href="icon/favicon-32x32.png" type="image/png" />
   <link rel="apple-touch-icon" href="icon/apple-touch-icon.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="loading">
-  <main class="container">
-    <div id="menu-placeholder"></div>
+<body>
+  <header>
+    <a class="site-name" href="#" data-section="home">julianszere</a>
+    <nav>
+      <a href="#" data-section="home">home</a>
+      <a href="#" data-section="projects">projects</a>
+      <a href="#" data-section="contact">contact</a>
+    </nav>
+  </header>
 
-    <ul id="project-list" class="project-list"></ul>
-    <div id="project-detail" class="project-detail" style="display:none;"></div>
+  <main>
+    <section id="section-home" class="section">
+      <p>
+        I build things at the intersection of physics, computation, and
+        literature. Pendulums, springs, Borges's infinite library, game
+        theory — I'm drawn to systems where simple rules generate unexpected
+        complexity.
+      </p>
+      <p>
+        Browse my <a href="#" data-section="projects">projects</a> or get in
+        <a href="#" data-section="contact">contact</a>.
+      </p>
+    </section>
+
+    <section id="section-projects" class="section">
+      <ul id="project-list" class="project-list"></ul>
+      <div id="project-detail" class="project-detail"></div>
+    </section>
+
+    <section id="section-contact" class="section">
+      <p><a href="mailto:julianszere@gmail.com">julianszere@gmail.com</a></p>
+      <p><a href="https://github.com/julianszere" target="_blank" rel="noopener noreferrer">github.com/julianszere</a></p>
+      <p><a href="/curriculum/curriculum.pdf" target="_blank" rel="noopener noreferrer">curriculum.pdf</a></p>
+    </section>
   </main>
 
   <script src="script.js"></script>

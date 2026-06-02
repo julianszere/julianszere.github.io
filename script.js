@@ -1,111 +1,110 @@
-async function loadMenu() {
-  const placeholder = document.getElementById("menu-placeholder");
-  try {
-    const res = await fetch("/menu.html");
-    if (!res.ok) throw new Error("Failed to load menu");
-    placeholder.innerHTML = await res.text();
-    document.body.classList.remove("loading");
-  } catch (e) {
-    console.error(e);
-    document.body.classList.remove("loading");
-  }
-}
-
 const projects = [
   {
     id: "teg",
     year: "2025",
-    month: "Nov.",
-    title: "Calculadora T.E.G.",
+    month: "Nov",
+    title: "T.E.G. Calculator",
     url: "https://julianszere.github.io/proyectar/TEG",
     description: `
-      <p>Una herramienta para calcular escenarios tácticos y estratégicos de guerra con modelos avanzados.</p>
+      <p>A tool for calculating tactical and strategic war scenarios in T.E.G. using advanced probability models.</p>
     `
   },
   {
     id: "biblioteca",
     year: "2024",
-    month: "Abr.",
-    title: "La Biblioteca Total",
+    month: "Apr",
+    title: "The Total Library",
     url: "https://julianszere.github.io/proyectar/biblioteca",
     description: `
-      <p>Todos los sinónimos sintácticamente compatibles con el texto La Biblioteca Total de Borges generan un decillón (10^60) de cuentos posibles para decir lo mismo pero distino</p>
-      <p>La biblioteca total, completa, extensa, integral, cabal, general, universal, absoluta, exhaustiva, global, etcétera es una demostración de todos los textos que podrían aparecer en la biblioteca. Borges está encontra (lo azulado)</p>    `
+      <p>All syntactically compatible synonyms with Borges's text <em>The Total Library</em> generate a decillion (10⁶⁰) of possible stories that say the same thing but differently.</p>
+      <p>The complete, extensive, integral, absolute, exhaustive, universal library is a demonstration of every text that could appear in the library. Borges is against it (the bluish one).</p>
+    `
   },
   {
     id: "resortes",
     year: "2023",
-    month: "Jun.",
-    title: "Resortes Mínimos",
+    month: "Jun",
+    title: "Minimal Springs",
     url: "https://julianszere.github.io/proyectar/resortes",
     description: `
-      <p>Proyecto experimental sobre sistemas de resortes mínimos y su comportamiento físico.</p>
+      <p>An experimental project on minimal spring systems and their physical behavior.</p>
     `
   },
   {
     id: "pendulos",
     year: "2023",
-    month: "May.",
-    title: "Péndulos Orquestrados",
+    month: "May",
+    title: "Orchestrated Pendulums",
     url: "https://julianszere.github.io/proyectar/péndulos",
     description: `
-      <p>Simulación y estudio de péndulos sincronizados con patrones orquestales.</p>
+      <p>Simulation and study of synchronized pendulums with orchestral patterns.</p>
     `
   }
 ];
 
+function showSection(name) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll("nav a[data-section], .site-name[data-section]").forEach(a => {
+    a.classList.toggle("active", a.dataset.section === name);
+  });
+
+  const section = document.getElementById("section-" + name);
+  if (section) section.classList.add("active");
+
+  if (name !== "projects") showProjectList();
+}
+
 function loadProjects() {
-  const projectList = document.getElementById("project-list");
-  
+  const list = document.getElementById("project-list");
   projects.forEach(project => {
     const li = document.createElement("li");
     li.className = "project-item";
     li.innerHTML = `
-      <div class="project-header">
-        <span class="project-date">${project.month} ${project.year}</span>
-        <a href="#" class="project-title" data-id="${project.id}">${project.title}</a>
-      </div>
+      <span class="project-date">${project.month} ${project.year}</span>
+      <a href="#" data-id="${project.id}">${project.title}</a>
     `;
-    
-    // Attach click handler directly
-    li.querySelector(".project-title").addEventListener("click", e => {
+    li.querySelector("a").addEventListener("click", e => {
       e.preventDefault();
       showProjectDetail(project.id);
     });
-    
-    projectList.appendChild(li);
+    list.appendChild(li);
   });
 }
 
 function showProjectDetail(id) {
-  const detailSection = document.getElementById("project-detail");
-  const projectList = document.getElementById("project-list");
   const project = projects.find(p => p.id === id);
+  if (!project) return;
 
-  if (!project) {
-    detailSection.innerHTML = "<p>Proyecto no encontrado.</p>";
-    detailSection.style.display = "block";
-    projectList.style.display = "none";
-    return;
-  }
-
-  projectList.style.display = "none";
-  detailSection.style.display = "block";
-  detailSection.innerHTML = `
-    <h2><span class="back-arrow" onclick="showProjectList()">←</span> <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-title-link">${project.title}</a> (${project.year})</h2>
-    <div>${project.description}</div>
+  document.getElementById("project-list").style.display = "none";
+  const detail = document.getElementById("project-detail");
+  detail.style.display = "block";
+  detail.innerHTML = `
+    <p><a href="#" id="back-link">← back</a></p>
+    <p><a href="${project.url}" target="_blank" rel="noopener noreferrer">${project.title}</a> (${project.year})</p>
+    ${project.description}
   `;
-  detailSection.scrollIntoView({ behavior: "smooth" });
+  detail.querySelector("#back-link").addEventListener("click", e => {
+    e.preventDefault();
+    showProjectList();
+  });
 }
 
 function showProjectList() {
-  const detailSection = document.getElementById("project-detail");
-  const projectList = document.getElementById("project-list");
-  
-  detailSection.style.display = "none";
-  projectList.style.display = "block";
-  projectList.scrollIntoView({ behavior: "smooth" });
+  const list = document.getElementById("project-list");
+  const detail = document.getElementById("project-detail");
+  if (list) list.style.display = "";
+  if (detail) detail.style.display = "none";
 }
 
-loadMenu();
+function wireLinks() {
+  document.addEventListener("click", e => {
+    const target = e.target.closest("[data-section]");
+    if (!target) return;
+    e.preventDefault();
+    showSection(target.dataset.section);
+  });
+}
+
 loadProjects();
+wireLinks();
+showSection("home");

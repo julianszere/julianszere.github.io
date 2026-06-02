@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How the TEG Probability Calculator Works</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 680px;
+      padding: 2rem 2.5rem 4rem;
+    }
+
+    /* ── Back link ── */
+    .back {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-size: 13px;
+    }
+    .back:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    header {
+      margin-bottom: 1rem;
+    }
+
+    .kicker {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    .byline {
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* ── Sections ── */
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 2rem 0 0.6rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 0.2rem;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 1.4rem 0 0.4rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    a { color: #000; text-decoration: underline; }
+
+    /* ── Footnote / citation style ── */
+    sup.cite {
+      font-size: 11px;
+      color: #888;
+      vertical-align: super;
+      cursor: default;
+    }
+    sup.cite::before { content: "["; }
+    sup.cite::after  { content: "]"; }
+
+    /* ── Pull quote ── */
+    blockquote {
+      border-left: 2px solid #000;
+      margin: 1.5rem 0;
+      padding: 0.4rem 1rem;
+      color: #444;
+    }
+
+    /* ── Inline math ── */
+    .math { font-style: italic; }
+    .math-frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      font-size: 0.85em;
+      margin: 0 0.2em;
+    }
+    .math-frac span:first-child {
+      border-bottom: 1px solid #000;
+      padding: 0 2px;
+      line-height: 1.3;
+    }
+    .math-frac span:last-child { padding: 0 2px; line-height: 1.3; }
+
+    /* ── Geometric diagrams ── */
+    .diagram-wrap {
+      margin: 1.5rem 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .diagram-caption {
+      font-size: 13px;
+      color: #888;
+      max-width: 480px;
+    }
+
+    canvas.grid-canvas {
+      display: block;
+      border: 1px solid #000;
+      background: #fff;
+    }
+    canvas#canvas1v1 {
+      border: none;
+    }
+
+    /* ── Probability table ── */
+    .prob-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 1.2rem 0;
+    }
+    .prob-table th {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #888;
+      border-bottom: 1px solid #000;
+      padding: 0.4rem 0.6rem;
+      text-align: left;
+      font-weight: normal;
+    }
+    .prob-table td {
+      padding: 0.35rem 0.6rem;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
+    .prob-table tr:last-child td { border-bottom: none; }
+    .prob-table .val { font-variant-numeric: tabular-nums; }
+    .prob-table .wrong { color: #888; text-decoration: line-through; }
+    .prob-table .right { font-weight: bold; }
+
+    /* ── Callout box ── */
+    .callout {
+      background: #f5f5f5;
+      border-left: 2px solid #000;
+      padding: 0.8rem 1rem;
+      margin: 1.4rem 0;
+    }
+    .callout p { margin-bottom: 0.3rem; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout strong { font-weight: bold; }
+
+    /* ── Figure block ── */
+    .figure-block {
+      margin: 2rem 0;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      padding: 1rem 0;
+    }
+    .figure-placeholder {
+      background: #f5f5f5;
+      border: 1px dashed #888;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      color: #888;
+      font-size: 13px;
+    }
+    .figure-num {
+      font-size: 12px;
+      color: #888;
+      margin-top: 0.6rem;
+      text-transform: uppercase;
+    }
+    .figure-caption {
+      font-size: 13px;
+      color: #888;
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+
+    /* ── References ── */
+    .references {
+      border-top: 1px solid #000;
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+    }
+    .references h2 {
+      border-bottom: none;
+      margin-top: 0;
+    }
+    .ref-list {
+      list-style: none;
+      counter-reset: refs;
+    }
+    .ref-list li {
+      counter-increment: refs;
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 0.6rem;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.5;
+    }
+    .ref-list li::before {
+      content: "[" counter(refs) "]";
+      position: absolute;
+      left: 0;
+      color: #888;
+      font-size: 12px;
+    }
+
+    /* ── Responsive tweaks ── */
+    @media (max-width: 560px) {
+      .page { padding: 1.25rem 1.25rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="../../index.html#projects">← back</a>
+
+  <!-- ══════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════ -->
+  <header>
+    <h1>T.E.G. Calculator</h1>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       1. INTRODUCTION
+  ══════════════════════════════════════════════ -->
+  <section id="intro">
+    <p>
+      This project extends the analytical results from the RISK combat models developed by
+      Blatt&nbsp;&amp;&nbsp;Sharon<sup class="cite">3</sup> and Osborne<sup class="cite">2</sup>
+      to the Argentine strategy game <em>TEG</em>. Using <em>Markov chains</em>, it computes
+      the probability of conquering a territory after a sequence of attacks.
+    </p>
+    <p>
+      Although TEG closely resembles RISK, there is one key structural difference:
+      in TEG the <strong>defender can roll up to three dice</strong>, while in RISK the
+      defender is limited to two. This seemingly minor rule change drastically shifts the
+      balance of the game: as the number of armies grows, the defender's advantage in TEG
+      becomes far greater than in RISK. We'll see why this is the case in detail below.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       2. SINGLE-DIE CASES (INDEPENDENT)
+  ══════════════════════════════════════════════ -->
+  <section id="simple-cases">
+    <h2>Single-Battle Probabilities: The Independent Cases</h2>
+    <p>
+      Each round of combat, both attacker and defender roll a number of dice determined by
+      how many armies they have. After rolling, both sides sort their dice in descending
+      order and compare them pair by pair: the attacker's highest vs the defender's highest,
+      second-highest vs second-highest, and so on. The attacker loses one army for each
+      pair in which their die is <em>less than or equal to</em> the defender's die.
+    </p>
+    <p>
+      The simplest situation, one attacking die vs one defending die, is easy to visualize geometrically.
+    </p>
+
+    <h3>1 die vs 1 die</h3>
+    <p>
+      Lay out all 36 equally-likely outcomes on a 6×6 grid, with the attacker's result on
+      one axis and the defender's on the other. The attacker wins whenever their die is
+      <em>strictly greater</em> than the defender's (that is, all cells <em>below</em>
+      the main diagonal). The diagonal itself (draws) goes to the defender. Counting:
+    </p>
+
+    <div class="diagram-wrap">
+      <canvas class="grid-canvas" id="canvas1v1" width="270" height="270"></canvas>
+      <div class="diagram-caption">
+        1 vs 1 case. Each cell is one equally-likely outcome (attacker on <em>x</em>, defender on <em>y</em>).
+        <span style="color:#2a4a7f">■</span> attacker wins (15 cells),
+        <span style="color:#8b3a2a">■</span> defender wins (21 cells).
+      </div>
+    </div>
+
+    <p>
+      There are 15 cells below the diagonal (attacker wins) and 21 on or above it
+      (defender wins), giving:
+    </p>
+    <p style="text-align:center;margin:1rem 0">
+      <span class="math">P(attacker wins, 1v1)</span> =
+      <span class="math-frac"><span>15</span><span>36</span></span>
+      ≈ <span class="math">0.417</span>
+      &emsp;&emsp;
+      <span class="math">P(defender wins, 1v1)</span> =
+      <span class="math-frac"><span>21</span><span>36</span></span>
+      ≈ <span class="math">0.583</span>
+    </p>
+    <p>
+      These agree exactly with Blatt<sup class="cite">3</sup> and Osborne.<sup class="cite">2</sup>
+      No tricks needed here. We simply count cells.
+    </p>
+
+    <h3>2 dice vs 1 die: a square (the max of two)</h3>
+    <p>
+      When the attacker rolls two dice and the defender one, only the <em>maximum</em>
+      of the attacker's two dice is compared against the defender's single die. COMPLETE 
+
+    <p>
+      Summing the weighted cells below the diagonal:
+      <span class="math">P(attacker wins, 2v1) = 125/216 ≈ 0.579</span>.
+      The attacker now has the edge.
+    </p>
+
+    <h3>3 dice vs 1 die: extending to a third dimension</h3>
+    <p>
+      With three attacking dice and one defending die, the attacker's maximum follows an
+      even more skewed distribution: <span class="math">P(max = k) = (3k²−3k+1)/216</span>.
+      Conceptually this is a 6×6×6 cube, collapsed to a 6×6 grid by marginalising over
+      the second and third dice — only the maximum of the three matters here. Summing
+      those cells below the diagonal gives
+      <span class="math">P(attacker wins, 3v1) = 855/1296 ≈ 0.660</span>.
+    </p>
+
+    <div class="diagram-wrap">
+      <canvas class="grid-canvas" id="canvas3v1" width="270" height="270"></canvas>
+      <div class="diagram-caption">
+        3 vs 1 — attacker axis is the max of three dice (cell width proportional to
+        marginal probability). The attacker wins in 855 of 1296 equally-likely outcomes.
+      </div>
+    </div>
+
+    <p>
+      All three cases above involve only a single comparison (the highest die on each side),
+      so the geometric counting is straightforward. Things get harder as soon as we need to compare <em>two</em> pairs simultaneously.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       3. THE INDEPENDENCE TRAP
+  ══════════════════════════════════════════════ -->
+  <section id="independence-trap">
+    <h2>The Independence Trap: N Dice vs 2 or More Dice</h2>
+    <p>
+      When both sides have at least two armies, two pairs of dice are compared: the
+      highest attacker die against the highest defender die, and the second-highest
+      against the second-highest. A natural first instinct is to treat these two
+      comparisons as <em>independent</em> events and multiply their probabilities.
+      This is the approach taken by Tan<sup class="cite">1</sup> — and it is wrong.
+    </p>
+    <p>
+      Consider the case of 3 attacking dice vs 2 defending dice (Case VI in the
+      literature). Let <span class="math">Y<sup>(1)</sup> ≥ Y<sup>(2)</sup></span> be
+      the top two attacker dice and
+      <span class="math">Z<sup>(1)</sup> ≥ Z<sup>(2)</sup></span> the top two defender
+      dice. The probability that the defender loses two armies is:
+    </p>
+
+    <div class="callout">
+      <p>
+        <strong>Tan's (incorrect) calculation:</strong>
+        <span class="math">P(Y<sup>(1)</sup> &gt; Z<sup>(1)</sup>) × P(Y<sup>(2)</sup> &gt; Z<sup>(2)</sup>)</span>
+        = 0.471 × 0.551 ≈ <strong>0.259</strong>
+      </p>
+      <p>
+        <strong>Correct answer (Osborne):</strong>
+        Using the joint distribution of the order statistics,
+        <span class="math">P(Y<sup>(1)</sup> &gt; Z<sup>(1)</sup> ∩ Y<sup>(2)</sup> &gt; Z<sup>(2)</sup>)</span>
+        = 2890/7776 ≈ <strong>0.372</strong>
+      </p>
+    </div>
+
+    <p>
+      Why does independence fail? Because <span class="math">Y<sup>(1)</sup></span> and
+      <span class="math">Y<sup>(2)</sup></span> are the <em>sorted</em> outcomes of the
+      same set of dice. Knowing that the maximum is large makes it <em>more likely</em>
+      that the second-largest is also large — they are positively correlated. Multiplying
+      the marginal probabilities ignores this relationship entirely.
+    </p>
+
+    <p>
+      As Osborne<sup class="cite">2</sup> showed, the correct approach is to work with
+      the <em>joint</em> distribution of <span class="math">(Y<sup>(1)</sup>, Y<sup>(2)</sup>)</span>
+      and <span class="math">(Z<sup>(1)</sup>, Z<sup>(2)</sup>)</span> simultaneously.
+      The table below shows how much Tan's values deviate from the correct ones for
+      Case VI (3 attackers, ≥2 defenders):
+    </p>
+
+    <table class="prob-table">
+      <thead>
+        <tr>
+          <th>Outcome</th>
+          <th>Tan (independent)</th>
+          <th>Correct (joint)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Defender loses 2</td>
+          <td class="val wrong">0.259</td>
+          <td class="val right">0.372</td>
+        </tr>
+        <tr>
+          <td>Each loses 1</td>
+          <td class="val wrong">0.504</td>
+          <td class="val right">0.336</td>
+        </tr>
+        <tr>
+          <td>Attacker loses 2</td>
+          <td class="val wrong">0.237</td>
+          <td class="val right">0.293</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The errors are not negligible. Because these transition probabilities are the
+      building blocks of the entire Markov chain, even a small per-roll bias compounds
+      dramatically over the many rounds of a full campaign.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       4. CORRECT CALCULATION
+  ══════════════════════════════════════════════ -->
+  <section id="correct-calc">
+    <h2>Getting It Right: Joint Distributions and Enumeration</h2>
+    <p>
+      The correct probabilities for every case are obtained by working with the
+      full joint distribution of the ordered dice. For two dice the joint distribution
+      of <span class="math">(Z<sup>(1)</sup>, Z<sup>(2)</sup>)</span> is:
+    </p>
+
+    <div class="callout">
+      <p>
+        <span class="math">P(Z<sup>(1)</sup>=z<sub>1</sub>, Z<sup>(2)</sup>=z<sub>2</sub>)</span>
+        =
+        <span class="math-frac"><span>1</span><span>36</span></span> if
+        <span class="math">z<sub>1</sub> = z<sub>2</sub></span>
+        &nbsp;&nbsp;and&nbsp;&nbsp;
+        <span class="math-frac"><span>2</span><span>36</span></span> if
+        <span class="math">z<sub>1</sub> &gt; z<sub>2</sub></span>
+      </p>
+    </div>
+
+    <p>
+      For three dice the joint distribution of
+      <span class="math">(Y<sup>(1)</sup>, Y<sup>(2)</sup>)</span>
+      can be derived by marginalising out the minimum:
+    </p>
+
+    <div class="callout">
+      <p>
+        <span class="math">P(Y<sup>(1)</sup>=y<sub>1</sub>, Y<sup>(2)</sup>=y<sub>2</sub>)</span>
+        =
+        <span class="math-frac"><span>3y<sub>1</sub>−2</span><span>216</span></span> if
+        <span class="math">y<sub>1</sub> = y<sub>2</sub></span>
+        &nbsp;&nbsp;and&nbsp;&nbsp;
+        <span class="math-frac"><span>6y<sub>2</sub>−3</span><span>216</span></span> if
+        <span class="math">y<sub>1</sub> &gt; y<sub>2</sub></span>
+      </p>
+    </div>
+
+    <p>
+      With these joint distributions in hand, the probability of any outcome is obtained
+      by a double sum (or quadruple sum for the 3v2 case) over all valid combinations
+      of dice values, weighted by the appropriate joint probabilities. Osborne<sup class="cite">2</sup>
+      and Blatt<sup class="cite">3</sup> both arrive at the complete set of 14 distinct
+      per-round probabilities this way — exact, not approximate.
+    </p>
+
+    <p>
+      The TEG calculator extends this to the additional case where the defender rolls
+      <em>three</em> dice (possible in TEG but not in RISK). The same enumeration
+      technique applies: one works with the joint distribution of
+      <span class="math">(Z<sup>(1)</sup>, Z<sup>(2)</sup>, Z<sup>(3)</sup>)</span>
+      and sums over all valid comparison outcomes. This is the piece that makes TEG
+      computationally novel relative to prior RISK analyses.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       5. MARKOV CHAINS
+  ══════════════════════════════════════════════ -->
+  <section id="markov">
+    <h2>From a Single Round to a Full Battle: Markov Chains</h2>
+    <p>
+      A single combat round only removes armies; it never adds them. This means the
+      state of a battle — the pair <span class="math">(a, d)</span> of remaining
+      attacking and defending armies — evolves over time, and the probability of every
+      future outcome depends <em>only</em> on the current state, not on the history of
+      how it was reached. That is exactly the
+      <em>Markov property</em>,<sup class="cite">1</sup> and it allows us to model an
+      entire battle as a Markov chain.
+    </p>
+
+    <h3>States and absorbing boundaries</h3>
+    <p>
+      The chain lives on the state space
+      <span class="math">{(a, d) : 1 ≤ a ≤ A, 0 ≤ d ≤ D}</span>.
+      States where <span class="math">d = 0</span> (attacker wins) or
+      <span class="math">a = 1</span> (attacker can no longer attack; defender wins)
+      are <em>absorbing</em> — once reached, the battle is over. All other states are
+      <em>transient</em>: the chain will leave them with probability 1 eventually.
+    </p>
+
+    <div class="diagram-wrap">
+      <canvas id="markov-diagram" width="660" height="220" style="max-width:100%;border:none"></canvas>
+      <div class="diagram-caption">
+        A fragment of the state-transition diagram for a small battle. Transient states
+        (white) transition to other transient or to absorbing states (coloured). The
+        per-round probabilities computed in the previous section fill every arrow.
+      </div>
+    </div>
+
+    <h3>The fundamental matrix</h3>
+    <p>
+      Arranging the per-round probabilities into a transition matrix
+      <span class="math">P</span> in block form:
+    </p>
+
+    <div class="callout">
+      <p>
+        <span class="math">P = [Q &nbsp; R ; 0 &nbsp; I]</span>
+      </p>
+      <p>
+        where <span class="math">Q</span> contains transitions between transient states
+        and <span class="math">R</span> contains transitions from transient to absorbing
+        states.
+      </p>
+    </div>
+
+    <p>
+      The probability of eventually reaching each absorbing state from each transient
+      starting state is given by the <em>fundamental matrix</em>
+      <span class="math">F = (I − Q)<sup>−1</sup> R</span>.<sup class="cite">1,2,3</sup>
+      Each row of <span class="math">F</span> corresponds to an initial state
+      <span class="math">(A, D)</span>; summing the entries in the columns where the
+      attacker wins yields the victory probability for that starting configuration. Expected
+      losses are computed similarly, by weighting each absorbing state by the number of
+      armies lost and summing over the corresponding row.
+    </p>
+
+    <p>
+      For TEG with armies up to 30 on each side, the state space can have close to
+      1 000 states, making the matrix <span class="math">Q</span> nearly 900×900. Because
+      <span class="math">Q</span> is extremely sparse — each state transitions to at most
+      five others — the inversion is tractable using standard sparse-matrix techniques.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       6. FIGURE 1
+  ══════════════════════════════════════════════ -->
+  <section id="results">
+    <h2>What the Numbers Reveal</h2>
+    <p>
+      Applying this pipeline — correct joint-distribution probabilities fed into a
+      Markov-chain fundamental matrix — for both RISK (defender rolls ≤2 dice) and TEG
+      (defender rolls ≤3 dice) produces striking results. Figure 1 shows the probability
+      of victory for equal-sized armies as a function of army count in each game.
+    </p>
+
+    <div class="figure-block">
+      <div class="figure-placeholder">
+        <div class="icon">📊</div>
+        <em>Figure 1 — Insert <code>prob_equal_curve_risk_teg</code> here</em>
+      </div>
+      <div class="figure-num">Figure 1</div>
+      <div class="figure-caption">
+        Probability of the attacker winning a battle when attacker and defender start
+        with equal armies, as a function of army count. Computed analytically via
+        Markov chains for both RISK (defender ≤2 dice) and TEG (defender ≤3 dice).
+        In RISK, the attacker reaches a comfortable majority even at moderate army sizes;
+        in TEG the defender's extra die maintains a persistent structural advantage that
+        grows with army count.
+      </div>
+    </div>
+
+    <p>
+      The contrast is stark. In RISK, larger engagements tend to favour the attacker —
+      an intuition consistent with Osborne's<sup class="cite">2</sup> recommendation to
+      "be more aggressive." In TEG, the opposite holds: the defender's third die provides
+      an advantage that <em>compounds</em> over many rounds, making large-scale attacks
+      a poor proposition unless the attacker has a significant numerical edge.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       REFERENCES
+  ══════════════════════════════════════════════ -->
+  <div class="references">
+    <h2>References</h2>
+    <ol class="ref-list">
+      <li>
+        B. Tan, "Markov Chains and the RISK Board Game,"
+        <em>Mathematics Magazine</em>, vol. 70, no. 5, pp. 349–357, Dec. 1997.
+      </li>
+      <li>
+        J. A. Osborne, "Markov Chains for the RISK Board Game Revisited,"
+        <em>Mathematics Magazine</em>, North Carolina State University, Raleigh, NC, 2003.
+      </li>
+      <li>
+        S. Blatt, "RISKy Business: An In-Depth Look at the Game RISK,"
+        <em>Rose-Hulman Undergraduate Mathematics Journal</em>, vol. 3, iss. 2, art. 3, 2002.
+      </li>
+    </ol>
+  </div>
+
+</div><!-- .page -->
+
+<!-- ══════════════════════════════════════════════
+     INTERACTIVE CANVASES
+══════════════════════════════════════════════ -->
+<script>
+/* ── helpers ── */
+const C  = (id) => document.getElementById(id);
+const px = (canvas) => ({ w: canvas.width, h: canvas.height });
+
+/* colour palette */
+const COL = {
+  attWin:   '#000000',
+  defWin:   '#888888',
+  diag:     '#cccccc',
+  text:     '#000000',
+  bg:       '#ffffff',
+  gridLine: 'rgba(0,0,0,0.15)',
+  attWinLt: 'rgba(0,0,0,0.10)',
+  defWinLt: 'rgba(0,0,0,0.04)',
+};
+
+/* ── 1v1 canvas ── */
+(function draw1v1() {
+  const cv = C('canvas1v1');
+  const ctx = cv.getContext('2d');
+  const N = 6, pad = 30;
+  const cellW = (cv.width  - pad * 2) / N;
+  const cellH = (cv.height - pad * 2) / N;
+
+  const C1 = {
+    attWin:   '#2a4a7f',
+    defWin:   '#8b3a2a',
+    diag:     '#c8b89a',
+    gridLine: 'rgba(200,184,154,0.5)',
+    attWinLt: 'rgba(42,74,127,0.18)',
+    defWinLt: 'rgba(139,58,42,0.13)',
+  };
+
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  for (let a = 1; a <= N; a++) {        // attacker die value (x-axis)
+    for (let d = 1; d <= N; d++) {      // defender die value (y-axis)
+      const x = pad + (a - 1) * cellW;
+      const y = pad + (N - d) * cellH;  // y flipped so d=6 at top
+      const won = a > d;
+      ctx.fillStyle = won ? C1.attWinLt : C1.defWinLt;
+      ctx.fillRect(x + 1, y + 1, cellW - 2, cellH - 2);
+      ctx.strokeStyle = C1.gridLine;
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x + 0.5, y + 0.5, cellW - 1, cellH - 1);
+
+      /* dot */
+      ctx.beginPath();
+      ctx.arc(x + cellW/2, y + cellH/2, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = won ? C1.attWin : C1.defWin;
+      ctx.fill();
+    }
+  }
+
+  /* diagonal */
+  ctx.beginPath();
+  ctx.moveTo(pad, pad + N * cellH);
+  ctx.lineTo(pad + N * cellW, pad);
+  ctx.strokeStyle = C1.diag;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  /* axis labels */
+  ctx.fillStyle = '#888';
+  ctx.font = '11px "Courier New", Courier, monospace';
+  ctx.textAlign = 'center';
+  for (let i = 1; i <= N; i++) {
+    ctx.fillText(i, pad + (i - 0.5) * cellW, cv.height - 8);
+    ctx.fillText(i, 14, pad + (N - i + 0.5) * cellH + 4);
+  }
+  ctx.fillText('Attacker', cv.width / 2, cv.height - 0);
+  ctx.save();
+  ctx.translate(6, cv.height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Defender', 0, 0);
+  ctx.restore();
+})();
+
+/* ── 2v1 canvas (max of 2 vs 1) ── */
+(function draw2v1() {
+  const cv = C('canvas2v1');
+  const ctx = cv.getContext('2d');
+  const N = 6, pad = 30;
+  const cellH = (cv.height - pad * 2) / N;
+
+  ctx.fillStyle = COL.bg;
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  /* probability of max of 2 dice = k  => (2k-1)/36 */
+  const maxProb = Array.from({length: 6}, (_, i) => (2*(i+1)-1)/36);
+  const totalWidth = cv.width - pad * 2;
+  const xs = [pad]; // left edges
+  for (let k = 0; k < N; k++) xs.push(xs[k] + maxProb[k] * totalWidth);
+
+  for (let a = 0; a < N; a++) {          // attacker max = a+1
+    for (let d = 0; d < N; d++) {        // defender die = d+1
+      const aVal = a + 1, dVal = d + 1;
+      const x = xs[a];
+      const y = pad + (N - 1 - d) * cellH;
+      const w = xs[a+1] - xs[a];
+      const won = aVal > dVal;
+      ctx.fillStyle = won ? COL.attWinLt : COL.defWinLt;
+      ctx.fillRect(x + 0.5, y + 0.5, w - 1, cellH - 1);
+      ctx.strokeStyle = COL.gridLine;
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x + 0.5, y + 0.5, w - 1, cellH - 1);
+      /* dot */
+      ctx.beginPath();
+      ctx.arc(x + w/2, y + cellH/2, 2, 0, Math.PI*2);
+      ctx.fillStyle = won ? COL.attWin : COL.defWin;
+      ctx.fill();
+    }
+  }
+
+  ctx.fillStyle = '#888';
+  ctx.font = '11px "Courier New", Courier, monospace';
+  ctx.textAlign = 'center';
+  for (let i = 0; i < N; i++) {
+    ctx.fillText(i+1, (xs[i]+xs[i+1])/2, cv.height - 8);
+    ctx.fillText(i+1, 14, pad + (N - 1 - i + 0.5) * cellH + 4);
+  }
+  ctx.fillText('Attacker (max of 2)', cv.width / 2, cv.height);
+  ctx.save();
+  ctx.translate(6, cv.height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Defender', 0, 0);
+  ctx.restore();
+})();
+
+/* ── 3v1 canvas (max of 3 vs 1) ── */
+(function draw3v1() {
+  const cv = C('canvas3v1');
+  const ctx = cv.getContext('2d');
+  const N = 6, pad = 30;
+  const cellH = (cv.height - pad * 2) / N;
+
+  ctx.fillStyle = COL.bg;
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  /* P(max of 3 = k) = (3k²-3k+1)/216 */
+  const maxProb3 = Array.from({length:6}, (_,i)=>{
+    const k = i+1;
+    return (3*k*k - 3*k + 1)/216;
+  });
+  const totalWidth = cv.width - pad * 2;
+  const xs = [pad];
+  for (let k = 0; k < N; k++) xs.push(xs[k] + maxProb3[k] * totalWidth);
+
+  for (let a = 0; a < N; a++) {
+    for (let d = 0; d < N; d++) {
+      const aVal = a+1, dVal = d+1;
+      const x = xs[a];
+      const y = pad + (N-1-d) * cellH;
+      const w = xs[a+1] - xs[a];
+      const won = aVal > dVal;
+      ctx.fillStyle = won ? COL.attWinLt : COL.defWinLt;
+      ctx.fillRect(x+0.5, y+0.5, w-1, cellH-1);
+      ctx.strokeStyle = COL.gridLine;
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x+0.5, y+0.5, w-1, cellH-1);
+      ctx.beginPath();
+      ctx.arc(x+w/2, y+cellH/2, 2, 0, Math.PI*2);
+      ctx.fillStyle = won ? COL.attWin : COL.defWin;
+      ctx.fill();
+    }
+  }
+
+  ctx.fillStyle = '#888';
+  ctx.font = '11px "Courier New", Courier, monospace';
+  ctx.textAlign = 'center';
+  for (let i = 0; i < N; i++) {
+    ctx.fillText(i+1, (xs[i]+xs[i+1])/2, cv.height-8);
+    ctx.fillText(i+1, 14, pad+(N-1-i+0.5)*cellH+4);
+  }
+  ctx.fillText('Attacker (max of 3)', cv.width/2, cv.height);
+  ctx.save();
+  ctx.translate(6, cv.height/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText('Defender', 0, 0);
+  ctx.restore();
+})();
+
+/* ── Markov state diagram ── */
+(function drawMarkov() {
+  const cv = C('markov-diagram');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const states = [
+    { id:'(3,2)', x:100, y:80,  transient:true },
+    { id:'(3,1)', x:100, y:160, transient:true },
+    { id:'(2,2)', x:220, y:80,  transient:true },
+    { id:'(2,1)', x:220, y:160, transient:true },
+    { id:'(3,0)', x:340, y:80,  transient:false, label:'Att.\nwins' },
+    { id:'(2,0)', x:340, y:160, transient:false, label:'Att.\nwins' },
+    { id:'(1,2)', x:460, y:80,  transient:false, label:'Def.\nwins' },
+    { id:'(1,1)', x:460, y:160, transient:false, label:'Def.\nwins' },
+  ];
+  const R = 28;
+
+  /* arrow helper */
+  function arrow(x1,y1,x2,y2,col,prob,bend=0) {
+    ctx.save();
+    ctx.strokeStyle = col;
+    ctx.fillStyle   = col;
+    ctx.lineWidth   = 1.2;
+    const dx = x2-x1, dy = y2-y1;
+    const len = Math.sqrt(dx*dx+dy*dy);
+    const ux = dx/len, uy = dy/len;
+    const sx = x1 + ux*R, sy = y1 + uy*R;
+    const ex = x2 - ux*R, ey = y2 - uy*R;
+    const mx = (sx+ex)/2 + bend*(-uy), my = (sy+ey)/2 + bend*(ux);
+
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.quadraticCurveTo(mx, my, ex, ey);
+    ctx.stroke();
+    /* arrowhead */
+    const angle = Math.atan2(ey-my, ex-mx);
+    ctx.beginPath();
+    ctx.moveTo(ex, ey);
+    ctx.lineTo(ex - 8*Math.cos(angle-0.4), ey - 8*Math.sin(angle-0.4));
+    ctx.lineTo(ex - 8*Math.cos(angle+0.4), ey - 8*Math.sin(angle+0.4));
+    ctx.closePath();
+    ctx.fill();
+    /* probability label */
+    if (prob) {
+      ctx.fillStyle = '#888';
+      ctx.font = '10px "Courier New", Courier, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(prob, mx, my - 5);
+    }
+    ctx.restore();
+  }
+
+  /* draw edges */
+  const s = (id) => states.find(s=>s.id===id);
+  const edges = [
+    ['(3,2)','(3,1)','0.337',COL.attWin, 20],
+    ['(3,2)','(2,2)','0.293',COL.defWin, -20],
+    ['(3,2)','(2,1)','0.372',COL.attWin, 0],
+    ['(3,1)','(3,0)','0.660',COL.attWin, 0],
+    ['(3,1)','(2,1)','0.340',COL.defWin, 0],
+    ['(2,2)','(2,1)','0.228',COL.attWin, 18],
+    ['(2,2)','(1,2)','0.448',COL.defWin, 0],
+    ['(2,2)','(1,1)','0.324',COL.attWin, 0],
+    ['(2,1)','(2,0)','0.579',COL.attWin, 0],
+    ['(2,1)','(1,1)','0.421',COL.defWin, 0],
+  ];
+  for (const [from, to, prob, col, bend=0] of edges) {
+    const a = s(from), b = s(to);
+    arrow(a.x, a.y, b.x, b.y, col, prob, bend);
+  }
+
+  /* draw nodes */
+  for (const st of states) {
+    ctx.beginPath();
+    ctx.arc(st.x, st.y, R, 0, Math.PI*2);
+    ctx.fillStyle = st.transient ? '#fff' : (st.label?.startsWith('Att') ? 'rgba(42,74,127,0.15)' : 'rgba(139,58,42,0.12)');
+    ctx.fill();
+    ctx.strokeStyle = st.transient ? '#ccc' : (st.label?.startsWith('Att') ? COL.attWin : COL.defWin);
+    ctx.lineWidth = st.transient ? 1.5 : 2;
+    ctx.stroke();
+
+    ctx.fillStyle = COL.text;
+    ctx.font = '11px "Courier New", Courier, monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    if (st.transient) {
+      ctx.fillText(st.id, st.x, st.y);
+    } else {
+      const lines = st.label.split('\n');
+      ctx.fillText(lines[0], st.x, st.y - 7);
+      ctx.font = '9px "Courier New", Courier, monospace';
+      ctx.fillStyle = '#888';
+      ctx.fillText(st.id, st.x, st.y + 7);
+    }
+    ctx.textBaseline = 'alphabetic';
+  }
+})();
+</script>
+
+</body>
+</html>

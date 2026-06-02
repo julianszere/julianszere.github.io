@@ -4,7 +4,8 @@ const projects = [
     year: "2025",
     month: "Nov",
     title: "T.E.G. Calculator",
-    url: "https://julianszere.github.io/proyectar/TEG",
+    url: "https://julianszere.github.io/projects/TEG",
+    detailUrl: "./projects/TEG/teg_probability_calculator.html",
     description: `
       <p>A tool for calculating tactical and strategic war scenarios in T.E.G. using advanced probability models.</p>
     `
@@ -14,7 +15,7 @@ const projects = [
     year: "2024",
     month: "Apr",
     title: "The Total Library",
-    url: "https://julianszere.github.io/proyectar/biblioteca",
+    url: "https://julianszere.github.io/projects/biblioteca",
     description: `
       <p>All syntactically compatible synonyms with Borges's text <em>The Total Library</em> generate a decillion (10⁶⁰) of possible stories that say the same thing but differently.</p>
       <p>The complete, extensive, integral, absolute, exhaustive, universal library is a demonstration of every text that could appear in the library. Borges is against it (the bluish one).</p>
@@ -25,7 +26,7 @@ const projects = [
     year: "2023",
     month: "Jun",
     title: "Minimal Springs",
-    url: "https://julianszere.github.io/proyectar/resortes",
+    url: "https://julianszere.github.io/projects/resortes",
     description: `
       <p>An experimental project on minimal spring systems and their physical behavior.</p>
     `
@@ -35,7 +36,7 @@ const projects = [
     year: "2023",
     month: "May",
     title: "Orchestrated Pendulums",
-    url: "https://julianszere.github.io/proyectar/péndulos",
+    url: "https://julianszere.github.io/projects/péndulos",
     description: `
       <p>Simulation and study of synchronized pendulums with orchestral patterns.</p>
     `
@@ -75,6 +76,11 @@ function showProjectDetail(id) {
   const project = projects.find(p => p.id === id);
   if (!project) return;
 
+  if (project.detailUrl) {
+    window.location.href = project.detailUrl;
+    return;
+  }
+
   document.getElementById("project-list").style.display = "none";
   const detail = document.getElementById("project-detail");
   detail.style.display = "block";
@@ -107,4 +113,6 @@ function wireLinks() {
 
 loadProjects();
 wireLinks();
-showSection("home");
+
+const initialSection = window.location.hash.replace("#", "") || "home";
+showSection(initialSection);

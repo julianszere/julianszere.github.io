@@ -11,24 +11,14 @@ const projects = [
     `
   },
   {
-    id: "biblioteca",
-    year: "2024",
-    month: "Apr",
-    title: "The Total Library",
-    url: "https://julianszere.github.io/projects/biblioteca",
-    description: `
-      <p>All syntactically compatible synonyms with Borges's text <em>The Total Library</em> generate a decillion (10⁶⁰) of possible stories that say the same thing but differently.</p>
-      <p>The complete, extensive, integral, absolute, exhaustive, universal library is a demonstration of every text that could appear in the library. Borges is against it (the bluish one).</p>
-    `
-  },
-  {
-    id: "resortes",
+    id: "springs",
     year: "2023",
     month: "Jun",
-    title: "Minimal Springs",
-    url: "https://julianszere.github.io/projects/resortes",
+    title: "Least Springs",
+    url: "https://julianszere.github.io/projects/springs",
+    detailUrl: "./projects/springs/index.html",
     description: `
-      <p>An experimental project on minimal spring systems and their physical behavior.</p>
+      <p>Fitting a regression line by least squares is physically identical to finding the equilibrium of a rigid rod held by springs.</p>
     `
   },
   {

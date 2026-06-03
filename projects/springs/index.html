@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Least Springs</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 680px;
+      padding: 2rem 2.5rem 4rem;
+    }
+
+    .back {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-size: 13px;
+    }
+    .back:hover { text-decoration: underline; }
+
+    header { margin-bottom: 1rem; }
+
+    .kicker {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 2rem 0 0.6rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 0.2rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    a { color: #000; text-decoration: underline; }
+
+    .callout {
+      background: #f5f5f5;
+      border-left: 2px solid #000;
+      padding: 0.8rem 1.2rem;
+      margin: 1.4rem 0;
+      overflow-x: auto;
+    }
+    .callout p { margin-bottom: 0.3rem; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .animation-wrap {
+      margin: 0.6rem 0 2rem;
+      padding: 0;
+    }
+
+    .animation-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 420px;
+      border: none;
+      border-top: 1px solid #000;
+      border-right: 1px solid #000;
+    }
+
+    .animation-caption {
+      font-size: 13px;
+      color: #888;
+      padding: 0.6rem 0 0.8rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      .page { padding: 1.25rem 1.25rem 3rem; }
+      .animation-wrap iframe { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="../../index.html#projects">← back</a>
+
+  <header>
+    <div class="kicker">Jun 2023</div>
+    <h1>Least Springs</h1>
+  </header>
+
+  <section id="intro">
+    <p>
+      Since the elastic potential energy of springs is quadratic,
+      fitting a linear function under least squares is mathematically equivalent to finding the rest state for a linear rod tied to a bunch of springs.
+    </p>
+    <div class="animation-wrap">
+      <iframe src="./animation.html" title="Spring regression animation" scrolling="no"></iframe>
+      <div class="animation-caption">
+        Drag any data point or the rod itself to disturb the equilibrium.
+        The rod always comes to rest on the least squares regression line.
+      </div>
+    </div>
+  </section>
+
+  <section id="least-squares">
+    <h2>The Least Squares Problem</h2>
+    <p>
+      Given $n$ data points $(x_1, y_1), \ldots, (x_n, y_n)$,
+      ordinary least squares finds the intercept $a$ and slope $b$ that minimise
+      the total squared residual:
+    </p>
+
+    <div class="callout">
+      <p>$$L(a,\, b) = \sum_{i=1}^{n} \bigl(y_i - a - b\, x_i\bigr)^2$$</p>
+    </div>
+
+    <p>
+      Setting the partial derivatives to zero and solving gives the familiar normal equations,
+      whose unique solution is the regression line.
+    </p>
+  </section>
+
+  <section id="springs">
+    <h2>The Rod tied to Springs</h2>
+    <p>
+      Now imagine a rigid rod hovering over the scatter plot. The rod has two mechanical
+      degrees of freedom: its vertical position at the centre
+      ($a$, the intercept) and its tilt angle
+      ($\theta \approx b$, the slope for small angles).
+    </p>
+    <p>
+      At each data point $(x_i, y_i)$ a vertical spring is anchored.
+      The other end attaches to the rod at the same $x$-coordinate,
+      where the rod sits at height $a + b\, x_i$.
+      The spring is stretched (or compressed) by the residual
+      $y_i - a - b\, x_i$, storing elastic energy:
+    </p>
+
+    <div class="callout">
+      <p>$$U(a,\, b) = \frac{k}{2}\sum_{i=1}^{n} \bigl(y_i - a - b\, x_i\bigr)^2$$</p>
+    </div>
+
+    <p>
+      With spring constant $k = 2$, this is identical to the
+      least squares objective $L$. The configuration that minimises
+      the total elastic energy is exactly the regression line.
+    </p>
+    <p>
+      The full Lagrangian for the rod is
+      $\mathcal{L} = T - U$, where $T$ is the
+      kinetic energy, translational plus rotational.
+      Since the equilibrum state of this system will have to extreme $\mathcal{L}$,
+      the rod will settle at the least squares line.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

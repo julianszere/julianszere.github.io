@@ -7,12 +7,11 @@ let rodAngularVelocity = 0;
 let rodCenterX, rodCenterY;
 let rodVelocityY = 0;
 let springK = 1;
-let damping = 0.99; // no damping by default
+let damping = 0.99;
 let rodInertia;
 let fitCache = null;
 let gridBuffer;
 
-// === Rod dragging state ===
 let isDraggingRod = false;
 let rodDragOffsetX = 0;
 let rodDragOffsetY = 0;
@@ -62,7 +61,7 @@ function getLinearFitLine() {
 }
 
 function setup() {
-  createCanvas(1847, 976);
+  createCanvas(windowWidth, windowHeight);
   pixelDensity(1);
   rodLength = max(width, height) * 1.2;
   rodCenterX = width / 2;
@@ -87,6 +86,9 @@ function draw() {
   background(255);
   image(gridBuffer, 0, 0);
 
+  drawAxes();
+  drawExactFitLine();
+
   let cosAngle = cos(rodAngle);
   let sinAngle = sin(rodAngle);
   let tanAngle = tan(rodAngle);
@@ -106,37 +108,147 @@ function draw() {
   }
 
   if (!isDraggingRod) {
-    // Proper time step
-    let dt = 1.0 / 60.0; // assume ~60fps
+    let dt = 1.0 / 60.0;
 
-    // Angular dynamics
     let angularAcceleration = totalTorque / rodInertia;
     rodAngularVelocity += angularAcceleration * dt;
-    rodAngularVelocity *= damping; // no damping if =1
+    rodAngularVelocity *= damping;
     rodAngle += rodAngularVelocity * dt;
 
-    // Linear dynamics
     let linearAcceleration = totalForceY / rodMass;
     rodVelocityY += linearAcceleration * dt;
-    rodVelocityY *= damping; // no damping if =1
+    rodVelocityY *= damping;
     rodCenterY += rodVelocityY * dt;
   }
 
-  // Draw rod
-  stroke('#1f77b4');
-  strokeWeight(3);
-  let rodX1 = rodCenterX - rodLength / 2 * cosAngle;
-  let rodY1 = rodCenterY - rodLength / 2 * sinAngle;
-  let rodX2 = rodCenterX + rodLength / 2 * cosAngle;
-  let rodY2 = rodCenterY + rodLength / 2 * sinAngle;
-  line(rodX1, rodY1, rodX2, rodY2);
-
-  // Draw springs + points
+  // Springs (behind rod and points)
   for (let p of dataPoints) {
     const rodY = rodCenterY + tanAngle * (p.x - rodCenterX);
     drawZigZagSpring(p.x, p.y, p.x, rodY, 3, 10);
+  }
+
+  // Rod — draw edge-to-edge so it always spans the full canvas
+  const rodActive = isDraggingRod || mouseNearRod(mouseX, mouseY);
+  const rodColor = rodActive ? '#FF4136' : '#1f77b4';
+  stroke(rodColor);
+  strokeWeight(3);
+  let ex1, ey1, ex2, ey2;
+  if (abs(cosAngle) > 0.001) {
+    ex1 = 0;     ey1 = rodCenterY + tanAngle * (0 - rodCenterX);
+    ex2 = width; ey2 = rodCenterY + tanAngle * (width - rodCenterX);
+  } else {
+    ex1 = rodCenterX; ey1 = 0;
+    ex2 = rodCenterX; ey2 = height;
+  }
+  line(ex1, ey1, ex2, ey2);
+
+  // Data points (top layer)
+  for (let p of dataPoints) {
     p.draw();
   }
+
+  // Legend on top of everything
+  drawLegend(rodColor);
+}
+
+function drawAxes() {
+  stroke('#333');
+  strokeWeight(1);
+
+  // left spine
+  line(0, 0, 0, height);
+  // bottom spine
+  line(0, height - 1, width, height - 1);
+
+  const step = 40;
+  for (let x = step; x < width; x += step) {
+    line(x, height - 1, x, height - 6);
+  }
+  for (let y = 0; y < height - 1; y += step) {
+    line(0, y, 6, y);
+  }
+
+  noStroke();
+  fill('#333');
+  textFont('Courier New');
+  textSize(13);
+  textAlign(RIGHT, BOTTOM);
+  text('x', width - 5, height - 5);
+  textAlign(LEFT, TOP);
+  text('y', 5, 5);
+}
+
+function drawExactFitLine() {
+  const fit = getLinearFitLine();
+  if (!fit) return;
+  const { slope, intercept } = fit;
+
+  drawingContext.setLineDash([8, 5]);
+  stroke('#aaa');
+  strokeWeight(1.5);
+  line(0, intercept, width, intercept + slope * width);
+  drawingContext.setLineDash([]);
+}
+
+function drawLegend(rodColor) {
+  const margin = 14;
+  const padX = 10;
+  const padY = 8;
+  const lineLen = 22;
+  const lineTextGap = 7;
+  const rowH = 16;
+  const rowGap = 6;
+
+  textFont('Courier New');
+  textSize(12);
+
+  const label1 = 'Linear Rod';
+  const label2 = 'Linear Fit';
+  const label3 = 'Datapoints';
+  const maxTextW = max(textWidth(label1), textWidth(label2), textWidth(label3));
+
+  const boxW = padX + lineLen + lineTextGap + maxTextW + padX;
+  const boxH = padY + rowH + rowGap + rowH + rowGap + rowH + padY;
+  const bx = width - margin - boxW;
+  const by = margin;
+
+  fill(255);
+  stroke('#cccccc');
+  strokeWeight(0.8);
+  rect(bx, by, boxW, boxH);
+
+  // Linear Rod row
+  const row1y = by + padY + rowH / 2;
+  stroke(rodColor);
+  strokeWeight(2.5);
+  line(bx + padX, row1y, bx + padX + lineLen, row1y);
+  noStroke();
+  fill('#333');
+  textAlign(LEFT, CENTER);
+  text(label1, bx + padX + lineLen + lineTextGap, row1y);
+
+  // Linear Fit row
+  const row2y = by + padY + rowH + rowGap + rowH / 2;
+  drawingContext.setLineDash([5, 3]);
+  stroke('#aaa');
+  strokeWeight(1.5);
+  line(bx + padX, row2y, bx + padX + lineLen, row2y);
+  drawingContext.setLineDash([]);
+  noStroke();
+  fill('#333');
+  textAlign(LEFT, CENTER);
+  text(label2, bx + padX + lineLen + lineTextGap, row2y);
+
+  // Datapoints row
+  const row3y = by + padY + 2 * (rowH + rowGap) + rowH / 2;
+  fill('#111111');
+  stroke(255);
+  strokeWeight(2);
+  ellipse(bx + padX + lineLen / 2, row3y, 10);
+  noStroke();
+  fill('#333');
+  textAlign(LEFT, CENTER);
+  text(label3, bx + padX + lineLen + lineTextGap, row3y);
 }
 
 function drawGrid(buffer, gridSpacing) {
@@ -171,25 +283,8 @@ function drawZigZagSpring(x1, y1, x2, y2, amplitude, segments) {
 }
 
 function mouseNearRod(mx, my) {
-  let cosAngle = cos(rodAngle);
-  let sinAngle = sin(rodAngle);
-  let rodX1 = rodCenterX - rodLength / 2 * cosAngle;
-  let rodY1 = rodCenterY - rodLength / 2 * sinAngle;
-  let rodX2 = rodCenterX + rodLength / 2 * cosAngle;
-  let rodY2 = rodCenterY + rodLength / 2 * sinAngle;
-
-  let A = mx - rodX1;
-  let B = my - rodY1;
-  let C = rodX2 - rodX1;
-  let D = rodY2 - rodY1;
-  let dot = A * C + B * D;
-  let len_sq = C * C + D * D;
-  let t = constrain(dot / len_sq, 0, 1);
-
-  let projX = rodX1 + t * C;
-  let projY = rodY1 + t * D;
-
-  return dist(mx, my, projX, projY) < 15;
+  let d = abs(-sin(rodAngle) * (mx - rodCenterX) + cos(rodAngle) * (my - rodCenterY));
+  return d < 15;
 }
 
 function touchStarted() {

@@ -69,10 +69,9 @@
     a { color: #000; text-decoration: underline; }
 
     .callout {
-      background: #f5f5f5;
-      border-left: 2px solid #000;
+      background: #fff;
       padding: 0.8rem 1.2rem;
-      margin: 1.4rem 0;
+      margin: 0.2rem 0;
       overflow-x: auto;
     }
     .callout p { margin-bottom: 0.3rem; }
@@ -111,23 +110,24 @@
   </header>
 
   <p>
-    Release a set of pendulums of carefully chosen lengths from the same angle at the same instant.
-    They fan out, weave through intricate wave patterns, and after a fixed period return to perfect unison.
-    The trick is entirely in the lengths.
+    Even though these pendulums are completely uncoupled, after realising them from the same angle, 
+    they weave through intricate patterns and return to perfect unison after a fixed period of time.
+    This is known as "pendulum waves", but the underlying principle is more general and can be applied to all sorts of periodic trajectories.
   </p>
 
   <div class="animation-wrap">
     <iframe src="./pendulum_animation.html" title="Pendulum waves" scrolling="no" height="420"></iframe>
     <div class="animation-caption">
-      15 pendulums released simultaneously. Sliders control count, cycles, speed, and angle.
+      Pendulums released simultaneously. Sliders control count, cycles, speed, and angle.
     </div>
   </div>
 
-  <h2>The math</h2>
+  <h2>Pendulum Waves</h2>
 
   <p>
-    The period of pendulum $n$ is $T_n = 2\pi\sqrt{L_n/g}$, giving angular frequency $\omega_n = \sqrt{g/L_n}$.
-    We want pendulum $n$ to complete exactly $N + n$ full oscillations in a shared recurrence time $\mathcal{T}$:
+    The period of pendulum $n$ is $T_n = 2\pi\sqrt{L_n/g}$.
+    To reproduce the effect of the animation, we want pendulum $n$ to complete exactly $N + n$ full oscillations in a shared recurrence time $\mathcal{T}$.
+    For this to happen, 
   </p>
 
   <div class="callout">
@@ -135,36 +135,15 @@
   </div>
 
   <p>
-    The resulting angular frequencies are evenly spaced — an arithmetic sequence with common difference $\Delta\omega = 2\pi/\mathcal{T}$:
+    There are some great resources online about how this works and its relationship to aliasing. 
+    One interesting detail is that this relationship does not enforce anything on the trayectory of each individual pendulum. 
+    As long as the frequency of the particles in a system are evenly spaced, this effect will follow.   
   </p>
 
-  <div class="callout">
-    <p>$$\omega_n = \omega_0 + n\,\Delta\omega$$</p>
-  </div>
-
   <p>
-    With all pendulums starting from angle $\theta_0$, pendulum $n$ is at
-    $\theta_n(t) = \theta_0\cos(\omega_n t)$.
-    Across the ensemble at any fixed $t$, the phases $\omega_n t$ form an arithmetic sequence in $n$
-    — a discrete sinusoid in index space whose apparent wavenumber grows linearly.
-    This produces the traveling-wave effect, and at $t = \mathcal{T}$ every pendulum
-    has completed an integer number of cycles and all return to $\theta_0$.
-  </p>
-
-  <h2>The general principle</h2>
-
-  <p>
-    Nothing in that argument is specific to pendulums or to oscillation along an arc.
-    The only ingredients are:
-  </p>
-  <p>
-    1. A collection of uncoupled particles, each following some periodic trajectory.<br>
-    2. Their frequencies forming an arithmetic sequence.
-  </p>
-  <p>
-    Given those two conditions the ensemble will dephase, trace complex collective patterns,
-    and realign at $t = \mathcal{T}$ — regardless of the shape of the individual trajectories.
-    The three animations below show the same arithmetic at work on three different curves.
+    This leaves space for two interesting generalizations of the phenomenon.
+    First, we don't need to stay in the small angle regime, as the trayectory of the pendulums does not matter, only their frequencies.
+    Second, we can apply the same principle to any periodic system, not just pendulums.
   </p>
 
   <h2>On a line</h2>
@@ -212,7 +191,7 @@
   <div class="animation-wrap">
     <iframe src="./spiral_animation.html" title="Circular orbits" scrolling="no" height="420"></iframe>
     <div class="animation-caption">
-      100 particles on concentric circles. The spiral arm winds and unwinds with period $\mathcal{T}$.
+      Particles on concentric circles. The spiral arm winds and unwinds with period $\mathcal{T}$.
     </div>
   </div>
 
@@ -221,7 +200,7 @@
   <p>
     More generally, each particle can trace its own closed curve parametrized by a phase $\phi$.
     Below, particle $n$ traces an ellipse whose x-amplitude grows with $n$
-    and y-amplitude shrinks — a family ranging from a thin vertical segment to a wide horizontal one:
+    and y-amplitude shrinks.
   </p>
 
   <div class="callout">
@@ -238,7 +217,7 @@
   <div class="animation-wrap">
     <iframe src="./lisajous_animation.html" title="Lissajous curves" scrolling="no" height="420"></iframe>
     <div class="animation-caption">
-      100 particles on ellipses ranging from vertical ($a_n \approx 0$) to horizontal ($b_n \approx 0$).
+      Particles on ellipses ranging from vertical ($a_n \approx 0$) to horizontal ($b_n \approx 0$).
     </div>
   </div>
 

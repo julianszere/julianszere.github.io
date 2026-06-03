@@ -1,16 +1,5 @@
 const projects = [
   {
-    id: "waves",
-    year: "2026",
-    month: "Jun",
-    title: "Solving PDEs on Images",
-    url: "https://julianszere.github.io/projects/waves",
-    detailUrl: "./projects/waves/index.html",
-    description: `
-      <p>A static image used as the initial condition for wave, heat, and Schrödinger PDE solvers — each equation deforms the image according to its own physics.</p>
-    `
-  },
-  {
     id: "teg",
     year: "2025",
     month: "Nov",
@@ -19,6 +8,17 @@ const projects = [
     detailUrl: "./projects/teg/teg_probability_calculator.html",
     description: `
       <p>A tool for calculating tactical and strategic war scenarios in T.E.G. using advanced probability models.</p>
+    `
+  },
+  {
+    id: "waves",
+    year: "2025",
+    month: "Feb",
+    title: "PDE Image Solver",
+    url: "https://julianszere.github.io/projects/waves",
+    detailUrl: "./projects/waves/index.html",
+    description: `
+      <p>A static image used as the initial condition for wave, heat, and Schrödinger PDE solvers — each equation deforms the image according to its own physics.</p>
     `
   },
   {

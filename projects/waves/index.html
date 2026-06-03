@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-  <title>Solving PDEs on Images</title>
+  <title>PDE Image Solver</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -129,20 +129,16 @@
   </div>
 
   <header>
-    <div class="kicker">Jun 2026</div>
-    <h1><span class="en">Solving PDEs on Images</span><span class="es">Resolviendo EDPs sobre imágenes</span></h1>
+    <div class="kicker">Feb 2025</div>
+    <h1><span class="en">PDE Image Solver</span><span class="es">Integrador de imágenes</span></h1>
   </header>
 
   <p>
-    A static image is a two-dimensional array of values — which is also exactly what a PDE solver expects
-    as an initial condition. Taking that literally: load an image, interpret each pixel's intensity (or
-    color channels) as the value of a field $u(x, y, 0)$, and then let the field evolve forward in time
-    according to a chosen equation. The result is an animation that shows how the physics of that equation
-    would deform, spread, or oscillate the image.
-  </p>
-  <p>
-    Three equations were tried: the wave equation, the heat equation, and the Schrödinger equation.
-    Each produces a qualitatively different kind of motion.
+    A static image is a two-dimensional array of values, which is also exactly what a PDE solver expects
+    as an initial condition. Here, we load an image, interpret each pixel's intensity as the value of a field $u(x, y, 0)$,
+    and then let the field evolve forward in time according to a chosen equation.
+    The result is an animation that shows how the physics of that equation
+    would deform, spread, or oscillate the image over time.
   </p>
 
   <h2><span class="en">Wave Equation</span><span class="es">Ecuación de onda</span></h2>
@@ -158,10 +154,9 @@
   <p>
     Each RGB channel is evolved independently. At the start the three channels share the same
     initial image, so their wavefronts are spatially coherent and the animation still reads as
-    a recognisable picture in motion — the effect is genuinely wave-like, with peaks and troughs
-    radiating outward from every bright edge. As the simulation runs the channels gradually
-    dephase and fine interference ripples accumulate across the field, eventually dominating
-    the image.
+    a recognisable picture in motion. Evolving from this starting condition, the effect is genuinely wave-like, 
+    with peaks and troughs radiating outward from every bright edge. As the simulation runs, the channels gradually
+    dephase and fine interference ripples accumulate across the field, eventually dominating the image.
   </p>
 
   <div class="video-wrap">
@@ -177,7 +172,7 @@
   <h2><span class="en">Heat Equation</span><span class="es">Ecuación de calor</span></h2>
 
   <p>
-    The heat (diffusion) equation spreads values toward their spatial average at a rate controlled
+    The heat (diffusion) equation, as expected, spreads values toward their spatial average at a rate controlled
     by the diffusion coefficient $D$:
   </p>
 
@@ -186,9 +181,8 @@
   </div>
 
   <p>
-    Sharp edges blur out immediately and the image progressively melts into uniform grey —
-    exactly what diffusion demands. There is no oscillation, no wavefront, just an irreversible
-    smoothing that erases structure from fine detail to coarse.
+    Sharp edges blur out immediately and the image progressively melts into uniform grey. There is no oscillation and no wavefront, just an irreversible
+    smoothing that erases all structure.
   </p>
 
   <div class="video-wrap">
@@ -212,12 +206,8 @@
   </div>
 
   <p>
-    The image initialises both the amplitude $|\psi|$ and the phase of the wavefunction,
-    encoding hue as phase and lightness as amplitude.
-    Unlike the heat equation, the Schrödinger equation is norm-preserving — probability is
-    conserved — so the field does not decay but instead redistributes through quantum
-    interference. The probability density $|\psi(x,y,t)|^2$ spreads and diffracts into
-    hologram-like patterns, with colour tracking the evolving phase.
+    The image initialises the amplitude $|\psi|$ of the wavefunction as the square root of each pixel's brightness,
+    so that the probability density $|\psi|^2$ matches the original image at $t = 0$.
   </p>
 
   <div class="video-wrap">
@@ -229,6 +219,24 @@
       allowfullscreen>
     </iframe>
   </div>
+
+  <p>
+    To actually solve this equation, the Laplacian $\nabla^2$ is discretised on the pixel grid using finite differences,
+    building a sparse Hamiltonian $H$ of size $(N_x N_y) \times (N_x N_y)$.
+    The formal solution to the equation is $\psi(t) = e^{-iHt}\psi_0$,
+    and each frame is computed by applying one step of this matrix exponential:
+  </p>
+
+  <div class="callout">
+    <p>$$\psi_{n+1} = e^{-iH\,\Delta t}\,\psi_n$$</p>
+  </div>
+
+  <p>
+    The matrix exponential is evaluated with a Krylov subspace method to apply $e^{-iH\Delta t}$ to the state vector
+    without ever forming the full dense matrix.
+    This is exact: no truncation error from time-stepping.
+    Each frame then displays $|\psi|^2$, the probability density.
+  </p>
 
 </div>
 <script>

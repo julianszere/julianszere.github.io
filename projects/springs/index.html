@@ -138,7 +138,7 @@
 
     <p>
       Since the elastic potential energy of springs is quadratic,
-      fitting a linear function under least squares is mathematically equivalent to finding the rest state for a linear rod tied to a bunch of springs.
+      fitting a linear function under least squares is mathematically equivalent to finding the rest state of a linear rod tied to a bunch of springs.
     </p>
     <div class="animation-wrap">
       <iframe src="./animation.html" title="Spring regression animation" scrolling="no"></iframe>
@@ -168,7 +168,7 @@
       Now imagine a rigid rod hovering over the scatter plot. The rod has two mechanical
       degrees of freedom: its vertical position at the centre
       ($a$, the intercept) and its tilt angle
-      ($\theta \approx b$, the slope for small angles).
+      ($\tan(\theta) = b$, the slope).
     </p>
     <p>
       At each data point $(x_i, y_i)$ a vertical spring is anchored.
@@ -184,15 +184,8 @@
 
     <p>
       With spring constant $k = 2$, this is identical to the
-      least squares objective $L$. The configuration that minimises
-      the total elastic energy is exactly the regression line.
-    </p>
-    <p>
-      The full Lagrangian for the rod is
-      $\mathcal{L} = T - U$, where $T$ is the
-      kinetic energy, translational plus rotational.
-      Since the equilibrum state of this system will have to extreme $\mathcal{L}$,
-      the rod will settle at the least squares line.
+      least squares objective $L$. And since the equilibrium state is achived by minimizing the potential energy,
+      both approaches converge to the same result. Hence, fitting a linear regression is the same as waiting for a linear rod attached to springs to come to its rest state.
     </p>
 
 </div>

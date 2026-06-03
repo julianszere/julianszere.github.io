@@ -237,19 +237,39 @@
     @media (max-width: 560px) {
       .page { padding: 1.25rem 1.25rem 3rem; }
     }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .back { margin-bottom: 0; }
+    .lang-toggle {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px; background: #fff;
+      border: 1px solid #ccc; cursor: pointer;
+      padding: 0.25rem 0.75rem; color: #777;
+      letter-spacing: 0.05em;
+    }
+    .lang-toggle:hover { border-color: #000; color: #000; }
+    body.es .en { display: none; }
+    body:not(.es) .es { display: none; }
   </style>
 </head>
 <body>
 <div class="page">
 
-  <a class="back" href="../../index.html#projects">← back</a>
+  <div class="topbar">
+    <a class="back" href="../../index.html#projects"><span class="en">← back</span><span class="es">← volver</span></a>
+    <button id="lang-toggle">ES</button>
+  </div>
 
   <!-- ══════════════════════════════════════════════
        HEADER
   ══════════════════════════════════════════════ -->
   <header>
     <div class="kicker">Nov 2025</div>
-    <h1>T.E.G. Calculator</h1>
+    <h1><span class="en">T.E.G. Calculator</span><span class="es">Calculadora T.E.G.</span></h1>
   </header>
 
   <!-- ══════════════════════════════════════════════
@@ -275,7 +295,7 @@
        2. SINGLE-DIE CASES (INDEPENDENT)
   ══════════════════════════════════════════════ -->
   <section id="simple-cases">
-    <h2>Single-Battle Probabilities: The Independent Cases</h2>
+    <h2><span class="en">Single-Battle Probabilities: The Independent Cases</span><span class="es">Probabilidades de una batalla: los casos independientes</span></h2>
     <p>
       Each round of combat, both attacker and defender roll a number of dice determined by
       how many armies they have. After rolling, both sides sort their dice in descending
@@ -361,7 +381,7 @@
        3. THE INDEPENDENCE TRAP
   ══════════════════════════════════════════════ -->
   <section id="independence-trap">
-    <h2>The Independence Trap: N Dice vs 2 or More Dice</h2>
+    <h2><span class="en">The Independence Trap: N Dice vs 2 or More Dice</span><span class="es">La trampa de la independencia: N dados vs 2 o más</span></h2>
     <p>
       When both sides have at least two armies, two pairs of dice are compared: the
       highest attacker die against the highest defender die, and the second-highest
@@ -445,7 +465,7 @@
        4. CORRECT CALCULATION
   ══════════════════════════════════════════════ -->
   <section id="correct-calc">
-    <h2>Getting It Right: Joint Distributions and Enumeration</h2>
+    <h2><span class="en">Getting It Right: Joint Distributions and Enumeration</span><span class="es">El enfoque correcto: distribuciones conjuntas y enumeración</span></h2>
     <p>
       The correct probabilities for every case are obtained by working with the
       full joint distribution of the ordered dice. For two dice the joint distribution
@@ -504,7 +524,7 @@
        5. MARKOV CHAINS
   ══════════════════════════════════════════════ -->
   <section id="markov">
-    <h2>From a Single Round to a Full Battle: Markov Chains</h2>
+    <h2><span class="en">From a Single Round to a Full Battle: Markov Chains</span><span class="es">De una ronda a una batalla completa: cadenas de Markov</span></h2>
     <p>
       A single combat round only removes armies; it never adds them. This means the
       state of a battle — the pair <span class="math">(a, d)</span> of remaining
@@ -574,7 +594,7 @@
        6. FIGURE 1
   ══════════════════════════════════════════════ -->
   <section id="results">
-    <h2>What the Numbers Reveal</h2>
+    <h2><span class="en">What the Numbers Reveal</span><span class="es">Lo que revelan los números</span></h2>
     <p>
       Applying this pipeline — correct joint-distribution probabilities fed into a
       Markov-chain fundamental matrix — for both RISK (defender rolls ≤2 dice) and TEG
@@ -611,7 +631,7 @@
        REFERENCES
   ══════════════════════════════════════════════ -->
   <div class="references">
-    <h2>References</h2>
+    <h2><span class="en">References</span><span class="es">Referencias</span></h2>
     <ol class="ref-list">
       <li>
         B. Tan, "Markov Chains and the RISK Board Game,"
@@ -919,6 +939,18 @@ const COL = {
     }
     ctx.textBaseline = 'alphabetic';
   }
+})();
+</script>
+
+<script>
+(function() {
+  var btn = document.getElementById('lang-toggle');
+  if (localStorage.getItem('lang') === 'es') { document.body.classList.add('es'); btn.textContent = 'EN'; }
+  btn.addEventListener('click', function() {
+    var isEs = document.body.classList.toggle('es');
+    localStorage.setItem('lang', isEs ? 'es' : 'en');
+    btn.textContent = isEs ? 'EN' : 'ES';
+  });
 })();
 </script>
 

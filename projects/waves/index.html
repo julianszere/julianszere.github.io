@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Solving PDEs on Images</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem 4rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .back {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .back:hover { text-decoration: underline; }
+
+    .lang-toggle {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px; background: #fff;
+      border: 1px solid #ccc; cursor: pointer;
+      padding: 0.25rem 0.75rem; color: #777;
+      letter-spacing: 0.05em;
+    }
+    .lang-toggle:hover { border-color: #000; color: #000; }
+    body.es .en { display: none; }
+    body:not(.es) .es { display: none; }
+
+    header { margin-bottom: 1rem; }
+
+    .kicker {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 2rem 0 0.6rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 0.2rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    a { color: #000; text-decoration: underline; }
+
+    .callout {
+      background: #fff;
+      padding: 0.8rem 1.2rem;
+      margin: 0.4rem 0;
+      overflow-x: auto;
+    }
+
+    .video-wrap {
+      margin: 0.6rem 0 1.8rem;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 1px solid #000;
+      display: block;
+    }
+
+    .video-caption {
+      font-size: 13px;
+      color: #888;
+      padding: 0.5rem 0 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      .page { padding: 1.25rem 1.25rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <a class="back" href="../../index.html#projects"><span class="en">← back</span><span class="es">← volver</span></a>
+    <button id="lang-toggle">ES</button>
+  </div>
+
+  <header>
+    <div class="kicker">Jun 2026</div>
+    <h1><span class="en">Solving PDEs on Images</span><span class="es">Resolviendo EDPs sobre imágenes</span></h1>
+  </header>
+
+  <p>
+    A static image is a two-dimensional array of values — which is also exactly what a PDE solver expects
+    as an initial condition. Taking that literally: load an image, interpret each pixel's intensity (or
+    color channels) as the value of a field $u(x, y, 0)$, and then let the field evolve forward in time
+    according to a chosen equation. The result is an animation that shows how the physics of that equation
+    would deform, spread, or oscillate the image.
+  </p>
+  <p>
+    Three equations were tried: the wave equation, the heat equation, and the Schrödinger equation.
+    Each produces a qualitatively different kind of motion.
+  </p>
+
+  <h2><span class="en">Wave Equation</span><span class="es">Ecuación de onda</span></h2>
+
+  <p>
+    The 2D wave equation propagates disturbances at a finite speed $c$:
+  </p>
+
+  <div class="callout">
+    <p>$$\frac{\partial^2 u}{\partial t^2} = c^2 \nabla^2 u$$</p>
+  </div>
+
+  <p>
+    Each RGB channel is evolved independently. At the start the three channels share the same
+    initial image, so their wavefronts are spatially coherent and the animation still reads as
+    a recognisable picture in motion — the effect is genuinely wave-like, with peaks and troughs
+    radiating outward from every bright edge. As the simulation runs the channels gradually
+    dephase and fine interference ripples accumulate across the field, eventually dominating
+    the image.
+  </p>
+
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/10EG6UM2s4E"
+      title="Wave equation on an image"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <h2><span class="en">Heat Equation</span><span class="es">Ecuación de calor</span></h2>
+
+  <p>
+    The heat (diffusion) equation spreads values toward their spatial average at a rate controlled
+    by the diffusion coefficient $D$:
+  </p>
+
+  <div class="callout">
+    <p>$$\frac{\partial u}{\partial t} = D\,\nabla^2 u$$</p>
+  </div>
+
+  <p>
+    Sharp edges blur out immediately and the image progressively melts into uniform grey —
+    exactly what diffusion demands. There is no oscillation, no wavefront, just an irreversible
+    smoothing that erases structure from fine detail to coarse.
+  </p>
+
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/akUaE3TcYT4"
+      title="Heat equation on an image"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <h2><span class="en">Schrödinger Equation</span><span class="es">Ecuación de Schrödinger</span></h2>
+
+  <p>
+    The free-particle Schrödinger equation evolves a complex wavefunction $\psi$:
+  </p>
+
+  <div class="callout">
+    <p>$$i\hbar\,\frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\,\nabla^2\psi$$</p>
+  </div>
+
+  <p>
+    The image initialises both the amplitude $|\psi|$ and the phase of the wavefunction,
+    encoding hue as phase and lightness as amplitude.
+    Unlike the heat equation, the Schrödinger equation is norm-preserving — probability is
+    conserved — so the field does not decay but instead redistributes through quantum
+    interference. The probability density $|\psi(x,y,t)|^2$ spreads and diffracts into
+    hologram-like patterns, with colour tracking the evolving phase.
+  </p>
+
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/kG94qboUj4o"
+      title="Schrödinger equation on an image"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+</div>
+<script>
+(function() {
+  var btn = document.getElementById('lang-toggle');
+  if (localStorage.getItem('lang') === 'es') { document.body.classList.add('es'); btn.textContent = 'EN'; }
+  btn.addEventListener('click', function() {
+    var isEs = document.body.classList.toggle('es');
+    localStorage.setItem('lang', isEs ? 'es' : 'en');
+    btn.textContent = isEs ? 'EN' : 'ES';
+  });
+})();
+</script>
+</body>
+</html>

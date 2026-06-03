@@ -97,6 +97,22 @@ nav a.active {
   margin-bottom: 0.75rem;
 }
 
+/* ── Language toggle ── */
+
+.lang-toggle {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  background: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 0.25rem 0.75rem;
+  color: #777;
+  letter-spacing: 0.05em;
+}
+.lang-toggle:hover { border-color: #000; color: #000; }
+body.es .en { display: none; }
+body:not(.es) .es { display: none; }
+
 /* ── Responsive ── */
 
 @media (max-width: 480px) {

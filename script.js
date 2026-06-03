@@ -1,11 +1,22 @@
 const projects = [
   {
+    id: "waves",
+    year: "2026",
+    month: "Jun",
+    title: "Solving PDEs on Images",
+    url: "https://julianszere.github.io/projects/waves",
+    detailUrl: "./projects/waves/index.html",
+    description: `
+      <p>A static image used as the initial condition for wave, heat, and Schrödinger PDE solvers — each equation deforms the image according to its own physics.</p>
+    `
+  },
+  {
     id: "teg",
     year: "2025",
     month: "Nov",
     title: "T.E.G. Calculator",
-    url: "https://julianszere.github.io/projects/TEG",
-    detailUrl: "./projects/TEG/teg_probability_calculator.html",
+    url: "https://julianszere.github.io/projects/teg",
+    detailUrl: "./projects/teg/teg_probability_calculator.html",
     description: `
       <p>A tool for calculating tactical and strategic war scenarios in T.E.G. using advanced probability models.</p>
     `

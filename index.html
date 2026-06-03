@@ -14,8 +14,9 @@
   <header>
     <a class="site-name" href="#" data-section="home">julianszere</a>
     <nav>
-      <a href="#" data-section="projects">projects</a>
-      <a href="#" data-section="contact">contact</a>
+      <a href="#" data-section="projects"><span class="en">projects</span><span class="es">proyectos</span></a>
+      <a href="#" data-section="contact"><span class="en">contact</span><span class="es">contacto</span></a>
+      <button id="lang-toggle">ES</button>
     </nav>
   </header>
 
@@ -45,6 +46,17 @@
   </main>
 
   <script src="script.js"></script>
+  <script>
+  (function() {
+    var btn = document.getElementById('lang-toggle');
+    if (localStorage.getItem('lang') === 'es') { document.body.classList.add('es'); btn.textContent = 'EN'; }
+    btn.addEventListener('click', function() {
+      var isEs = document.body.classList.toggle('es');
+      localStorage.setItem('lang', isEs ? 'es' : 'en');
+      btn.textContent = isEs ? 'EN' : 'ES';
+    });
+  })();
+  </script>
 </div>
 </body>
 </html>

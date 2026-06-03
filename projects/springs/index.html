@@ -104,16 +104,36 @@
       .page { padding: 1.25rem 1.25rem 3rem; }
       .animation-wrap iframe { height: 300px; }
     }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .back { margin-bottom: 0; }
+    .lang-toggle {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px; background: #fff;
+      border: 1px solid #ccc; cursor: pointer;
+      padding: 0.25rem 0.75rem; color: #777;
+      letter-spacing: 0.05em;
+    }
+    .lang-toggle:hover { border-color: #000; color: #000; }
+    body.es .en { display: none; }
+    body:not(.es) .es { display: none; }
   </style>
 </head>
 <body>
 <div class="page">
 
-  <a class="back" href="../../index.html#projects">← back</a>
+  <div class="topbar">
+    <a class="back" href="../../index.html#projects"><span class="en">← back</span><span class="es">← volver</span></a>
+    <button id="lang-toggle">ES</button>
+  </div>
 
   <header>
     <div class="kicker">Jun 2023</div>
-    <h1>Least Springs</h1>
+    <h1><span class="en">Least Springs</span><span class="es">Mínimos Resortes</span></h1>
   </header>
 
     <p>
@@ -176,5 +196,16 @@
     </p>
 
 </div>
+<script>
+(function() {
+  var btn = document.getElementById('lang-toggle');
+  if (localStorage.getItem('lang') === 'es') { document.body.classList.add('es'); btn.textContent = 'EN'; }
+  btn.addEventListener('click', function() {
+    var isEs = document.body.classList.toggle('es');
+    localStorage.setItem('lang', isEs ? 'es' : 'en');
+    btn.textContent = isEs ? 'EN' : 'ES';
+  });
+})();
+</script>
 </body>
 </html>

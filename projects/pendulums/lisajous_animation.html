@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #fff; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script>
+const max_balls = 100;
+const N = 10;
+const T = 20000;
+const r = 1;
+
+let t = 0;
+let balls = [];
+
+function setup() {
+  pixelDensity(1);
+  createCanvas(windowWidth, windowHeight);
+  colorMode(HSB, 360, 100, 100);
+
+  for (let i = 0; i < max_balls; i++) {
+    balls.push(new Ball(i));
+  }
+}
+
+function draw() {
+  background(255);
+  translate(width / 2, height / 2);
+
+  for (let ball of balls) {
+    ball.move();
+    ball.display();
+  }
+
+  t += 1;
+}
+
+class Ball {
+  constructor(i) {
+    this.i = i;
+    this.A = height / 2 - r;
+    this.w = (2 * PI * (N + this.i)) / T;
+    this.x = this.A;
+    this.y = 0;
+    this.color = map(i, 0, max_balls, 0, 360);
+  }
+
+  move() {
+    this.x = 4 * this.i * r * cos(this.w * t);
+    this.y = (this.A - this.i * r) * sin(this.w * t);
+  }
+
+  display() {
+    noStroke();
+    fill(this.color, 80, 55);
+    circle(this.x, this.y, 20 * r);
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  balls = [];
+  for (let i = 0; i < max_balls; i++) {
+    balls.push(new Ball(i));
+  }
+  t = 0;
+}
+</script>
+</body>
+</html>

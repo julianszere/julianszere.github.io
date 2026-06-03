@@ -10,6 +10,8 @@ body {
   line-height: 1.65;
   background: #fff;
   color: #000;
+  max-width: 640px;
+  margin: 0 auto;
   padding: 2rem 2.5rem;
 }
 
@@ -92,7 +94,7 @@ nav a.active {
 
 @media (max-width: 480px) {
   body {
-    padding: 1.25rem 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
 
   header {

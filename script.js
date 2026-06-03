@@ -11,6 +11,17 @@ const projects = [
     `
   },
   {
+    id: "doppler",
+    year: "2024",
+    month: "Oct",
+    title: "Doppler Lights",
+    url: "https://julianszere.github.io/projects/doppler",
+    detailUrl: "./projects/doppler/index.html",
+    description: `
+      <p>What any photograph would look like to an observer moving at a relativistic speed — Doppler wavelength shift and aberration applied pixel by pixel.</p>
+    `
+  },
+  {
     id: "springs",
     year: "2023",
     month: "Jun",

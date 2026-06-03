@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orchestrated Pendulums</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 680px;
+      padding: 2rem 2.5rem 4rem;
+    }
+
+    .back {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-size: 13px;
+    }
+    .back:hover { text-decoration: underline; }
+
+    header { margin-bottom: 1rem; }
+
+    .kicker {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 2rem 0 0.6rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 0.2rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    a { color: #000; text-decoration: underline; }
+
+    .callout {
+      background: #f5f5f5;
+      border-left: 2px solid #000;
+      padding: 0.8rem 1.2rem;
+      margin: 1.4rem 0;
+      overflow-x: auto;
+    }
+    .callout p { margin-bottom: 0.3rem; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .animation-wrap {
+      margin: 0.6rem 0 2rem;
+      padding: 0;
+    }
+
+    .animation-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 420px;
+      border: 1px solid #000;
+    }
+
+    .animation-caption {
+      font-size: 13px;
+      color: #888;
+      padding: 0.6rem 0 0.8rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      .page { padding: 1.25rem 1.25rem 3rem; }
+      .animation-wrap iframe { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="../../index.html#projects">← back</a>
+
+  <header>
+    <div class="kicker">Jun 2026</div>
+    <h1>Orchestrated Pendulums</h1>
+  </header>
+
+  <p>
+    A set of pendulums — all released from the same angle at the same instant — can be made to sweep through a
+    sequence of coordinated wave patterns and return, after a fixed period, to perfect unison. The trick lies
+    entirely in how their lengths are chosen.
+  </p>
+
+  <div class="animation-wrap">
+    <iframe src="./animation.html" title="Orchestrated pendulums animation" scrolling="no"></iframe>
+    <div class="animation-caption">
+      15 pendulums, all released simultaneously. Watch for traveling waves, standing waves, and the eventual return to alignment.
+    </div>
+  </div>
+
+  <h2>Choosing the lengths</h2>
+
+  <p>
+    The period of a simple pendulum of length $L$ is $T = 2\pi\sqrt{L/g}$, so its angular frequency is
+    $\omega = \sqrt{g/L}$. To produce a repeating collective display, we want each pendulum to complete
+    an integer number of oscillations within a shared recurrence time $\mathcal{T}$.
+  </p>
+  <p>
+    Label the pendulums $n = 0, 1, \ldots, M-1$. We require pendulum $n$ to complete exactly $N + n$
+    full oscillations in $\mathcal{T}$:
+  </p>
+
+  <div class="callout">
+    <p>$$(N + n)\, T_n = \mathcal{T}$$</p>
+  </div>
+
+  <p>
+    This fixes each period $T_n = \mathcal{T}/(N+n)$ and hence each length:
+  </p>
+
+  <div class="callout">
+    <p>$$L_n = \frac{g}{\omega_n^2} = g\left(\frac{\mathcal{T}}{2\pi(N+n)}\right)^2 = L_0\left(\frac{N}{N+n}\right)^2$$</p>
+  </div>
+
+  <p>
+    The longest pendulum ($n=0$, slowest) sets the scale $L_0$. Every shorter pendulum is tuned
+    by squaring the frequency ratio, so lengths decrease as $1/(N+n)^2$.
+  </p>
+
+  <h2>Evenly spaced frequencies</h2>
+
+  <p>
+    The design condition means angular frequencies are uniformly spaced:
+  </p>
+
+  <div class="callout">
+    <p>$$\omega_n = \frac{2\pi(N+n)}{\mathcal{T}} = \omega_0 + n\,\Delta\omega, \qquad \Delta\omega = \frac{2\pi}{\mathcal{T}}$$</p>
+  </div>
+
+  <p>
+    With all pendulums released from angle $\theta_0$, the position of pendulum $n$ at time $t$ is
+    $\theta_n(t) = \theta_0\cos(\omega_n t)$. The snapshot across all pendulums at a given $t$ looks like:
+  </p>
+
+  <div class="callout">
+    <p>$$\theta_n(t) = \theta_0\cos\!\bigl(\omega_0 t + n\cdot\Delta\omega\, t\bigr)$$</p>
+  </div>
+
+  <p>
+    This is a discrete sinusoid in the index $n$, with apparent wavenumber $\Delta\omega\, t$ that
+    grows linearly in time. As the wavenumber sweeps through half-integer multiples of $\pi$,
+    the ensemble traces out traveling waves, anti-phase clusters, and standing-wave-like patterns
+    before the wavenumber reaches $2\pi$ — at $t = \mathcal{T}$ — and all pendulums snap back into
+    phase simultaneously.
+  </p>
+
+  <h2>Recurrence and sub-harmonics</h2>
+
+  <p>
+    Full realignment occurs whenever $t$ is an integer multiple of $\mathcal{T}$, since every
+    pendulum then sits at an integer cycle count. Partial alignments appear at rational fractions
+    of $\mathcal{T}$: at $t = \mathcal{T}/2$ the pendulums split into two groups in antiphase; at
+    $t = \mathcal{T}/3$ and $2\mathcal{T}/3$ three equally spaced clusters form; and so on.
+    The visual rhythm of the display is governed by these simple fractions — a purely arithmetic consequence
+    of the evenly spaced frequencies.
+  </p>
+
+</div>
+</body>
+</html>

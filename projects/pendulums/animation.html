@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #fff; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script>
+let numberOfPendulums = 9;
+let numberOfCycles = 20;
+let velocityOfSimulation = 2000;
+let initialAngle = 20;
+
+let pendulums = [];
+let t = 0;
+let l_max;
+let c1, c2;
+let pendulumSlider;
+let cycleSlider;
+let velocitySlider;
+let angleSlider;
+
+function setup() {
+  pixelDensity(1);
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
+  l_max = windowHeight * 0.8;
+  c1 = color(210, 35, 55);
+  c2 = color(75, 10, 155);
+
+  pendulumSlider = createSlider(1, 100, numberOfPendulums);
+  pendulumSlider.position(windowWidth * 0.1, windowHeight * 0.1);
+  pendulumSlider.style("width", "150px");
+
+  cycleSlider = createSlider(1, 100, numberOfCycles);
+  cycleSlider.position(windowWidth * 0.1, windowHeight * 0.05);
+  cycleSlider.style("width", "150px");
+
+  velocitySlider = createSlider(1000, 10000, velocityOfSimulation);
+  velocitySlider.position(windowWidth * 0.1, windowHeight * 0.15);
+  velocitySlider.style("width", "150px");
+
+  angleSlider = createSlider(0, 90, initialAngle);
+  angleSlider.position(windowWidth * 0.1, windowHeight * 0.2);
+  angleSlider.style("width", "150px");
+
+  initPendulums();
+}
+
+function initPendulums() {
+  pendulums = [];
+  for (let i = 0; i < numberOfPendulums; i++) {
+    pendulums.push(new Pendulum(pendulumLength(i)));
+  }
+}
+
+function draw() {
+  if (
+    numberOfPendulums != pendulumSlider.value() ||
+    numberOfCycles != cycleSlider.value() ||
+    velocityOfSimulation != velocitySlider.value() ||
+    initialAngle != angleSlider.value()
+  ) {
+    numberOfPendulums = pendulumSlider.value();
+    numberOfCycles = cycleSlider.value();
+    velocityOfSimulation = velocitySlider.value();
+    initialAngle = angleSlider.value();
+    initPendulums();
+    t = 0;
+  }
+
+  background(255);
+  translate(width / 2, 0);
+
+  for (let i = 0; i < pendulums.length; i++) {
+    pendulums[i].move();
+    pendulums[i].display();
+  }
+  t += 1;
+}
+
+function pendulumLength(n) {
+  return l_max * (numberOfCycles / (numberOfCycles + n)) ** 2;
+}
+
+class Pendulum {
+  constructor(r) {
+    this.r = r;
+    this.w = sqrt(velocityOfSimulation / this.r);
+    this.c = lerpColor(c1, c2, this.r / l_max);
+    this.s = map(this.r, 0, l_max, 6, 14);
+  }
+
+  move() {
+    this.theta = initialAngle * cos(this.w * t);
+  }
+
+  display() {
+    let x = this.r * sin(this.theta);
+    let y = this.r * cos(this.theta);
+    stroke(70);
+    strokeWeight(1);
+    line(0, 0, x, y);
+    noStroke();
+    fill(this.c);
+    circle(x, y, this.s);
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  l_max = windowHeight * 0.8;
+  pendulumSlider.position(windowWidth * 0.1, windowHeight * 0.1);
+  cycleSlider.position(windowWidth * 0.1, windowHeight * 0.05);
+  velocitySlider.position(windowWidth * 0.1, windowHeight * 0.15);
+  angleSlider.position(windowWidth * 0.1, windowHeight * 0.2);
+  initPendulums();
+  t = 0;
+}
+</script>
+</body>
+</html>

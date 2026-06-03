@@ -26,7 +26,8 @@ const projects = [
     year: "2023",
     month: "May",
     title: "Orchestrated Pendulums",
-    url: "https://julianszere.github.io/projects/péndulos",
+    url: "https://julianszere.github.io/projects/pendulums",
+    detailUrl: "./projects/pendulums/index.html",
     description: `
       <p>Simulation and study of synchronized pendulums with orchestral patterns.</p>
     `

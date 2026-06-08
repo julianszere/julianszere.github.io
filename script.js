@@ -53,6 +53,15 @@ const projects = [
     description: `
       <p>Simulation and study of synchronized pendulums with orchestral patterns.</p>
     `
+  },
+  {
+    id: "bugs",
+    year: "— Always",
+    month: "",
+    title: "Bugs",
+    url: "https://julianszere.github.io/projects/bugs",
+    detailUrl: "./projects/bugs/index.html",
+    description: ``
   }
 ];
 
@@ -74,7 +83,7 @@ function loadProjects() {
     const li = document.createElement("li");
     li.className = "project-item";
     li.innerHTML = `
-      <span class="project-date">${project.month} ${project.year}</span>
+      <span class="project-date">${[project.month, project.year].filter(Boolean).join(" ")}</span>
       <a href="#" data-id="${project.id}">${project.title}</a>
     `;
     li.querySelector("a").addEventListener("click", e => {

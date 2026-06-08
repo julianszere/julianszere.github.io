@@ -135,7 +135,7 @@
 
   <p>
     A static image is a two-dimensional array of values, which is also exactly what a PDE solver expects
-    as an initial condition. Here, we load an image, interpret each pixel's intensity as the value of a field $u(x, y, 0)$,
+    as an initial condition. Here, we load an image, interpret each pixel's intensity as the value of a field $u(x, y)$,
     and then let the field evolve forward in time according to a chosen equation.
     The result is an animation that shows how the physics of that equation
     would deform, spread, or oscillate the image over time.
@@ -152,9 +152,7 @@
   </div>
 
   <p>
-    Each RGB channel is evolved independently. At the start the three channels share the same
-    initial image, so their wavefronts are spatially coherent and the animation still reads as
-    a recognisable picture in motion. Evolving from this starting condition, the effect is genuinely wave-like, 
+    Each RGB channel is evolved independently. The effect is genuinely wave-like, 
     with peaks and troughs radiating outward from every bright edge. As the simulation runs, the channels gradually
     dephase and fine interference ripples accumulate across the field, eventually dominating the image.
   </p>

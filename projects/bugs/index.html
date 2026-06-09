@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Bugs</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem 4rem;
+    }
+
+    .back {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-size: 15px;
+    }
+
+    .back:hover { text-decoration: underline; }
+
+    h1 {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .gallery img {
+      max-width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back" href="../../index.html">← back</a>
+    <h1>Bugs</h1>
+    <div class="gallery" id="gallery"></div>
+  </div>
+
+  <script>
+    const images = ["argentina.png", "bug.png"];
+    const gallery = document.getElementById("gallery");
+    images.forEach(name => {
+      const img = document.createElement("img");
+      img.src = "images/" + name;
+      img.alt = name.replace(/\.[^.]+$/, "");
+      gallery.appendChild(img);
+    });
+  </script>
+</body>
+</html>

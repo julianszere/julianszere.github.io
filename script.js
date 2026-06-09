@@ -64,6 +64,17 @@ const projects = [
     description: `
       <p>Simulation and study of synchronized pendulums with orchestral patterns.</p>
     `
+  },
+  {
+    id: "lagrange",
+    year: "2022",
+    month: "Oct",
+    title: "Lagrange Solver",
+    url: "https://julianszere.github.io/projects/lagrange",
+    detailUrl: "./projects/lagrange/index.html",
+    description: `
+      <p>Automatically derives the Euler-Lagrange equations of motion for any mechanical system given its generalized coordinates, then integrates and animates the result.</p>
+    `
   }
 ];
 

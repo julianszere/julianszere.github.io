@@ -53,15 +53,6 @@ const projects = [
     description: `
       <p>Simulation and study of synchronized pendulums with orchestral patterns.</p>
     `
-  },
-  {
-    id: "bugs",
-    year: "— Always",
-    month: "",
-    title: "Bugs",
-    url: "https://julianszere.github.io/projects/bugs",
-    detailUrl: "./projects/bugs/index.html",
-    description: ``
   }
 ];
 

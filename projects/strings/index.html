@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Guitar Simulation</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem 4rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .back {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .back:hover { text-decoration: underline; }
+
+    header { margin-bottom: 1rem; }
+
+    .kicker {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    h2 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 2rem 0 0.6rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 0.2rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    a { color: #000; text-decoration: underline; }
+
+    .callout {
+      background: #fff;
+      padding: 0.8rem 1.2rem;
+      margin: 0.4rem 0;
+      overflow-x: auto;
+    }
+    .callout p { margin-bottom: 0.3rem; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .video-wrap {
+      margin: 0.6rem 0 1.8rem;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 1px solid #000;
+      display: block;
+    }
+
+    .video-caption {
+      font-size: 13px;
+      color: #888;
+      padding: 0.5rem 0 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      .page { padding: 1.25rem 1.25rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <a class="back" href="../../index.html#projects">← back</a>
+  </div>
+
+  <header>
+    <div class="kicker">Jan 2024</div>
+    <h1>Guitar Simulation</h1>
+  </header>
+
+  <p>
+    Each string of a guitar is a continuous medium clamped at both ends.
+    The physics is captured by the damped wave equation (leaving out the interaction with the guitar body), and numerical integration of that equation
+    produces both the animation of the vibrating string and the actual audio you would hear.
+    Six strings, each with its own tension and length tuned to match the pitch of a standard guitar.
+  </p>
+
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/wA7FSTKI-ZI"
+      title="Guitar string simulation"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="video-caption">Smoke on the Water, simulated string by string.</div>
+
+  <h2>The Physical Model</h2>
+
+  <p>
+    The transverse displacement $u(x,t)$ of a string of length $L$ evolves according damped wave equation:
+  </p>
+
+  <div class="callout">
+    <p>$$\frac{\partial^2 u}{\partial t^2} + 2\gamma\,\frac{\partial u}{\partial t} = c^2\,\frac{\partial^2 u}{\partial x^2} - \lambda^2\,\frac{\partial^4 u}{\partial x^4}$$</p>
+  </div>
+
+  <p>
+    The first two terms are the standard damped wave equation: $c$ is the wave speed set by string tension and linear density,
+    and $\gamma$ controls how fast the vibration decays.
+    The $\partial^4 u / \partial x^4$ term is a stiffness correction: real strings resist bending slightly,
+    which makes higher harmonics land a little sharp relative to integer multiples of the fundamental.
+    That inharmonicity is part of what gives plucked strings their characteristic timbre.
+  </p>
+
+  <p>
+    Boundary conditions pin both ends:
+  </p>
+
+  <div class="callout">
+    <p>$$u(0,t) = u(L,t) = 0$$</p>
+  </div>
+
+  <p>
+    The initial condition is a Gaussian bump near the quarter-length point of the string, mimicking a pluck.
+  </p>
+
+  <h2>Pitch and Frets</h2>
+
+  <p>
+    Each open string has a fundamental frequency $f_0$ determined by its wave speed $c$ and scale length $L$:
+  </p>
+
+  <div class="callout">
+    <p>$$f_0 = \frac{c}{2L}$$</p>
+  </div>
+
+  <p>
+    Pressing a fret shortens the vibrating portion of the string to a new length $L' &lt; L$,
+    raising the pitch proportionally. The six open strings are tuned to E, A, D, G, B, e
+    (standard guitar tuning), and each fret position is computed from the standard fret-spacing formula
+    derived from equal temperament.
+    Chords are built by specifying a fret number per string and running the simulation independently for each.
+  </p>
+
+  <h2>Audio Synthesis</h2>
+
+  <p>
+    Once the PDE is solved numerically, the displacement field $u(x,t)$ is a grid of values.
+    To extract what a microphone would pick up, the solution is projected onto the first ten normal modes of the string:
+  </p>
+
+  <div class="callout">
+    <p>$$a_n(t) = \sum_x u(x,t)\,\sin\!\left(\frac{n\pi x}{L}\right)$$</p>
+  </div>
+
+  <p>
+    Summing these harmonic amplitudes over time gives a scalar signal that is downsampled to 44 kHz and written to a WAV file.
+    The chord audio is obtained by adding the six string signals together before writing.
+  </p>
+
+</div>
+</body>
+</html>

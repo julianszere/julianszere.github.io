@@ -138,7 +138,7 @@ function updateChart() {
       maintainAspectRatio: false,
       scales: {
         x: { 
-          title: { display: true, text: `Armies lost by the ${labelPrefix}` },
+          title: { display: true, text: `Max armies lost by the ${labelPrefix}` },
           ticks: { font: { size: 10 }, color: '#000' },
           grid: { color: 'rgba(0, 0, 0, 0.3)' }
         },

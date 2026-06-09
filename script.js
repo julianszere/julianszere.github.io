@@ -33,6 +33,17 @@ const projects = [
     `
   },
   {
+    id: "strings",
+    year: "2024",
+    month: "Jan",
+    title: "Guitar Simulation",
+    url: "https://julianszere.github.io/projects/strings",
+    detailUrl: "./projects/strings/index.html",
+    description: `
+      <p>Simulating guitar strings with the damped wave equation — six strings, real fret positions, and synthesized audio good enough to play Smoke on the Water.</p>
+    `
+  },
+  {
     id: "springs",
     year: "2023",
     month: "Jun",

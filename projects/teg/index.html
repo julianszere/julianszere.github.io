@@ -1,45 +1,867 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculadora TEG</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-    <h1>Calculadora del Plan Táctico y Estratégico de la guerra</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEG Calculator</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <div class="input-wrapper">
-      <div class="input-container">
-        <div class="input-group">
-          <label for="attacker" id="attacker-label">Atacante</label>
-          <input type="number" id="attacker" class="dynamic-input" min="2" />
-        </div>
+    body {
+      background: #fff;
+      color: #000;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 15px;
+      line-height: 1.65;
+    }
 
-        <span class="vs">vs</span>
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem 4rem;
+    }
 
-        <div class="input-group">
-          <label for="defender" id="defender-label">Defensor</label>
-          <input type="number" id="defender" class="dynamic-input" min="1" />
-        </div>
+    /* ── Back link ── */
+    .back {
+      display: inline-block;
+      color: #000;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      font-size: 13px;
+    }
+    .back:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    header {
+      margin-bottom: 1rem;
+    }
+
+    .kicker {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+
+    .byline {
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* ── Sections ── */
+    section { margin-bottom: 2.5rem; }
+
+    h2 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 2rem 0 0.6rem;
+      border-bottom: 1px solid #000;
+      padding-bottom: 0.2rem;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 1.4rem 0 0.4rem;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    a { color: #000; text-decoration: underline; }
+
+    /* ── Footnote / citation style ── */
+    sup.cite {
+      font-size: 11px;
+      color: #888;
+      vertical-align: super;
+      cursor: default;
+    }
+    sup.cite::before { content: "["; }
+    sup.cite::after  { content: "]"; }
+
+    /* ── Pull quote ── */
+    blockquote {
+      border-left: 2px solid #000;
+      margin: 1.5rem 0;
+      padding: 0.4rem 1rem;
+      color: #444;
+    }
+
+    /* ── Inline math ── */
+    .math { font-style: italic; }
+    .math-frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      font-size: 0.85em;
+      margin: 0 0.2em;
+    }
+    .math-frac span:first-child {
+      border-bottom: 1px solid #000;
+      padding: 0 2px;
+      line-height: 1.3;
+    }
+    .math-frac span:last-child { padding: 0 2px; line-height: 1.3; }
+
+    /* ── Geometric diagrams ── */
+    .diagram-wrap {
+      margin: 1.5rem 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .diagram-caption {
+      font-size: 13px;
+      color: #888;
+      max-width: 480px;
+    }
+
+    canvas.grid-canvas {
+      display: block;
+      border: 1px solid #000;
+      background: #fff;
+    }
+    canvas#canvas1v1 {
+      border: none;
+    }
+
+    /* ── Probability table ── */
+    .prob-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 1.2rem 0;
+    }
+    .prob-table th {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #888;
+      border-bottom: 1px solid #000;
+      padding: 0.4rem 0.6rem;
+      text-align: left;
+      font-weight: normal;
+    }
+    .prob-table td {
+      padding: 0.35rem 0.6rem;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
+    .prob-table tr:last-child td { border-bottom: none; }
+    .prob-table .val { font-variant-numeric: tabular-nums; }
+    .prob-table .wrong { color: #888; text-decoration: line-through; }
+    .prob-table .right { font-weight: bold; }
+
+    /* ── Callout box ── */
+    .callout {
+      background: #f5f5f5;
+      border-left: 2px solid #000;
+      padding: 0.8rem 1rem;
+      margin: 1.4rem 0;
+    }
+    .callout p { margin-bottom: 0.3rem; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout strong { font-weight: bold; }
+
+    /* ── Figure block ── */
+    .figure-block {
+      margin: 2rem 0;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      padding: 1rem 0;
+    }
+.figure-num {
+      font-size: 12px;
+      color: #888;
+      margin-top: 0.6rem;
+      text-transform: uppercase;
+    }
+    .figure-caption {
+      font-size: 13px;
+      color: #888;
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+
+    /* ── References ── */
+    .references {
+      border-top: 1px solid #000;
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+    }
+    .references h2 {
+      border-bottom: none;
+      margin-top: 0;
+    }
+    .ref-list {
+      list-style: none;
+      counter-reset: refs;
+    }
+    .ref-list li {
+      counter-increment: refs;
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 0.6rem;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.5;
+    }
+    .ref-list li::before {
+      content: "[" counter(refs) "]";
+      position: absolute;
+      left: 0;
+      color: #888;
+      font-size: 12px;
+    }
+
+    /* ── Responsive tweaks ── */
+    @media (max-width: 560px) {
+      .page { padding: 1.25rem 1.25rem 3rem; }
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .back { margin-bottom: 0; }
+    .lang-toggle {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px; background: #fff;
+      border: 1px solid #ccc; cursor: pointer;
+      padding: 0.25rem 0.75rem; color: #777;
+      letter-spacing: 0.05em;
+    }
+    .lang-toggle:hover { border-color: #000; color: #000; }
+    body.es .en { display: none; }
+    body:not(.es) .es { display: none; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <a class="back" href="../../index.html#projects"><span class="en">← back</span><span class="es">← volver</span></a>
+    <button id="lang-toggle">ES</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════ -->
+  <header>
+    <div class="kicker">Nov 2025</div>
+    <h1><span class="en">TEG Calculator</span><span class="es">Calculadora TEG</span></h1>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       1. INTRODUCTION
+  ══════════════════════════════════════════════ -->
+  <section id="intro">
+    <p>
+      <span class="en">TEG and RISK are two very similar board games whose theme, like chess, is war. The countries of the map are distributed randomly among all players, and each player adds a certain number of tokens (or "armies") to their territories. With these armies a player can attack neighbouring enemy territories by rolling one fewer die than the number of armies in the attacking country, while the defender rolls as many dice as they have armies. The dice are then compared from highest to lowest: whenever the attacker's die is <em>strictly greater</em> than the defender's, the attacker wins one army; if the defender's die is greater or equal, the attacker loses one army.</span>
+      <span class="es">El TEG y el RISK son dos juegos de mesa muy similares cuya temática, como el ajedrez, es la guerra. Los países del mapa se reparten aleatoriamente entre los jugadores, y cada uno agrega una cierta cantidad de fichas (o "ejércitos") a sus países. Con estos ejércitos el jugador ataca países enemigos limítrofes tirando un dado menos que la cantidad de ejércitos de su país, mientras que el defensor tira tantos dados como ejércitos tenga. Los dados se comparan de mayor a menor: cuando el dado del atacante es <em>estrictamente mayor</em> que el del defensor, el atacante gana un ejército; si el defensor saca mayor o igual, el atacante pierde uno.</span>
+    </p>
+    <p>
+      <span class="en">This project extends the analytical results from the RISK combat models developed by
+      Blatt&nbsp;&amp;&nbsp;Sharon<sup class="cite">3</sup> and Osborne<sup class="cite">2</sup>
+      to the Argentine strategy game <em>TEG</em>. Using <em>Markov chains</em>, it computes
+      the probability of conquering a territory after a sequence of attacks.</span>
+      <span class="es">Este proyecto extiende los resultados analíticos de los modelos de combate del RISK desarrollados por Blatt&nbsp;&amp;&nbsp;Sharon<sup class="cite">3</sup> y Osborne<sup class="cite">2</sup> al juego de estrategia argentino <em>TEG</em>. Usando <em>cadenas de Markov</em>, calcula la probabilidad de conquistar un territorio tras sucesivos ataques.</span>
+    </p>
+    <p>
+      <span class="en">Although TEG closely resembles RISK, there is one key structural difference:
+      in TEG the <strong>defender can roll up to three dice</strong>, while in RISK the
+      defender is limited to two. This seemingly minor rule change drastically shifts the
+      balance of the game: as the number of armies grows, the defender's advantage in TEG
+      becomes far greater than in RISK. We'll see why this is the case in detail below.</span>
+      <span class="es">Aunque el TEG se parece mucho al RISK, hay una diferencia estructural clave: en el TEG el <strong>defensor puede tirar hasta tres dados</strong>, mientras que en el RISK el defensor está limitado a dos. Este pequeño cambio en la regla desplaza drásticamente el equilibrio del juego: a medida que crecen los ejércitos, la ventaja del defensor en el TEG se vuelve mucho mayor que en el RISK.</span>
+    </p>
+    <iframe src="./calculator.html" style="width:100%;height:380px;border:none;background:#fff;display:block;margin-top:1.5rem;" scrolling="no"></iframe>
+    <p style="margin-top:0.75rem;font-size:0.9rem;color:#888;">
+      <span class="en">Enter the number of attacking and defending armies to see the exact probability of conquest and the distribution of army losses after the full sequence of battles. Toggle between attacker and defender to switch the distribution shown in the chart.</span>
+      <span class="es">Ingresá la cantidad de ejércitos atacantes y defensores para ver la probabilidad exacta de conquista y la distribución de pérdidas de ejércitos tras la secuencia completa de batallas. Cambiá el toggle para ver la distribución del atacante o del defensor.</span>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       2. SINGLE-DIE CASES (INDEPENDENT)
+  ══════════════════════════════════════════════ -->
+  <section id="simple-cases">
+    <h2><span class="en">Single-Battle Probabilities: The Independent Cases</span><span class="es">Probabilidades de una batalla: los casos independientes</span></h2>
+    <p>
+      Each round of combat, both attacker and defender roll a number of dice determined by
+      how many armies they have. After rolling, both sides sort their dice in descending
+      order and compare them pair by pair: the attacker's highest vs the defender's highest,
+      second-highest vs second-highest, and so on. The attacker loses one army for each
+      pair in which their die is <em>less than or equal to</em> the defender's die.
+    </p>
+    <p>
+      The simplest situation, one attacking die vs one defending die, is easy to visualize geometrically.
+    </p>
+
+    <h3>1 die vs 1 die</h3>
+    <p>
+      Lay out all 36 equally-likely outcomes on a 6×6 grid, with the attacker's result on
+      one axis and the defender's on the other. The attacker wins whenever their die is
+      <em>strictly greater</em> than the defender's (that is, all cells <em>below</em>
+      the main diagonal). The diagonal itself (draws) goes to the defender. Counting:
+    </p>
+
+    <div class="diagram-wrap">
+      <canvas class="grid-canvas" id="canvas1v1" width="270" height="270"></canvas>
+      <div class="diagram-caption">
+        1 vs 1 case. Each cell is one equally-likely outcome (attacker on <em>x</em>, defender on <em>y</em>).
+        <span style="color:#2a4a7f">■</span> attacker wins (15 cells),
+        <span style="color:#8b3a2a">■</span> defender wins (21 cells).
       </div>
     </div>
 
-    <div class="probability-container" style="display: none;">
-      <p id="last-probability"></p>
-      <div class="toggle-container">
-        <label class="switch">
-          <input type="checkbox" id="toggleSwitch">
-          <span class="slider"></span>
-        </label>
+    <p>
+      <span class="en">Counting the cases where the defender wins (on or above the diagonal) gives a triangle: summing from top to bottom, 1+2+3+4+5+6 out of 36 total. Following the notation of Osborne,<sup class="cite">2</sup> \(\pi_{ADG}\) denotes the probability of gaining \(G\) armies when attacking with \(A\) dice and defending against \(D\) dice:</span>
+      <span class="es">Contando los casos donde gana el defensor (sobre la diagonal o por encima) se obtiene un triángulo: sumando de arriba hacia abajo, 1+2+3+4+5+6 de 36 totales. Siguiendo la notación de Osborne,<sup class="cite">2</sup> \(\pi_{ADG}\) denota la probabilidad de ganar \(G\) ejércitos atacando con \(A\) dados y defendiendo con \(D\) dados:</span>
+    </p>
+    <p style="text-align:center;margin:1rem 0">
+      \[ \pi_{110} = \frac{1+2+3+4+5+6}{6^2} = \frac{7}{12} = 58{,}33\% \qquad \pi_{111} = 1 - \pi_{110} = \frac{5}{12} = 41{,}67\% \]
+    </p>
+
+    <h3>2 dice vs 1 die</h3>
+    <p>
+      <span class="en">Picture a cube where one edge is the defender's die and the other two edges from the same vertex are the attacker's two dice. If before the losing probability was given by a triangle, now it is given by a square pyramid. The total number of cases is 6³, and summing the losing outcomes gives 1²+2²+3²+4²+5²+6² (because now, we are summing up squares of increasing size):</span>
+      <span class="es">Se puede armar un cubo donde una arista sea el dado del defensor y las otras dos aristas desde el mismo vértice sean los dos dados del atacante. Si antes la probabilidad de perder estaba dada por un triángulo, ahora está dada por una pirámide de base cuadrada. La cantidad total de casos es 6³ y la suma de los casos perdidos da 1²+2²+3²+4²+5²+6² (porque ahora, estamos sumando cuadrados de tamaño creciente):</span>
+    </p>
+    <p style="text-align:center;margin:1rem 0">
+      \[ \pi_{210} = \frac{1^2+2^2+3^2+4^2+5^2+6^2}{6^3} = \frac{91}{216} = 42{,}13\% \qquad \pi_{211} = 1 - \pi_{210} = \frac{125}{216} = 57{,}87\% \]
+    </p>
+
+    <h3>3 dice vs 1 die</h3>
+    <p>
+      <span class="en">Closing our eyes and trusting the god of the four-dimensional pyramid and the tesseract, we can generalise to three attacking dice. The total cases grow to 6⁴ and the losing count becomes 1³+2³+3³+4³+5³+6³:</span>
+      <span class="es">Cerrando bien fuerte los ojos y confiando en el dios de la pirámide tetradimensional y el teseracto, podemos generalizar a tres dados atacantes. Los casos totales crecen a 6⁴ y los casos perdidos suman 1³+2³+3³+4³+5³+6³:</span>
+    </p>
+    <p style="text-align:center;margin:1rem 0">
+      \[ \pi_{310} = \frac{1^3+2^3+3^3+4^3+5^3+6^3}{6^4} = \frac{49}{144} = 34{,}03\% \qquad \pi_{311} = 1 - \pi_{310} = \frac{95}{144} = 65{,}97\% \]
+    </p>
+
+    <p>
+      <span class="en">All three cases above involve only a single comparison (the highest die on each side), so the geometric counting is straightforward. Things get harder as soon as we need to compare <em>two</em> pairs simultaneously.</span>
+      <span class="es">Los tres casos anteriores implican una sola comparación (el dado más alto de cada lado), por lo que el conteo geométrico es directo. Las cosas se complican en cuanto hay que comparar <em>dos</em> pares simultáneamente.</span>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       2b. N-SIDED DICE
+  ══════════════════════════════════════════════ -->
+  <section id="n-dice">
+    <h2><span class="en">TEG with N-sided Dice</span><span class="es">TEG con dados de N caras</span></h2>
+    <p>
+      <span class="en">The geometric pattern in the single-comparison cases generalises cleanly to dice with <span class="math">N</span> sides. For 1v1 the formula extends to:</span>
+      <span class="es">El patrón geométrico de los casos de comparación simple se generaliza limpiamente a dados de <span class="math">N</span> caras. Para 1vs1 la fórmula se extiende a:</span>
+    </p>
+    <p style="text-align:center;margin:1rem 0">
+      \[ \pi_{110}^{N} = \frac{\sum_{n=1}^N n}{N^2} = \frac{N(N+1)}{2N^2} = \frac{1}{2} + \frac{1}{2N} \xrightarrow{N\to\infty} \frac{1}{2} \]
+    </p>
+    <p>
+      <span class="en">For 2v1 and 3v1 the sums of squares and cubes give:</span>
+      <span class="es">Para 2vs1 y 3vs1, las sumas de cuadrados y cubos dan:</span>
+    </p>
+    <p style="text-align:center;margin:1rem 0">
+      \[ \pi_{210}^{N} = \frac{\sum_{n=1}^N n^2}{N^3} = \frac{N(N+1)(2N+1)}{6N^3} \xrightarrow{N\to\infty} \frac{1}{3} \]
+    </p>
+    <p style="text-align:center;margin:1rem 0">
+      \[ \pi_{310}^{N} = \frac{\sum_{n=1}^N n^3}{N^4} = \frac{N^2(N+1)^2}{4N^4} \xrightarrow{N\to\infty} \frac{1}{4} \]
+    </p>
+    <p>
+      <span class="en">In general (without proof), the defender-wins probability for A vs 1 dice tends to \(1/(A+1)\) as \(N \to \infty\). In particular, the winning probabilities \(\pi_{A11}^\infty\) are all greater than \(\pi_{A11}\), so the attacker would always benefit from dice with as many faces as possible (as also noted by Osborne).<sup class="cite">2</sup></span>
+      <span class="es">En general (sin demostración), la probabilidad de que gane el defensor en Avs1 tiende a \(1/(A+1)\) cuando \(N \to \infty\). En particular, las probabilidades de ganar \(\pi_{A11}^\infty\) son todas mayores a \(\pi_{A11}\), con lo que al atacante siempre le convendría atacar con dados de la mayor cantidad de caras posibles (como también señala Osborne).<sup class="cite">2</sup></span>
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       3. THE INDEPENDENCE TRAP
+  ══════════════════════════════════════════════ -->
+  <section id="independence-trap">
+    <h2><span class="en">The Independence Trap</span><span class="es">La trampa de la independencia</span></h2>
+    <p>
+      <span class="en">In the 2v1 case one might think that the probability of two dice beating one is simply the probability that the first attacking die beats the defender's plus the probability that the second does. But, as Blatt<sup class="cite">3</sup> emphasises (and as Tan<sup class="cite">1</sup> incorrectly proposes), this is not so. Winning with the first die is not independent of winning with the second, because the outcome of the first roll changes the probability distribution of the other. For example, if the first attacking die wins, the defender's die can no longer have been a six (no attacking die could have beaten it) so the second attacking die's chances are automatically higher.</span>
+      <span class="es">En el caso 2vs1, se podría pensar que la probabilidad de que dos dados sean mayores a uno es la probabilidad de que el primer dado atacante sea mayor al defensor más la probabilidad de que lo sea el segundo. Pero, como hace hincapié Blatt<sup class="cite">3</sup> (y como erróneamente propone Tan<sup class="cite">1</sup>), esto no es así. Ganar con el primer dado no es un evento independiente de ganar con el segundo, porque el resultado del primer dado cambia la distribución de probabilidad del defensor. Por ejemplo, si el primer dado atacante gana, es imposible que el defensor haya sacado un seis —ningún dado le habría podido ganar— y el segundo dado atacante ya tiene más chances automáticamente.</span>
+    </p>
+    <p>
+      <span class="en">This seems paradoxical. What does the second die care whether the first won or not? And yet it does: knowing the first die won tells you something about what the defender must have rolled, and that changes the probabilities for the second comparison. The events are not independent.</span>
+      <span class="es">Esto parece paradójico. ¿Qué le importa al segundo dado si el primero ganó o no? Y sin embargo sí le importa: saber que el primer dado ganó dice algo sobre lo que habrá sacado el defensor, y eso cambia las probabilidades para la segunda comparación. Los eventos no son independientes.</span>
+    </p>
+    <p>
+      <span class="en">This matters most in the 3v2 case, where two comparisons happen simultaneously. Tan<sup class="cite">1</sup> multiplies marginal probabilities; Osborne<sup class="cite">2</sup> works with the correct joint distribution of the sorted dice. The difference is not negligible:</span>
+      <span class="es">Esto importa especialmente en el caso 3vs2 (Caso VI en la literatura), donde hay dos comparaciones simultáneas. Tan<sup class="cite">1</sup> multiplica probabilidades marginales; Osborne<sup class="cite">2</sup> trabaja con la distribución conjunta correcta de los dados ordenados. La diferencia no es despreciable:</span>
+    </p>
+
+    <table class="prob-table">
+      <thead>
+        <tr>
+          <th>Outcome</th>
+          <th>Tan (independent)</th>
+          <th>Correct (joint)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Defender loses 2</td>
+          <td class="val wrong">0.259</td>
+          <td class="val right">0.372</td>
+        </tr>
+        <tr>
+          <td>Each loses 1</td>
+          <td class="val wrong">0.504</td>
+          <td class="val right">0.336</td>
+        </tr>
+        <tr>
+          <td>Attacker loses 2</td>
+          <td class="val wrong">0.237</td>
+          <td class="val right">0.293</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Because these transition probabilities are the
+      building blocks of the entire Markov chain, even a small per-roll bias compounds
+      dramatically over the many rounds of a full campaign.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       4. CORRECT CALCULATION
+  ══════════════════════════════════════════════ -->
+  <section id="correct-calc">
+    <h2><span class="en">Getting It Right: Scenarios and Enumeration</span><span class="es">El enfoque correcto: escenarios y enumeración</span></h2>
+    <p>
+      <span class="en">The key insight is to separate all possible rolls into <em>scenarios</em>: groups of outcomes that share the same ordering pattern. For example, one scenario for a 3v3 roll is \(Y_1 = Y_2 = Y_3,\, Z_1 = Z_2 = Z_3\) (all attacking dice equal, all defending dice equal). Another is \(Y_1 = Y_2 > Y_3,\, Z_1 = Z_2 = Z_3\). And so on. Each scenario groups all the realizations where the dice obey that same set of equalities and inequalities.</span>
+      <span class="es">La idea clave es separar todos los resultados posibles en <em>escenarios</em> — grupos de resultados que comparten el mismo patrón de orden. Por ejemplo, un escenario para un tiro 3vs3 es \(Y_1 = Y_2 = Y_3,\, Z_1 = Z_2 = Z_3\) (todos los dados atacantes iguales, todos los defensores iguales). Otro es \(Y_1 = Y_2 > Y_3,\, Z_1 = Z_2 = Z_3\). Y así sucesivamente. Cada escenario agrupa todas las realizaciones donde los dados satisfacen ese mismo conjunto de igualdades y desigualdades.</span>
+    </p>
+    <p>
+      <span class="en">Within a scenario, every realization has the same probability. For instance, the event \(Y_1 = Y_2 = Y_3\) has probability \(1/6^3\) (all three dice show the same face, chosen freely). The event \(Y_1 = Y_2 > Y_3\) has probability \(3/6^3\) (there are three permutations of two equal dice and one smaller). Since attacker and defender rolls are independent, the probability of a joint scenario like \(Y_1 = Y_2 > Y_3,\, Z_1 > Z_2 > Z_3\) is just \(\frac{3}{6^3} \cdot \frac{6}{6^3}\).</span>
+      <span class="es">Dentro de un escenario, todas las realizaciones tienen la misma probabilidad. Por ejemplo, el evento \(Y_1 = Y_2 = Y_3\) tiene probabilidad \(1/6^3\) (los tres dados muestran la misma cara, elegida libremente). El evento \(Y_1 = Y_2 > Y_3\) tiene probabilidad \(3/6^3\) — hay tres permutaciones de dos dados iguales y uno menor. Como los tiros del atacante y el defensor son independientes, la probabilidad de un escenario conjunto como \(Y_1 = Y_2 > Y_3,\, Z_1 > Z_2 > Z_3\) es simplemente \(\frac{3}{6^3} \cdot \frac{6}{6^3}\).</span>
+    </p>
+    <p>
+      <span class="en">For each scenario we then enumerate every realization and count how many result in the attacker winning 0, 1, 2, or 3 armies, contributing to \(\pi_{AD0}, \pi_{AD1}, \pi_{AD2}, \pi_{AD3}\) respectively. Multiplying each count by the scenario's probability and summing over all scenarios gives the exact final probabilities. For example, consider the 3v3 scenario \(Y_1 = Y_2 = Y_3,\, Z_1 = Z_2 = Z_3\): since all attacking dice are equal to each other and the same holds for the defending dice, the attacker either wins all three comparisons or loses all three. Enumerating gives 15 realizations contributing to \(\pi_{333}\) and 21 contributing to \(\pi_{330}\), with no contribution to \(\pi_{331}\) or \(\pi_{332}\).</span>
+      <span class="es">Para cada escenario enumeramos todas las realizaciones y contamos cuántas resultan en que el atacante gana 0, 1, 2 o 3 ejércitos — contribuyendo a \(\pi_{AD0}, \pi_{AD1}, \pi_{AD2}, \pi_{AD3}\) respectivamente. Multiplicando cada conteo por la probabilidad del escenario y sumando sobre todos los escenarios se obtienen las probabilidades exactas finales. Por ejemplo, el escenario 3vs3 \(Y_1 = Y_2 = Y_3,\, Z_1 = Z_2 = Z_3\): como todos los dados atacantes son iguales entre sí y lo mismo vale para los defensores, el atacante o gana las tres comparaciones o las pierde todas. La enumeración da 15 realizaciones que contribuyen a \(\pi_{333}\) y 21 a \(\pi_{330}\), sin contribución a \(\pi_{331}\) ni \(\pi_{332}\).</span>
+    </p>
+    <p>
+      <span class="en">Applying this procedure to every case, 1v1 through 3v3, yields the complete table of single-round probabilities that feeds the Markov chain. The two cases that require it (and that do not appear in any of the original RISK papers, since in RISK the defender is limited to two dice) are 3v3 and 2v3.</span>
+      <span class="es">Aplicar este procedimiento a todos los casos — de 1vs1 a 3vs3 — produce la tabla completa de probabilidades por ronda que alimenta la cadena de Markov. Los dos casos que lo requieren — y que no aparecen en ninguno de los artículos originales sobre el RISK, ya que en ese juego el defensor está limitado a dos dados — son el 3vs3 y el 2vs3.</span>
+    </p>
+
+    <h3>3 dice vs 3 dice</h3>
+    <p>
+      <span class="en">This is the most common combat situation in TEG: both sides roll three dice and compare them pair by pair, highest against highest, second against second, third against third. There are 6⁶ = 46 656 total outcomes, grouped into 16 ordering scenarios (4 patterns for the attacker's three dice × 4 for the defender's). The result:</span>
+      <span class="es">Esta es la situación de combate más común en el TEG: ambos lados tiran tres dados y los comparan de a pares, el mayor contra el mayor, el segundo contra el segundo, el tercero contra el tercero. Hay 6⁶ = 46 656 resultados totales, agrupados en 16 escenarios de orden (4 patrones para los tres dados del atacante × 4 para el defensor). El resultado:</span>
+    </p>
+    <table class="prob-table">
+      <thead>
+        <tr>
+          <th><span class="en">Probability</span><span class="es">Probabilidad</span></th>
+          <th><span class="en">Outcome</span><span class="es">Resultado</span></th>
+          <th><span class="en">Value</span><span class="es">Valor</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>\(\pi_{333}\)</td><td><span class="en">attacker wins 3</span><span class="es">atacante gana 3</span></td><td class="val">13.76%</td></tr>
+        <tr><td>\(\pi_{332}\)</td><td><span class="en">attacker wins 2, loses 1</span><span class="es">atacante gana 2, pierde 1</span></td><td class="val">21.47%</td></tr>
+        <tr><td>\(\pi_{331}\)</td><td><span class="en">attacker wins 1, loses 2</span><span class="es">atacante gana 1, pierde 2</span></td><td class="val">26.47%</td></tr>
+        <tr><td>\(\pi_{330}\)</td><td><span class="en">attacker loses 3</span><span class="es">atacante pierde 3</span></td><td class="val">38.30%</td></tr>
+      </tbody>
+    </table>
+    <p>
+      <span class="en">The defender's extra die compared to RISK makes itself felt immediately: in the standard 3v2 RISK case the attacker wins two armies with probability 37.2%; here, even with a matching third die, the attacker wins all three only 13.8% of the time.</span>
+      <span class="es">El dado extra del defensor respecto al RISK se siente de inmediato: en el caso estándar 3vs2 del RISK el atacante gana dos ejércitos con probabilidad del 37,2%; aquí, incluso con un tercer dado equivalente, el atacante gana los tres sólo el 13,8% de las veces.</span>
+    </p>
+
+    <h3>2 dice vs 3 dice</h3>
+    <p>
+      <span class="en">When the attacker has only two dice and the defender three, only two comparisons take place: the attacker's highest die against the defender's highest, and the attacker's second die against the defender's second. There are 6⁵ = 7 776 total outcomes grouped into 8 ordering scenarios (2 patterns for the attacker × 4 for the defender). The enumeration gives:</span>
+      <span class="es">Cuando el atacante tiene solo dos dados y el defensor tres, solo tienen lugar dos comparaciones: el dado más alto del atacante contra el del defensor, y el segundo del atacante contra el segundo del defensor. Hay 6⁵ = 7 776 resultados totales agrupados en 8 escenarios de orden (2 patrones para el atacante × 4 para el defensor). La enumeración da:</span>
+    </p>
+    <table class="prob-table">
+      <thead>
+        <tr>
+          <th><span class="en">Probability</span><span class="es">Probabilidad</span></th>
+          <th><span class="en">Outcome</span><span class="es">Resultado</span></th>
+          <th><span class="en">Value</span><span class="es">Valor</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>\(\pi_{232}\)</td><td><span class="en">attacker wins 2</span><span class="es">atacante gana 2</span></td><td class="val">12.59%</td></tr>
+        <tr><td>\(\pi_{231}\)</td><td><span class="en">each loses 1</span><span class="es">cada uno pierde 1</span></td><td class="val">25.48%</td></tr>
+        <tr><td>\(\pi_{230}\)</td><td><span class="en">attacker loses 2</span><span class="es">atacante pierde 2</span></td><td class="val">61.93%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       6. FIGURE 1
+  ══════════════════════════════════════════════ -->
+  <section id="results">
+    <h2><span class="en">Results</span><span class="es">Resultados</span></h2>
+    <p>
+      Applying the pipeline described in the papers, for both RISK (defender rolls ≤2 dice) and TEG
+      (defender rolls ≤3 dice) produces striking results. Figure 1 shows the probability
+      of victory for equal-sized armies as a function of army count in each game.
+    </p>
+
+    <div class="figure-block">
+      <img src="./prob_equal_curve_risk_teg.png" alt="Attacker win probability vs equal army count for RISK and TEG" style="width:100%;display:block;">
+      <div class="figure-num">Figure 1</div>
+      <div class="figure-caption">
+        Probability of the attacker winning a battle when attacker and defender start
+        with equal armies, as a function of army count. Computed analytically via
+        Markov chains for both RISK (defender ≤2 dice) and TEG (defender ≤3 dice).
       </div>
     </div>
 
-    <div class="chart-container" style="display: none;">
-      <canvas id="barChart"></canvas>
-    </div>
+    <p>
+      The contrast is stark. In RISK, larger engagements tend to favour the attacker
+      (an intuition consistent with Osborne's<sup class="cite">2</sup> recommendation to
+      "be more aggressive"). In TEG, the opposite holds: the defender's third die provides
+      an advantage that <em>compounds</em> over many rounds, making large-scale attacks
+      a poor proposition unless the attacker has a significant numerical edge.
+    </p>
 
-    <script src="./script.js"></script>
-  </body>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       REFERENCES
+  ══════════════════════════════════════════════ -->
+  <div class="references">
+    <h2><span class="en">References</span><span class="es">Referencias</span></h2>
+    <ol class="ref-list">
+      <li>
+        B. Tan, "Markov Chains and the RISK Board Game,"
+        <em>Mathematics Magazine</em>, vol. 70, no. 5, pp. 349–357, Dec. 1997.
+      </li>
+      <li>
+        J. A. Osborne, "Markov Chains for the RISK Board Game Revisited,"
+        <em>Mathematics Magazine</em>, North Carolina State University, Raleigh, NC, 2003.
+      </li>
+      <li>
+        S. Blatt, "RISKy Business: An In-Depth Look at the Game RISK,"
+        <em>Rose-Hulman Undergraduate Mathematics Journal</em>, vol. 3, iss. 2, art. 3, 2002.
+      </li>
+    </ol>
+  </div>
+
+</div><!-- .page -->
+
+<!-- ══════════════════════════════════════════════
+     INTERACTIVE CANVASES
+══════════════════════════════════════════════ -->
+<script>
+/* ── helpers ── */
+const C  = (id) => document.getElementById(id);
+const px = (canvas) => ({ w: canvas.width, h: canvas.height });
+
+/* colour palette */
+const COL = {
+  attWin:   '#000000',
+  defWin:   '#888888',
+  diag:     '#cccccc',
+  text:     '#000000',
+  bg:       '#ffffff',
+  gridLine: 'rgba(0,0,0,0.15)',
+  attWinLt: 'rgba(0,0,0,0.10)',
+  defWinLt: 'rgba(0,0,0,0.04)',
+};
+
+/* ── 1v1 canvas ── */
+(function draw1v1() {
+  const cv = C('canvas1v1');
+  const ctx = cv.getContext('2d');
+  const N = 6, pad = 30;
+  const cellW = (cv.width  - pad * 2) / N;
+  const cellH = (cv.height - pad * 2) / N;
+
+  const C1 = {
+    attWin:   '#2a4a7f',
+    defWin:   '#8b3a2a',
+    diag:     '#c8b89a',
+    gridLine: 'rgba(200,184,154,0.5)',
+    attWinLt: 'rgba(42,74,127,0.18)',
+    defWinLt: 'rgba(139,58,42,0.13)',
+  };
+
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  for (let a = 1; a <= N; a++) {        // attacker die value (x-axis)
+    for (let d = 1; d <= N; d++) {      // defender die value (y-axis)
+      const x = pad + (a - 1) * cellW;
+      const y = pad + (N - d) * cellH;  // y flipped so d=6 at top
+      const won = a > d;
+      ctx.fillStyle = won ? C1.attWinLt : C1.defWinLt;
+      ctx.fillRect(x + 1, y + 1, cellW - 2, cellH - 2);
+      ctx.strokeStyle = C1.gridLine;
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x + 0.5, y + 0.5, cellW - 1, cellH - 1);
+
+      /* dot */
+      ctx.beginPath();
+      ctx.arc(x + cellW/2, y + cellH/2, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = won ? C1.attWin : C1.defWin;
+      ctx.fill();
+    }
+  }
+
+  /* diagonal */
+  ctx.beginPath();
+  ctx.moveTo(pad, pad + N * cellH);
+  ctx.lineTo(pad + N * cellW, pad);
+  ctx.strokeStyle = C1.diag;
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  /* axis labels */
+  ctx.fillStyle = '#888';
+  ctx.font = '11px "Courier New", Courier, monospace';
+  ctx.textAlign = 'center';
+  for (let i = 1; i <= N; i++) {
+    ctx.fillText(i, pad + (i - 0.5) * cellW, cv.height - 8);
+    ctx.fillText(i, 14, pad + (N - i + 0.5) * cellH + 4);
+  }
+  ctx.fillText('Attacker', cv.width / 2, cv.height - 0);
+  ctx.save();
+  ctx.translate(6, cv.height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Defender', 0, 0);
+  ctx.restore();
+})();
+
+/* ── 2v1 canvas (max of 2 vs 1) ── */
+(function draw2v1() {
+  const cv = C('canvas2v1');
+  const ctx = cv.getContext('2d');
+  const N = 6, pad = 30;
+  const cellH = (cv.height - pad * 2) / N;
+
+  ctx.fillStyle = COL.bg;
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  /* probability of max of 2 dice = k  => (2k-1)/36 */
+  const maxProb = Array.from({length: 6}, (_, i) => (2*(i+1)-1)/36);
+  const totalWidth = cv.width - pad * 2;
+  const xs = [pad]; // left edges
+  for (let k = 0; k < N; k++) xs.push(xs[k] + maxProb[k] * totalWidth);
+
+  for (let a = 0; a < N; a++) {          // attacker max = a+1
+    for (let d = 0; d < N; d++) {        // defender die = d+1
+      const aVal = a + 1, dVal = d + 1;
+      const x = xs[a];
+      const y = pad + (N - 1 - d) * cellH;
+      const w = xs[a+1] - xs[a];
+      const won = aVal > dVal;
+      ctx.fillStyle = won ? COL.attWinLt : COL.defWinLt;
+      ctx.fillRect(x + 0.5, y + 0.5, w - 1, cellH - 1);
+      ctx.strokeStyle = COL.gridLine;
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x + 0.5, y + 0.5, w - 1, cellH - 1);
+      /* dot */
+      ctx.beginPath();
+      ctx.arc(x + w/2, y + cellH/2, 2, 0, Math.PI*2);
+      ctx.fillStyle = won ? COL.attWin : COL.defWin;
+      ctx.fill();
+    }
+  }
+
+  ctx.fillStyle = '#888';
+  ctx.font = '11px "Courier New", Courier, monospace';
+  ctx.textAlign = 'center';
+  for (let i = 0; i < N; i++) {
+    ctx.fillText(i+1, (xs[i]+xs[i+1])/2, cv.height - 8);
+    ctx.fillText(i+1, 14, pad + (N - 1 - i + 0.5) * cellH + 4);
+  }
+  ctx.fillText('Attacker (max of 2)', cv.width / 2, cv.height);
+  ctx.save();
+  ctx.translate(6, cv.height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Defender', 0, 0);
+  ctx.restore();
+})();
+
+/* ── 3v1 canvas (max of 3 vs 1) ── */
+(function draw3v1() {
+  const cv = C('canvas3v1');
+  const ctx = cv.getContext('2d');
+  const N = 6, pad = 30;
+  const cellH = (cv.height - pad * 2) / N;
+
+  ctx.fillStyle = COL.bg;
+  ctx.fillRect(0, 0, cv.width, cv.height);
+
+  /* P(max of 3 = k) = (3k²-3k+1)/216 */
+  const maxProb3 = Array.from({length:6}, (_,i)=>{
+    const k = i+1;
+    return (3*k*k - 3*k + 1)/216;
+  });
+  const totalWidth = cv.width - pad * 2;
+  const xs = [pad];
+  for (let k = 0; k < N; k++) xs.push(xs[k] + maxProb3[k] * totalWidth);
+
+  for (let a = 0; a < N; a++) {
+    for (let d = 0; d < N; d++) {
+      const aVal = a+1, dVal = d+1;
+      const x = xs[a];
+      const y = pad + (N-1-d) * cellH;
+      const w = xs[a+1] - xs[a];
+      const won = aVal > dVal;
+      ctx.fillStyle = won ? COL.attWinLt : COL.defWinLt;
+      ctx.fillRect(x+0.5, y+0.5, w-1, cellH-1);
+      ctx.strokeStyle = COL.gridLine;
+      ctx.lineWidth = 0.5;
+      ctx.strokeRect(x+0.5, y+0.5, w-1, cellH-1);
+      ctx.beginPath();
+      ctx.arc(x+w/2, y+cellH/2, 2, 0, Math.PI*2);
+      ctx.fillStyle = won ? COL.attWin : COL.defWin;
+      ctx.fill();
+    }
+  }
+
+  ctx.fillStyle = '#888';
+  ctx.font = '11px "Courier New", Courier, monospace';
+  ctx.textAlign = 'center';
+  for (let i = 0; i < N; i++) {
+    ctx.fillText(i+1, (xs[i]+xs[i+1])/2, cv.height-8);
+    ctx.fillText(i+1, 14, pad+(N-1-i+0.5)*cellH+4);
+  }
+  ctx.fillText('Attacker (max of 3)', cv.width/2, cv.height);
+  ctx.save();
+  ctx.translate(6, cv.height/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText('Defender', 0, 0);
+  ctx.restore();
+})();
+
+/* ── Markov state diagram ── */
+(function drawMarkov() {
+  const cv = C('markov-diagram');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const states = [
+    { id:'(3,2)', x:100, y:80,  transient:true },
+    { id:'(3,1)', x:100, y:160, transient:true },
+    { id:'(2,2)', x:220, y:80,  transient:true },
+    { id:'(2,1)', x:220, y:160, transient:true },
+    { id:'(3,0)', x:340, y:80,  transient:false, label:'Att.\nwins' },
+    { id:'(2,0)', x:340, y:160, transient:false, label:'Att.\nwins' },
+    { id:'(1,2)', x:460, y:80,  transient:false, label:'Def.\nwins' },
+    { id:'(1,1)', x:460, y:160, transient:false, label:'Def.\nwins' },
+  ];
+  const R = 28;
+
+  /* arrow helper */
+  function arrow(x1,y1,x2,y2,col,prob,bend=0) {
+    ctx.save();
+    ctx.strokeStyle = col;
+    ctx.fillStyle   = col;
+    ctx.lineWidth   = 1.2;
+    const dx = x2-x1, dy = y2-y1;
+    const len = Math.sqrt(dx*dx+dy*dy);
+    const ux = dx/len, uy = dy/len;
+    const sx = x1 + ux*R, sy = y1 + uy*R;
+    const ex = x2 - ux*R, ey = y2 - uy*R;
+    const mx = (sx+ex)/2 + bend*(-uy), my = (sy+ey)/2 + bend*(ux);
+
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.quadraticCurveTo(mx, my, ex, ey);
+    ctx.stroke();
+    /* arrowhead */
+    const angle = Math.atan2(ey-my, ex-mx);
+    ctx.beginPath();
+    ctx.moveTo(ex, ey);
+    ctx.lineTo(ex - 8*Math.cos(angle-0.4), ey - 8*Math.sin(angle-0.4));
+    ctx.lineTo(ex - 8*Math.cos(angle+0.4), ey - 8*Math.sin(angle+0.4));
+    ctx.closePath();
+    ctx.fill();
+    /* probability label */
+    if (prob) {
+      ctx.fillStyle = '#888';
+      ctx.font = '10px "Courier New", Courier, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(prob, mx, my - 5);
+    }
+    ctx.restore();
+  }
+
+  /* draw edges */
+  const s = (id) => states.find(s=>s.id===id);
+  const edges = [
+    ['(3,2)','(3,1)','0.337',COL.attWin, 20],
+    ['(3,2)','(2,2)','0.293',COL.defWin, -20],
+    ['(3,2)','(2,1)','0.372',COL.attWin, 0],
+    ['(3,1)','(3,0)','0.660',COL.attWin, 0],
+    ['(3,1)','(2,1)','0.340',COL.defWin, 0],
+    ['(2,2)','(2,1)','0.228',COL.attWin, 18],
+    ['(2,2)','(1,2)','0.448',COL.defWin, 0],
+    ['(2,2)','(1,1)','0.324',COL.attWin, 0],
+    ['(2,1)','(2,0)','0.579',COL.attWin, 0],
+    ['(2,1)','(1,1)','0.421',COL.defWin, 0],
+  ];
+  for (const [from, to, prob, col, bend=0] of edges) {
+    const a = s(from), b = s(to);
+    arrow(a.x, a.y, b.x, b.y, col, prob, bend);
+  }
+
+  /* draw nodes */
+  for (const st of states) {
+    ctx.beginPath();
+    ctx.arc(st.x, st.y, R, 0, Math.PI*2);
+    ctx.fillStyle = st.transient ? '#fff' : (st.label?.startsWith('Att') ? 'rgba(42,74,127,0.15)' : 'rgba(139,58,42,0.12)');
+    ctx.fill();
+    ctx.strokeStyle = st.transient ? '#ccc' : (st.label?.startsWith('Att') ? COL.attWin : COL.defWin);
+    ctx.lineWidth = st.transient ? 1.5 : 2;
+    ctx.stroke();
+
+    ctx.fillStyle = COL.text;
+    ctx.font = '11px "Courier New", Courier, monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    if (st.transient) {
+      ctx.fillText(st.id, st.x, st.y);
+    } else {
+      const lines = st.label.split('\n');
+      ctx.fillText(lines[0], st.x, st.y - 7);
+      ctx.font = '9px "Courier New", Courier, monospace';
+      ctx.fillStyle = '#888';
+      ctx.fillText(st.id, st.x, st.y + 7);
+    }
+    ctx.textBaseline = 'alphabetic';
+  }
+})();
+</script>
+
+<script>
+(function() {
+  var btn = document.getElementById('lang-toggle');
+  if (localStorage.getItem('lang') === 'es') { document.body.classList.add('es'); btn.textContent = 'EN'; }
+  btn.addEventListener('click', function() {
+    var isEs = document.body.classList.toggle('es');
+    localStorage.setItem('lang', isEs ? 'es' : 'en');
+    btn.textContent = isEs ? 'EN' : 'ES';
+  });
+})();
+</script>
+
+</body>
 </html>

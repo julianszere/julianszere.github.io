@@ -65,9 +65,14 @@ function updateChart() {
   const probabilityContainer = document.querySelector('.probability-container');
   const chartContainer = document.querySelector('.chart-container');
 
+  const probGroup = document.getElementById('prob-group');
+  const toggleGroup = document.getElementById('toggle-group');
+
   if (attacker < 2 || defender < 1 || isNaN(attacker) || isNaN(defender)) {
-    lastProbElement.textContent = 'Ingrese el número de ejércitos atacantes y defensores';
-    probabilityContainer.style.display = 'none';
+    if (lastProbElement) lastProbElement.textContent = '';
+    if (probabilityContainer) probabilityContainer.style.display = 'none';
+    if (probGroup) probGroup.style.display = 'none';
+    if (toggleGroup) toggleGroup.style.display = 'none';
     chartContainer.style.display = 'none';
     if (chart) chart.destroy();
     return;
@@ -79,15 +84,17 @@ function updateChart() {
   const totalProb = probabilityData[attacker]?.[defender];
 
   if (!attData || !defData || totalProb === undefined) {
-    lastProbElement.textContent = `No hay datos para ${attacker} vs ${defender}`;
-    probabilityContainer.style.display = 'block';
+    if (lastProbElement) lastProbElement.textContent = `No data for ${attacker} vs ${defender}`;
+    if (probabilityContainer) probabilityContainer.style.display = 'flex';
+    if (probGroup) probGroup.style.display = 'flex';
+    if (toggleGroup) toggleGroup.style.display = 'none';
     chartContainer.style.display = 'none';
     if (chart) chart.destroy();
     return;
   }
 
   const data = showingAttacker ? attData : defData;
-  const labelPrefix = showingAttacker ? 'atacante' : 'defensor';
+  const labelPrefix = showingAttacker ? 'attacker' : 'defender';
   const color = showingAttacker ? '#0066cc' : '#cc0000';
   const borderColor = showingAttacker ? '#004d99' : '#990000';
   const winProb = showingAttacker ? totalProb : 1 - totalProb;
@@ -104,8 +111,9 @@ function updateChart() {
 
   lastProbElement.textContent = `${(winProb * 100).toFixed(2)}%`;
   lastProbElement.style.backgroundColor = showingAttacker ? '#0066cc' : '#cc0000';
-  lastProbElement.style.color = '#fff';
-  probabilityContainer.style.display = 'flex';
+  if (probabilityContainer) probabilityContainer.style.display = 'flex';
+  if (probGroup) probGroup.style.display = 'flex';
+  if (toggleGroup) toggleGroup.style.display = 'flex';
   chartContainer.style.display = 'block';
 
   const ctx = document.getElementById('barChart').getContext('2d');
@@ -116,7 +124,7 @@ function updateChart() {
     data: {
       labels: filteredLosses,
       datasets: [{
-        label: `Pérdidas del ${labelPrefix}`,
+        label: `${labelPrefix} losses`,
         data: normalizedProbs,
         backgroundColor: color,
         borderColor: borderColor,
@@ -130,12 +138,12 @@ function updateChart() {
       maintainAspectRatio: false,
       scales: {
         x: { 
-          title: { display: true, text: `Ejércitos perdidos por el ${labelPrefix}` }, 
+          title: { display: true, text: `Armies lost by the ${labelPrefix}` },
           ticks: { font: { size: 10 }, color: '#000' },
           grid: { color: 'rgba(0, 0, 0, 0.3)' }
         },
         y: { 
-          title: { display: true, text: 'Probabilidad' }, 
+          title: { display: true, text: 'Probability' },
           ticks: { font: { size: 10 }, color: '#000' },
           grid: { color: 'rgba(0, 0, 0, 0.3)' },
           beginAtZero: true

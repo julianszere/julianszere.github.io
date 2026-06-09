@@ -3,9 +3,9 @@ const projects = [
     id: "teg",
     year: "2025",
     month: "Nov",
-    title: "T.E.G. Calculator",
+    title: "TEG Calculator",
     url: "https://julianszere.github.io/projects/teg",
-    detailUrl: "./projects/teg/teg_probability_calculator.html",
+    detailUrl: "./projects/teg/index.html",
     description: `
       <p>A tool for calculating tactical and strategic war scenarios in T.E.G. using advanced probability models.</p>
     `

@@ -1,0 +1,274 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage[
+  colorlinks=false,
+  pdfborder={0 0 1},
+  urlbordercolor={0.8 0.8 0.8},  % soft-gray box
+  linkbordercolor={0.8 0.8 0.8}
+]{hyperref}
+
+
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome}
+\usepackage{enumitem}
+\input{glyphtounicode}
+\usepackage{xcolor}
+\definecolor{mygray}{gray}{0.5}  % 0 is black, 1 is white
+\usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\bfseries\raggedright\Large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+
+\newcommand{\resumeItem}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      {\parbox[t]{0.7\textwidth}{\small#3}} & \textit{\small \textcolor{mygray}{#4}} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+
+
+
+\newcommand{\resumeEvent}[1]{
+  \item
+  \textnormal{#1}\vspace{-7pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSectionStart}{\begin{itemize}[leftmargin=0pt, label={}]}
+\newcommand{\resumeSectionEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+    {\Huge \scshape Julián Szereszewski} \\ \vspace{2pt}
+    {\large Buenos Aires, Argentina} \\
+    \href{https://julianszere.github.io/}{\faGlobe\ julianszere.github.io} $|$
+    \href{mailto:julianszere@gmail.com}{\Letter\ julianszere@gmail.com} $|$
+    \href{https://www.linkedin.com/in/julianszereszewski/?locale=en-US}{\faLinkedin\ julianszereszewski} $|$
+    \href{https://github.com/julianszere}{\faGithub\ julianszere}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSectionStart
+    \resumeItem
+      {University of Buenos Aires}
+      {March 2019 -- April 2026}
+      {Licentiate in \textbf{Physics} (B.Sc.\,+\,M.Sc. equivalent), GPA 9.3 / 10.}
+      {FCEyN | UBA}
+    \resumeItem
+      {National College of Buenos Aires}
+      {March 2014 -- December 2018}
+      {High School diploma.}
+      {CNBA | UBA}
+  \resumeSectionEnd
+
+%-----------RESEARCH-----------
+\section{Research Experience}
+  \resumeSectionStart
+    \resumeItem
+      {BAISH Labs}
+      {September 2026 - Present}
+      {Founding Team Member \& Research Fellow}
+      {}
+    \resumeItem
+      {Iliad Fellowship + Extension}
+      {June 2026 - October 2026}
+      {Studying how language models infer latent personas from training data with a focus on minimum description length.}
+      {Advisor: Stephan Wäldchen}
+    \resumeItem
+      {SPAR Program}
+      {February 2026 - May 2026}
+      {Investigating a geometry-based explanation of \textit{subliminal learning} using steering vectors extracted as the difference between biased and unbiased activations.}
+      {Advisor: Yuxiao Li}
+    \resumeItem
+      {Dynamical Systems Lab (LSD)}
+      {February 2025 -- December 2025}
+      {Worked on Kolmogorov-Arnold Networks (KANs) for my thesis project to model dynamical systems as a more interpretable alternative to traditional Neural Networks.}
+      {Advisor: Gabriel B. Mindlin}
+%    \resumeItem
+%      {Plasma Physics Institute (INFIP)}
+%      {March 2024 -- December 2024}
+%      {Characterized and optimized a plasma-based reactor for water treatment, developing Python-based data analysis tools to extract and analyze current measurements.}
+%      {Advisor: Diana Grondona}
+  \resumeSectionEnd
+
+%-----------EXPERIENCE-----------
+\section{Work Experience}
+  \resumeSectionStart
+    \resumeItem
+      {Performance Analyst | Avature}
+      {August 2024 -- June 2026}
+      {I developed and maintained statistical analysis tools in Python to gain insights from web server response times.}
+      {Semi-Senior}
+    \resumeItem
+      {QA Engineer | Avature}
+      {July 2021 -- August 2024}
+      {I analyzed database inconsistencies with SQL and developed automated tests using Selenium, JavaScript and PHP.}
+      {Semi-Senior}
+  \resumeSectionEnd
+
+\section{Teaching Experience}
+  \resumeSectionStart
+    \resumeItem
+      {Teaching Assistant | Iliad}
+      {August 2026}
+      {Assisted a steganography for LLMs lecture.}
+      {}
+    \resumeItem
+      {Science Museum Guide | Museo Participativo de Ciencias}
+      {October 2019 -- December 2019}
+      {Explained physics exhibits to visitors.}
+      {}
+  \resumeSectionEnd
+
+
+%\section{Relevant Coursework}
+%  \resumeSectionStart
+%    \item
+%      \begin{tabularx}{\textwidth}{X X X}
+%        \textbullet~Statistical Mechanics & \textbullet~Statistics for Experimental Physics & \textbullet~Classical Mechanics \\
+%        \textbullet~Machine Learning & \textbullet~Quantum Mechanics & \textbullet~Differential and Integral Calculus \\
+%        \textbullet~Modeling of Complex Systems & \textbullet~Linear Algebra & \textbullet~Complex Analysis \\
+%      \end{tabularx}
+%  \resumeSectionEnd
+
+\section{Courses \& Conferences}
+  \resumeSectionStart
+    \resumeItem
+      {\href{https://www.iliadconference.com/}{ILIAD Conference} | San Francisco, USA}
+      {August 2026}
+      {}
+      {}
+    \vspace{-14pt}
+    \resumeItem
+      {\href{https://bluedot.org/courses/technical-ai-safety}{Technical AI Safety Course} | BlueDot Impact}
+      {January 2026}
+      {}
+      {}
+    \vspace{-14pt}
+    \resumeItem
+      {\href{https://primavera-dl.github.io/}{Deep Learning Spring School} | FCEyN}
+      {October 2025}
+      {}
+      {}
+    \vspace{-14pt}
+    \resumeItem
+      {\href{https://eci.dc.uba.ar/cursos-eci/}{Generative Image Models Based on Deep Neural Networks} | FCEyN}
+      {August 2025}
+      {}
+      {}
+    \vspace{-14pt}
+    \resumeItem
+      {\href{https://udesa.edu.ar/sciaa}{Scientific Symposium on AI and Applications} | UdeSA}
+      {November 2024 \& September 2025}
+      {}
+      {}
+    \vspace{-14pt}
+  \resumeSectionEnd
+
+\section{Papers}
+  \resumeSectionStart
+    \resumeEvent
+      {\textbf{J. Szereszewski}, F. Fainstein, L. E. Fernandez, G. B. Mindlin. (2026)
+      \textit{\href{http://arxiv.org/abs/2606.08479}{Inferring hidden forcing in a biological oscillator using Kolmogorov--Arnold networks}}. arXiv:2606.08479.}
+  \resumeSectionEnd
+
+\section{Conference Presentations}
+  \resumeSectionStart
+    \resumeEvent
+      {\textbf{J. Szereszewski}, N. Waehner, M. Smith.
+      \textit{\href{https://julianszere.github.io/curriculum/posters/sae.pdf}{Sparse Autoencoders for Interpretable Memory Retrieval in LLMs}}. Poster presented at the Y-Hat Hackathon, FCEyN (December 2025). Buenos Aires, Argentina.}
+    \resumeEvent
+      {\textbf{J. Szereszewski}, F. Fainstein, L. E. Fernandez, G. B. Mindlin. \textit{\href{https://julianszere.github.io/curriculum/posters/kan.pdf}{Kolmogorov Arnold Networks for the reconstruction of dynamical systems from data}}. Poster presented at the Scientific Artificial Intelligence and Applications Symposium (SCIAA), UdeSA (September 2025); and the Deep Learning Spring School, FCEyN (October 2025). Buenos Aires, Argentina.}
+    \resumeEvent
+      {\textbf{J. Szereszewski}, F. Otero Zappa, A. Kleiman, M. Zanini, D. Grondona. \textit{\href{https://julianszere.github.io/curriculum/posters/plasma.pdf}{Design and Assembly of a Scalable Plasma Reactor for Water Remediation}}. Poster presented at the Annual Reunion of Argentinian Physics Asociation (RAFA), UNSL (September 2024). San Luis, Argentina.}
+  \resumeSectionEnd
+
+\section{Achievements}
+  \resumeSectionStart
+    \resumeEvent
+      {\textbf{Hackathon Winner} for the poster presented at the NLP track of the Y-Hat Hackathon (FCEyN-UBA). \textit{December 2025, Buenos Aires, Argentina.}}
+    \resumeEvent
+      {\textbf{Best Poster Award} for the poster presented at the Deep Learning School (FCEyN-UBA). \textit{October 2025, Buenos Aires, Argentina.}}
+    \resumeEvent
+      {\textbf{Finalist} at the National Stage of the Argentine Mathematical Olympiad (OMA). \textit{November 2018, La Falda, Córdoba, Argentina.}}
+    \resumeEvent
+      {\textbf{Nominated} for the Metropolitan Argentine Mathematical Olympiad (OMA). \textit{August 2018, Mar del Plata, Buenos Aires, Argentina.}}
+  \resumeSectionEnd
+
+%-----------PROJECTS-----------
+%\section{Projects}
+%  \small
+%  \resumeSectionStart
+%    \resumeEvent
+%      {\textbf{2025} • \href{https://github.com/julianszere/dopplerlights}{GitHub} $|$ Simulation of how images would appear at relativistic speeds, applying Doppler shift and aberration effects to model color distortions and image warping.}
+%    \resumeEvent
+%      {\textbf{2024} • \href{https://github.com/julianszere/TEG/tree/main}{GitHub} \& \href{https://julianszere.github.io/proyectar/TEG/}{Web Page} $|$ Analytic probability model for the TEG strategy game, extending the formulations of J.~A.~Osborne and B.~Sharon for RISK.}
+%    \resumeEvent
+%      {\textbf{2024} • \href{https://github.com/julianszere/strings/tree/main}{Github} \& \href{https://www.youtube.com/watch?v=wA7FSTKI-ZI}{Video} $|$ Numerical simulation of the sound (and movement) produced by a string under the damped wave equation.}
+%    \resumeEvent
+%      {\textbf{2023} • \href{https://youtu.be/Cx6NcWK6EzA?si=T7sWFCwXgkGispCK}{Video} \& \href{https://editor.p5js.org/julianszere/full/q_dg8XIGB}{Web Page} $|$ Numerical simulation of damped springs, demonstrating that fitting a linear function under least squares is mathematically equivalent to finding the rest state for a system of springs.}
+%    \resumeEvent
+%      {\textbf{2022} • \href{https://youtu.be/fm-Fd9UOtdY?si=0tVyYXBaPWpg_y7c}{Video} $|$ Numerical simulation in Python of the triple pendulum with its equations of motion in analytical form.}
+%    \resumeEvent
+%      {\textbf{2021} • \href{https://julianszere.github.io/proyectar/péndulos/}{Web Page} $|$ Interactive numerical simulation in JavaScript of decoupled pendulums tracing a wave due to aliasing.}
+%  \resumeSectionEnd
+%
+%-----------PROGRAMMING SKILLS-----------
+%\section{Languages}
+%\begin{itemize}[leftmargin=*, labelsep=0.5em, itemsep=2pt, topsep=2pt]
+%  \item \textbf{Spanish}: Native.
+%  \item \textbf{English}: Proficient (C1).
+%  \item \textbf{French}: Basic.
+%\end{itemize}
+
+
+%-------------------------------------------
+\end{document}

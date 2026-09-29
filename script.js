@@ -5,7 +5,7 @@ const projects = [
     month: "Sep",
     title: "Albert: Reward Hacking Game",
     url: "https://heiofdvk.github.io/reward-hacking-game/",
-    detailUrl: "https://heiofdvk.github.io/reward-hacking-game/",
+    detailUrl: "./projects/reward-hacking-game/index.html",
     description: `
       <p>A game about reward hacking.</p>
     `

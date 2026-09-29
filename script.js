@@ -1,11 +1,11 @@
 const projects = [
   {
-    id: "reward-hacking-game",
+    id: "aibert",
     year: "2026",
     month: "Sep",
-    title: "Albert: Reward Hacking Game",
+    title: "Albert: The Reward Hacking Game",
     url: "https://heiofdvk.github.io/reward-hacking-game/",
-    detailUrl: "./projects/reward-hacking-game/index.html",
+    detailUrl: "./projects/aibert/index.html",
     description: `
       <p>A game about reward hacking.</p>
     `

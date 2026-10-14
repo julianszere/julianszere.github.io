@@ -12,7 +12,7 @@ const projects = [
     year: "2026",
     month: "Sep",
     title: "Albert: The Reward Hacking Game",
-    url: "https://joaquinjacu.github.io/reward-hacking-game/#intro",
+    url: "https://heiofdvk.github.io/reward-hacking-game/",
     detailUrl: "./projects/aibert/index.html",
     description: `
       <p>A game about reward hacking.</p>

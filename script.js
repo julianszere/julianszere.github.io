@@ -1,10 +1,18 @@
 const projects = [
   {
+    id: "false-negative",
+    year: "2026",
+    month: "Oct",
+    title: "False Negative",
+    url: "https://julianszere.github.io/projects/false-negative/",
+    detailUrl: "./projects/false-negative/index.html"
+  },
+  {
     id: "aibert",
     year: "2026",
     month: "Sep",
     title: "Albert: The Reward Hacking Game",
-    url: "https://heiofdvk.github.io/reward-hacking-game/",
+    url: "https://joaquinjacu.github.io/reward-hacking-game/#intro",
     detailUrl: "./projects/aibert/index.html",
     description: `
       <p>A game about reward hacking.</p>

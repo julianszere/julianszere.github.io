@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1790020796.54627 "c:/Users/Julian/Desktop/julianszere.github.io/curriculum/main.tex" "curriculum.pdf" "curriculum" 1790020797.41326 0
+["pdflatex"] 1792005055.09476 "c:/Users/Julian/Desktop/julianszere.github.io/curriculum/main.tex" "curriculum.pdf" "curriculum" 1792005055.83469 0
   "C:/Program Files/MiKTeX/tex/generic/bigintcalc/bigintcalc.sty" 1576433602 40635 c40361e206be584d448876bba8a64a3b ""
   "C:/Program Files/MiKTeX/tex/generic/bitset/bitset.sty" 1575926576 33961 6b5c75130e435b2bfdb9f480a09a39f9 ""
   "C:/Program Files/MiKTeX/tex/generic/gettitlestring/gettitlestring.sty" 1576433666 8371 9d55b8bd010bc717624922fb3477d92e ""
@@ -98,10 +98,10 @@
   "C:/Users/Julian/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1761901070 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/Julian/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Julian/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/Julian/Desktop/julianszere.github.io/curriculum/main.tex" 1790020794 11566 e61f93c39150b3fd45d66534b131f426 ""
-  "curriculum.aux" 1790020797 1182 5fcffa79bc5d100480dabf291a275a1c "pdflatex"
-  "curriculum.out" 1790020797 990 7c10aebe7328b520b57cb229fec399e7 "pdflatex"
-  "main.tex" 1790020794 11566 e61f93c39150b3fd45d66534b131f426 ""
+  "c:/Users/Julian/Desktop/julianszere.github.io/curriculum/main.tex" 1792005053 12146 37bca4eb177fc03a1342c1b599852dd4 ""
+  "curriculum.aux" 1792005055 1182 73d7157376e9118a2aeb476f28d4a9e1 "pdflatex"
+  "curriculum.out" 1792005055 990 7c10aebe7328b520b57cb229fec399e7 "pdflatex"
+  "main.tex" 1792005053 12146 37bca4eb177fc03a1342c1b599852dd4 ""
   (generated)
   "curriculum.aux"
   "curriculum.log"

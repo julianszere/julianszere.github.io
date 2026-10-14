@@ -3,7 +3,7 @@ const projects = [
     id: "false-negative",
     year: "2026",
     month: "Oct",
-    title: "False Negative",
+    title: "False Negatives",
     url: "https://julianszere.github.io/projects/false-negative/",
     detailUrl: "./projects/false-negative/index.html"
   },

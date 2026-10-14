@@ -34,7 +34,7 @@
       grid-template-columns: 36px minmax(0, 1fr) 36px;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 2rem;
+      margin: 2rem 0;
     }
     .gallery a { display: block; }
     .gallery a[hidden] { display: none; }
@@ -70,7 +70,6 @@
   </header>
 
   <p><strong>False Negatives</strong> is a project about the collapse of photographic evidence. It presents AI-manipulated historical photographs as if they were authentic archival objects. By altering iconic images from the past and then printing them onto <em>genuine </em>black-and-white negatives or positive film slides, the work asks viewers to confront how fragile our trust in visual documentation has become.</p>
-  <p>When any photograph can be fabricated, every photograph can be doubted. Then, the future fills with images that are real but can’t be trusted: a past lost to false negatives.</p>
 
   <div class="gallery" role="region" aria-label="Project images" aria-roledescription="carousel">
     <button type="button" id="previous-image" aria-label="Previous image">←</button>
@@ -88,6 +87,8 @@
     <button type="button" id="next-image" aria-label="Next image">→</button>
     <div class="gallery-status" aria-live="polite" aria-atomic="true">1 / 3</div>
   </div>
+
+  <p>When any photograph can be fabricated, every photograph can be doubted. Then, the future fills with images that are real but can’t be trusted: a past lost to false negatives.</p>
 </main>
 <script>
 (function() {

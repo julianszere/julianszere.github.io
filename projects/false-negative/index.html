@@ -29,9 +29,29 @@
     .kicker { font-size: 13px; color: #888; margin-bottom: 0.4rem; }
     h1 { font-size: 20px; line-height: 1.3; margin-bottom: 0.4rem; }
     p { margin-bottom: 0.9rem; }
-    .gallery { margin-top: 2rem; }
-    .gallery a { display: block; margin-bottom: 1.5rem; }
+    .gallery {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) 36px;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .gallery a { display: block; }
+    .gallery a[hidden] { display: none; }
     .gallery img { display: block; width: 100%; height: auto; }
+    .gallery button {
+      width: 36px;
+      min-height: 44px;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #000;
+      font: inherit;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .gallery button:hover { border-color: #000; }
+    .gallery button:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+    .gallery-status { grid-column: 2; text-align: center; font-size: 13px; color: #888; }
 
     @media (max-width: 560px) {
       .page { padding: 1.25rem 1.25rem 3rem; }
@@ -52,17 +72,45 @@
   <p><strong>False Negatives</strong> is a project about the collapse of photographic evidence. It presents AI-manipulated historical photographs as if they were authentic archival objects. By altering iconic images from the past and then printing them onto <em>genuine </em>black-and-white negatives or positive film slides, the work asks viewers to confront how fragile our trust in visual documentation has become.</p>
   <p>When any photograph can be fabricated, every photograph can be doubted. Then, the future fills with images that are real but can’t be trusted: a past lost to false negatives.</p>
 
-  <div class="gallery">
+  <div class="gallery" role="region" aria-label="Project images" aria-roledescription="carousel">
+    <button type="button" id="previous-image" aria-label="Previous image">←</button>
+    <div class="gallery-slides">
     <a href="Archival%20Negative%20of%20Flag%20Raising.png">
       <img src="Archival%20Negative%20of%20Flag%20Raising.png" alt="Archival negative of flag raising" />
     </a>
-    <a href="Archival%20Apollo%20Lunar%20Transparency.png">
+    <a href="Archival%20Apollo%20Lunar%20Transparency.png" hidden>
       <img src="Archival%20Apollo%20Lunar%20Transparency.png" alt="Archival Apollo lunar transparency" loading="lazy" />
     </a>
-    <a href="35mm%20Negative%20of%20City%20Traffic.png">
+    <a href="35mm%20Negative%20of%20City%20Traffic.png" hidden>
       <img src="35mm%20Negative%20of%20City%20Traffic.png" alt="35mm negative of city traffic" loading="lazy" />
     </a>
+    </div>
+    <button type="button" id="next-image" aria-label="Next image">→</button>
+    <div class="gallery-status" aria-live="polite" aria-atomic="true">1 / 3</div>
   </div>
 </main>
+<script>
+(function() {
+  const gallery = document.querySelector('.gallery');
+  const slides = Array.from(gallery.querySelectorAll('.gallery-slides a'));
+  const status = gallery.querySelector('.gallery-status');
+  let current = 0;
+
+  function showImage(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => { slide.hidden = i !== current; });
+    status.textContent = `${current + 1} / ${slides.length}`;
+  }
+
+  document.getElementById('previous-image').addEventListener('click', () => showImage(current - 1));
+  document.getElementById('next-image').addEventListener('click', () => showImage(current + 1));
+  gallery.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      showImage(current + (event.key === 'ArrowLeft' ? -1 : 1));
+    }
+  });
+})();
+</script>
 </body>
 </html>

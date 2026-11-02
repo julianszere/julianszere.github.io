@@ -1,16 +1,14 @@
 False Negatives - Soviet Flag - Working Beside the Lunar Module
 Updated: 2 November 2026
 Tool: built-in image_gen, edit mode
-Original edit target: alternatives/5025h.jpg
-Crop reference: previous committed artwork (f8ee043), Soviet Flag - Working Beside the Lunar Module.png
+Edit target (Image 1): previous artwork, Soviet Flag - Working Beside the Lunar Module.png (revision 70f78e4)
+Soviet design/material reference (Image 2): Soviet Flag on the Moon.png
+Original photographic source (provenance): alternatives/5025h.jpg
 Output: Soviet Flag - Working Beside the Lunar Module.png
 Final format: 1536 x 1024 pixels (3:2)
 
-Source edit prompt:
-Use case: precise-object-edit. This is a minimal symbolic flag edit of a historical photograph for the fictional False Negatives art series.
-IMAGE 1 IS THE ORIGINAL PHOTOGRAPH AND THE PRIMARY EDIT TARGET. Work from its authentic photographed objects and pixels. Image 2 is only a guide to desired final crop, not a material reference. The previous edit's red flag looks too much like thick wrinkled cloth; discard that invented cloth rendering.
-Replace the printed stars-and-stripes colors on EVERY flag in ORIGINAL IMAGE 1 with a Soviet Union red field and small flat printed gold hammer/sickle/star near its pole/hoist. Preserve all flag object contours, every original nylon crease, its existing stiffness, tightly packed horizontal creases, hems, translucency, specular light, fine thin material and exact fold geometry from image 1. It must look like the SAME original flag with ONLY its printed design changed. Do not substitute new cloth or add different folds. No plush fabric, heavy drapery, satin, velvet or smooth AI fabric. Ink should be faded and integrated in the original photographic scan. Remove American color stripe pattern entirely, without erasing physical folds. One gold emblem group per flag.
-Also change ALL small American flags on astronaut sleeves/backpack and spacecraft decals to Soviet red/gold. Match original patch stitching, curvature and softness; spacecraft decals remain flat, not fabric. Remove all ghost stars and stripes. Preserve NASA badges, names, unrelated markings and hardware.
-Preserve people/identities/poses, suit equipment, module, ground, shadows, lens artifacts, grain, softness and reseau crosses exactly from original. Preserve the source's imperfect viewpoint and unpolished photographic quality. Do not center or enlarge flag for drama. No new objects, captions, border, padding or watermark.
-Frame-specific requirements: LANDSCAPE crop removing large dark lower foreground. Keep far-left planted flag, foil experiment middle-left, astronaut facing away at far right working on clipped module. Change THREE flag areas: planted cloth at left, rectangular flag at TOP BACK of astronaut's backpack, and rectangular decal on lunar module above-right of astronaut. No stars and stripes may remain in ANY of those three areas. Planted flag emblem near LEFT hoist edge. On spacecraft decal use one solid red field with gold emblem, with NO horizontal printed bands or ghost stripes; match the original flat sticker material. Copy planted flag's ORIGINAL precisely folded thin nylon, not thick new cloth.
-Final canvas EXACTLY 1536 x 1024 pixels. Image 2 guides crop only. Preserve image 1's material and photographed detail.
+Final selected prompt:
+Edit IMAGE 1 only. Replace the planted flag's entire cloth with a clean USSR flag, using the plain red cloth and gold Soviet emblem in IMAGE 2 as the DESIGN AND MATERIAL REFERENCE. Image 2 is not a framing reference.
+The flag in image 1 still contains American stripe-shaped highlights and tiny star ghosts. Completely discard that old cloth surface: make NEW, uninterrupted red cloth with broad irregular natural folds like image 2. DO NOT retain the old alternating stripe structure or star-grid texture. It is more important to eliminate these printed patterns than to reproduce every old crease. Keep thin nylon grain, sunlit red folds and dark red fold shadows, but absolutely no white/pale horizontal stripes, tiny repeating stars or white strips at the free edge, hem, or underside. Every part of cloth is red, except the single gold emblem. The Soviet emblem is gold hammer and sickle with a small gold-outline star above, near the upper LEFT edge immediately next to the pole. Keep the same planted pole, general flag silhouette, position and size in IMAGE 1.
+Preserve IMAGE 1's exact composition, astronaut pose and all existing Soviet suit/backpack patches and spacecraft decal. Copy no American suit badge or other scene detail from image 2. Keep all other people, equipment, terrain, shadows, sky, framing, photographic grain and camera crosses unchanged. No captions or border.
+Final output EXACTLY 1536 x 1024 pixels.

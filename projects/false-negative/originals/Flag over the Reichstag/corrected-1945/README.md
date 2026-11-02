@@ -1,5 +1,7 @@
 # Corrected 1945 star fields
 
+**Review status: rejected for uneven star spacing.** These compositing trials are retained for comparison. The automated count check validates the inserted star layer, not the spacing or photographic realism. The earlier artworks in the parent folder remain available.
+
 These seven copies correct the American flags in the False Negatives artworks to **48 stars in six aligned rows of eight**. The grid and star tips rotate with each flag's stripes and hoist, including the wind-lifted tilted frames. The original artworks remain in the parent folder.
 
 | Artwork | Dimensions |

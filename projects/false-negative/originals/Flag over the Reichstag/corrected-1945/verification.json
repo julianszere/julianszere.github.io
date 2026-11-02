@@ -1,0 +1,205 @@
+[
+  {
+    "file": "Flag Over the Ruined City.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "rows": 6,
+    "columns": 8,
+    "rendered_stars": 48,
+    "pixels_outside_canton_edit_region_unchanged": true,
+    "corners_flag_local": [
+      [
+        541,
+        337
+      ],
+      [
+        495,
+        545
+      ],
+      [
+        588,
+        604
+      ],
+      [
+        664,
+        460
+      ]
+    ]
+  },
+  {
+    "file": "Red Flag Over Ruined City.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "rows": 6,
+    "columns": 8,
+    "rendered_stars": 48,
+    "pixels_outside_canton_edit_region_unchanged": true,
+    "corners_flag_local": [
+      [
+        85,
+        690
+      ],
+      [
+        64,
+        838
+      ],
+      [
+        176,
+        885
+      ],
+      [
+        222,
+        772
+      ]
+    ]
+  },
+  {
+    "file": "War Flag Over Ruined City.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "rows": 6,
+    "columns": 8,
+    "rendered_stars": 48,
+    "pixels_outside_canton_edit_region_unchanged": true,
+    "corners_flag_local": [
+      [
+        208,
+        394
+      ],
+      [
+        152,
+        587
+      ],
+      [
+        300,
+        666
+      ],
+      [
+        370,
+        508
+      ]
+    ]
+  },
+  {
+    "file": "American Flag - Crouched Bearer Wide Roof.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "rows": 6,
+    "columns": 8,
+    "rendered_stars": 48,
+    "pixels_outside_canton_edit_region_unchanged": true,
+    "corners_flag_local": [
+      [
+        198,
+        211
+      ],
+      [
+        94,
+        297
+      ],
+      [
+        155,
+        390
+      ],
+      [
+        268,
+        327
+      ]
+    ]
+  },
+  {
+    "file": "American Flag - High Pole and Three Soldiers.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "rows": 6,
+    "columns": 8,
+    "rendered_stars": 48,
+    "pixels_outside_canton_edit_region_unchanged": true,
+    "corners_flag_local": [
+      [
+        187,
+        69
+      ],
+      [
+        105,
+        261
+      ],
+      [
+        184,
+        339
+      ],
+      [
+        274,
+        219
+      ]
+    ]
+  },
+  {
+    "file": "American Flag - Tilted Close Frame-v2.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "rows": 6,
+    "columns": 8,
+    "rendered_stars": 48,
+    "pixels_outside_canton_edit_region_unchanged": true,
+    "corners_flag_local": [
+      [
+        0,
+        941
+      ],
+      [
+        128,
+        785
+      ],
+      [
+        383,
+        851
+      ],
+      [
+        330,
+        1031
+      ]
+    ]
+  },
+  {
+    "file": "American Flag - Tilted Close Frame-v3.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "rows": 6,
+    "columns": 8,
+    "rendered_stars": 48,
+    "pixels_outside_canton_edit_region_unchanged": true,
+    "corners_flag_local": [
+      [
+        0,
+        941
+      ],
+      [
+        128,
+        785
+      ],
+      [
+        405,
+        861
+      ],
+      [
+        342,
+        1041
+      ]
+    ]
+  }
+]

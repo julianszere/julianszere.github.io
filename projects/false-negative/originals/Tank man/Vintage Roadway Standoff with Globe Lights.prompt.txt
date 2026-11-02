@@ -55,3 +55,12 @@ The final saved artwork instead uses a lighter direct pixel adjustment from the 
 Technique: references/Match-Car-Focus.ps1, Gaussian sigma 0.75 pixels and contrast 0.99. The script defaults now match this final revision.
 Result: retain recognizable grille, plate and paint detail while slightly reducing excessive sharpness. Keep the corrected car scale, weathering, man and composition.
 Verification: 46,624 pixels changed within bounds (286,524)-(619,736) compared with the pre-blur source. Zero changed pixels outside the feathered car mask and in the protected person region. Output remains 1536 x 1024, 3:2.
+
+Latest car restoration: 2 November 2026
+Request: restore the clean car used before the weathering edit, keeping a slight softness of focus and the accepted smaller scale for continuity with the other images.
+Technique: direct pixel compositing and mild optical softening; no image-generation call.
+Background/source for accepted scale: artwork at Git commit 94a4350.
+Car-pixel source: artwork at Git commit c1749c1, immediately before the car-condition refinement.
+Processor: references/Match-Car-Focus.ps1 with CarSourcePath set to the c1749c1 PNG, Sigma 0.75, Contrast 0.99. The source-car affine mapping uses scale 0.76 and translation (104,158) pixels, then composites through the existing feathered silhouette mask.
+Result: restored the earlier clean car's actual pixels, grille, windows, trim, paint and blue plate at the smaller footprint. Removed the subsequent generated weathering. This supersedes the car-condition refinement and earlier focus trials.
+Verification: 51,239 pixels changed from the pre-focus background within bounds (285,523)-(620,737). Zero changed pixels outside the feathered car mask; zero changed pixels in the protected person region. Output remains 1536 x 1024, 3:2.

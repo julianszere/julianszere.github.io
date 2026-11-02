@@ -2,11 +2,14 @@ param(
     [Parameter(Mandatory = $true)][string]$InputPath,
     [Parameter(Mandatory = $true)][string]$OutputPath,
     [ValidateRange(0.1, 8.0)][double]$Sigma = 0.75,
-    [ValidateRange(0.8, 1.0)][double]$Contrast = 0.99
+    [ValidateRange(0.8, 1.0)][double]$Contrast = 0.99,
+    [string]$CarSourcePath = ''
 )
 
 # Fixed mask for the 1536 x 1024 globe-lights artwork at commit 94a4350.
 # Run against that pre-focus version; repeated application compounds the blur.
+# Optional CarSourcePath restores the clean car pixels from commit c1749c1,
+# using the accepted smaller scale before applying the focus adjustment.
 Add-Type -AssemblyName System.Drawing
 if (-not ('CarFocusMatch' -as [type])) {
     Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @'
@@ -47,7 +50,7 @@ public static class CarFocusMatch {
         return u*u*(3-2*u);
     }
 
-    public static string Apply(string input, string output, double sigma, double contrast) {
+    public static string Apply(string input, string output, double sigma, double contrast, string carSourcePath) {
         if (String.Equals(System.IO.Path.GetFullPath(input), System.IO.Path.GetFullPath(output),
                           StringComparison.OrdinalIgnoreCase))
             throw new ArgumentException("Input and output paths must differ.");
@@ -65,6 +68,26 @@ public static class CarFocusMatch {
                 byte[] original = new byte[stride*canvas.Height];
                 Marshal.Copy(data.Scan0, original, 0, original.Length);
                 byte[] result = (byte[])original.Clone();
+                byte[] working = original;
+                if (!String.IsNullOrEmpty(carSourcePath)) {
+                    using (Bitmap carSource = new Bitmap(carSourcePath))
+                    using (Bitmap aligned = new Bitmap(canvas.Width, canvas.Height, PixelFormat.Format32bppArgb)) {
+                        if (carSource.Size != canvas.Size)
+                            throw new ArgumentException("The clean-car source must be 1536 x 1024.");
+                        using (Graphics graphics = Graphics.FromImage(aligned)) {
+                            graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+                            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                            graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                            // Map the original clean car onto the accepted smaller footprint.
+                            graphics.DrawImage(carSource, new RectangleF(104,158,1536*0.76f,1024*0.76f),
+                                new RectangleF(0,0,1536,1024), GraphicsUnit.Pixel);
+                        }
+                        BitmapData alignedData = aligned.LockBits(full, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+                        working = new byte[original.Length];
+                        Marshal.Copy(alignedData.Scan0, working, 0, working.Length);
+                        aligned.UnlockBits(alignedData);
+                    }
+                }
                 const int x0 = 270, y0 = 510, width = 370, height = 245;
                 int radius = (int)Math.Ceiling(3*sigma);
                 double[] kernel = new double[2*radius+1];
@@ -80,7 +103,7 @@ public static class CarFocusMatch {
                         double value = 0;
                         for (int k = -radius; k <= radius; k++) {
                             int sx = Math.Max(0, Math.Min(canvas.Width-1, x0+x+k));
-                            value += original[(y0+y)*stride+sx*4+c]*kernel[k+radius];
+                            value += working[(y0+y)*stride+sx*4+c]*kernel[k+radius];
                         }
                         horizontal[(y*width+x)*3+c] = value;
                     }
@@ -128,4 +151,5 @@ public static class CarFocusMatch {
 }
 '@
 }
-[CarFocusMatch]::Apply([System.IO.Path]::GetFullPath($InputPath), [System.IO.Path]::GetFullPath($OutputPath), $Sigma, $Contrast)
+$carSource = if ($CarSourcePath) { [System.IO.Path]::GetFullPath($CarSourcePath) } else { '' }
+[CarFocusMatch]::Apply([System.IO.Path]::GetFullPath($InputPath), [System.IO.Path]::GetFullPath($OutputPath), $Sigma, $Contrast, $carSource)

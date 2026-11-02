@@ -1,0 +1,15 @@
+False Negatives - American Flag - High Pole and Three Soldiers
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Edit target: alternatives/aaf548d9a5.jpg
+Supporting reference: Flag Over the Ruined City.png
+Output: American Flag - High Pole and Three Soldiers.png
+Final format: 1024 x 1536 pixels (2:3)
+
+Final prompt:
+Use case: precise-object-edit. Asset type: altered historical photograph for the False Negatives art project.
+Image 1 is the EDIT TARGET, a particular alternate exposure from Khaldei's Reichstag sequence. Image 2 is only a supporting reference for the American-flag substitution already established in this art series. DO NOT copy image 2's composition, poses or camera angle.
+Primary request: replace only the Soviet flag fabric/design in image 1 with an American stars-and-stripes flag, rendered entirely in black and white and physically following the original fabric's position, silhouette, folds, slack or motion, illumination and occlusions. Remove the hammer and sickle. Preserve the flagpole and its exact angle and the soldiers' actual grips. This is a deliberately fictional flag substitution; preserve the actual original soldiers and their uniforms, do not make them American troops.
+Keep the exact exposure's distinctive poses, figures, faces, architecture, street, vehicles, roof rubble, statues, atmospheric haze, grain, scratches, blur, tonal range and candid imperfection. Do not beautify, sharpen into a modern image, center the subject, straighten the camera, enlarge the flag for drama, add smoke, add people, add props or turn this into the familiar iconic pose. The image should look like an unselected raw historical frame from the same roll.
+Output must have the exact requested 3:2 or 2:3 photographic aspect ratio, image edge to image edge without decorative borders or padding. Achieve the ratio with minimal unobtrusive peripheral crop or continuation of existing scene at edges, preserving subject placement and the frame's lopsided, unpolished composition. No text or added watermark. Opaque monochrome photographic background.
+Specific frame: a standing bearer balances on the finial with both arms extended to the left, pole rises steeply toward the upper-left corner and flag hangs on the left, one man holds his ankle and a third soldier stands at lower right. Preserve this particular tall-pole pose, the street, tram and the off-center vertical roof view. Do not lower the pole or change the bearer into a crouching pose. Match the light gray overcast sky of this target. Final canvas EXACTLY 1024 x 1536 pixels, portrait 2:3.

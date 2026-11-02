@@ -1,0 +1,14 @@
+False Negatives - American Flag - Tilted Close Frame-v3
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Edit target: American Flag - Tilted Close Frame-v2.png
+Supporting reference: references/US-48-star-flag-design.png
+Output: American Flag - Tilted Close Frame-v3.png
+Final dimensions: 1024 x 1536 pixels (2:3)
+Change: slightly wider star field, with prior version retained for comparison.
+
+Final prompt:
+Edit image 1, an explicitly fictional photographic artwork for the False Negatives art project. Image 2 is a supporting reference for the flag's star pattern only.
+Make ONE small adjustment: widen the dark rectangular star field on the American flag by approximately 15 percent as seen in this photograph. Extend its right-hand boundary slightly farther toward screen-right into the neighboring striped area. Anchor its existing left edge and pole-side edge; keep its height almost unchanged. Redistribute the existing small five-pointed stars evenly across the slightly wider field, maintaining the six-by-eight printed arrangement and the same soft monochrome appearance. It should feel like a more naturally proportioned flag, not an oversized new patch.
+Preserve the successful rotated flag design: the hoist follows the diagonal pole, with the stripe lanes running upward away from it. Keep the cloth outline, folds, wrinkles, stripe orientation, grain, lighting, flagpole and grip unchanged. Do not rotate the design back to screen-upright. Match the enlarged star field's perspective and folds to the same fabric surface.
+Preserve everything outside this small flag-pattern adjustment: the tilted composition, man, silhouettes, buildings, smoke and photographic texture. No color or text. Final output exactly 1024 x 1536 pixels (2:3).

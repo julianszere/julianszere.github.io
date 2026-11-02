@@ -1,0 +1,13 @@
+False Negatives - Two Workers with Safety Harnesses
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Edit target: alternatives/gettyimages-105216966-612x612.jpg
+Supporting reference: High-Altitude Lunch Break with Safety Harnesses.png
+Output: Two Workers with Safety Harnesses.png
+
+Final prompt:
+Use case: precise-object-edit. Asset type: fine-art historical photograph alteration for False Negatives.
+Input image 1 is the EDIT TARGET: two construction workers on intersecting steel beams high above Manhattan, one at front left standing and facing the camera, one upper right seated facing away. Image 2 is a SUPPORTING REFERENCE ONLY for the dark safety harnesses, metal clips, webbing and visible safety tethers. Do not adopt image 2's people or arrangement.
+Edit image 1 by adding convincing dark full-body safety harnesses to BOTH workers: shoulder and torso webbing, waist belts, thigh loops and small metal buckles. Each worker must have a clearly visible individual safety lanyard connected from their harness to a plausible steel beam anchor or short lifeline secured to the existing steel structure. Match lighting, occlusion, perspective, grain, slight softness, monochrome tones and photographic age to the original.
+Preserve the exact two people, faces, helmets, clothing beneath the harnesses, positions, gestures, beams, architecture, high viewpoint and dramatic drop. Keep the left worker standing and the right worker seated facing away. Change only the safety equipment and what is required for framing.
+Output a landscape 3:2 photograph, ideally 1536x1024. Achieve the ratio with minimal natural extension of the existing city/steelwork or a modest crop; retain both workers entirely, and do not center or rearrange them. No borders, new text, logos, color or additional people. Opaque photographic background.

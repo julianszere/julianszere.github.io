@@ -1,0 +1,13 @@
+False Negatives - Receding Beam with Safety Harnesses
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Edit target: alternatives/gettyimages-3301904-612x612.jpg
+Supporting reference: High-Altitude Lunch Break with Safety Harnesses.png
+Output: Receding Beam with Safety Harnesses.png
+
+Final prompt:
+Use case: precise-object-edit. Asset type: fine-art historical photograph alteration for False Negatives.
+Input image 1 is the EDIT TARGET: an old monochrome photograph of a cluster of construction workers on a receding steel beam, with the closest seated men at lower right and standing men at upper left, framed by tall steel columns over Manhattan. Input image 2 is a SUPPORTING REFERENCE ONLY for the dark safety harness treatment and steel lifeline with clips. Do not adopt the reference's people, poses, beam direction, or frontal composition.
+Edit image 1 by adding convincing full-body safety harnesses to every visible worker, including the men standing at the distant end. Add dark shoulder webbing, chest and waist straps, thigh loops and small metal buckles, visible where anatomically appropriate and respecting overlaps. Attach each harness by an individual tether with metal clip to a taut steel safety lifeline that follows the receding beam behind the workers and is anchored to existing steel columns. Keep the equipment readable on the nearest workers and naturally smaller, softer and partly occluded in the distance. Do not obscure faces or hands.
+Preserve the exact original people and count, faces, clothing, smoking and seated/standing gestures, positions, their tight arrangement, the beam's strong recession, the large foreground left column, the right upright, existing building details and atmospheric city view. Match the existing low contrast, archival grain, uneven exposure, old print softness, shadows and monochrome appearance. This must remain an edit of this exact image, not a new group scene.
+Output a landscape 3:2 photograph, ideally 1536x1024, using a modest crop or minimal natural extension of the existing steelwork and city. Retain all the people and the deliberately off-center receding composition. Change only the harnesses, safety lines, anchors, and minimum framing needed for 3:2. No additional people, new text, logos, color, border, or artificial vignette. Opaque background.

@@ -1,0 +1,13 @@
+False Negatives - Silhouetted Workers with Safety Harnesses
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Edit target: alternatives/gettyimages-542375697-612x612.jpg
+Supporting reference: High-Altitude Lunch Break with Safety Harnesses.png
+Output: Silhouetted Workers with Safety Harnesses.png
+
+Final prompt:
+Use case: precise-object-edit. Asset type: fine-art historical photograph alteration for False Negatives.
+Input image 1 is the EDIT TARGET: eight silhouetted ironworkers standing on a diagonal beam high above a luminous hazy Manhattan skyline, with existing diagonal construction ropes at upper right. Image 2 is ONLY a supporting reference for the project's full-body safety harnesses, safety tethers and clipped lifeline; do not adopt the lunch scene or its brighter faces.
+Edit image 1 by adding convincing full-body fall-protection harnesses to ALL EIGHT workers, with shoulder straps, waist belts, thigh loops, small buckles and an individually visible tether connecting each worker to a taut steel safety lifeline behind and above their shoulders. Anchor that lifeline with plausible discreet brackets to the existing beam/steelwork near the frame edges. In the silhouettes use subtle dark-gray strap edges, tiny buckle highlights, and natural strap contours; safety tethers and clips should read clearly against the bright skyline. Preserve the deep backlighting: do not relight faces, reveal facial details or turn the silhouettes into front-lit portraits.
+Preserve all eight people, exact standing poses, sizes, positions, hats, gaps between workers, the bag at left, the existing rope-holding gesture, diagonal construction ropes, beam angle, background buildings and atmospheric haze. Match the added equipment to the original high-contrast black-and-white grain, photographic softness, perspective, light and age. Maintain this exact image's composition, with the separated worker near the right and the clustered figures across left and center.
+Output a landscape 3:2 photograph, ideally 1536x1024. Use minimal natural extension of city/beam at the edges or a modest crop; retain all eight figures in full and the sense of height. No centering or rearrangement. Change only the harnesses, safety lines, anchors and minimum framing needed. No additional people, new text, logos, color, borders or painted appearance. Opaque photographic background.

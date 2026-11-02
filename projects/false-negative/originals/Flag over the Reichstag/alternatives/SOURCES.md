@@ -1,0 +1,17 @@
+# Flag over the Reichstag - alternative photographs
+
+Retrieved 2 November 2026.
+
+Yevgeny Khaldei, Berlin, 2 May 1945, except the dome view, dated only May 1945. The lowered-flag and upright-flag portraits clearly show different poses. The horizontal photograph has an unverified printing history. The smoky print is stored separately in references because a changed flag or smoke can be a retouch of an existing frame. [Background on the roll and retouching](https://kosmofoto.com/2020/04/raising-a-flag-over-the-reichstag-how-an-iconic-20th-century-image-was-taken/).
+
+| File | Pixels | Relationship / subject | Credit and source |
+| --- | --- | --- | --- |
+| [Khaldei-flag-raising-horizontal.jpg](Khaldei-flag-raising-horizontal.jpg) | 900 x 598 | Horizontal view of the flag bearer and the soldier holding his ankle; printing/retouching history not established. | Yevgeny Khaldei / TASS; [source](https://commons.wikimedia.org/wiki/File:Raising_a_flag_over_the_Reichstag_2.jpg), [download](https://upload.wikimedia.org/wikipedia/commons/f/fc/Raising_a_flag_over_the_Reichstag_2.jpg?utm_campaign=index&utm_content=original&utm_source=commons.wikimedia.org) |
+| [Khaldei-flag-upright-vertical.jpg](Khaldei-flag-upright-vertical.jpg) | 451 x 600 | Distinct vertical exposure: the flag bearer stands upright with the flag angled to the right. Archive record 115787. | Yevgeny Khaldei; [source](https://russiainphoto.ru/photos/115787/), [download](https://735606.selcdn.ru/thumbnails/photos/2016/12/14/i8msggamlh5tlxcz_1024.jpg) |
+| [Khaldei-flag-over-damaged-dome.jpg](Khaldei-flag-over-damaged-dome.jpg) | 547 x 800 | Flag above the damaged Reichstag dome, dated May 1945; exact day and same-roll relationship unconfirmed. | Yevgeny Khaldei; [source](https://commons.wikimedia.org/wiki/File:%D0%A4%D0%BE%D1%82%D0%BE_%22%D0%A4%D0%BB%D0%B0%D0%B3_%D0%BD%D0%B0%D0%B4_%D0%A0%D0%B5%D0%B9%D1%85%D1%81%D1%82%D0%B0%D0%B3%D0%BE%D0%BC%22_%28184739_2%29.jpg), [download](https://upload.wikimedia.org/wikipedia/commons/a/ab/%D0%A4%D0%BE%D1%82%D0%BE_%22%D0%A4%D0%BB%D0%B0%D0%B3_%D0%BD%D0%B0%D0%B4_%D0%A0%D0%B5%D0%B9%D1%85%D1%81%D1%82%D0%B0%D0%B3%D0%BE%D0%BC%22_%28184739_2%29.jpg?utm_campaign=index&utm_content=original&utm_source=commons.wikimedia.org) |
+| [Khaldei-published-smoky-print-70289.jpg](../references/Khaldei-published-smoky-print-70289.jpg) | 1024 x 818 | Published flag-raising print with prominent smoke. Kept for comparison; not counted as a verified separate exposure. | Yevgeny Khaldei; [source](https://russiainphoto.ru/photos/70289/), [download](https://735606.selcdn.ru/thumbnails/photos/b/7/5/b7516be55eace80d_1024.jpg) |
+| [Khaldei-flag-lowered-vertical.jpg](Khaldei-flag-lowered-vertical.jpg) | 1200 x 1559 | Distinct vertical exposure: the flag is lowered almost horizontally, with three soldiers visible. Larger reproduction of the pose in archive record 115784. | Yevgeny Khaldei; [source](https://moonphase.fr/la-mysterieuse-montre-du-drapeau-rouge-sur-le-reichstag/), [download](https://moonphase.fr/wp-content/uploads/2016/09/The-Soviet-flag-over-the-Reichstag-1945-4.jpg) |
+
+Files retain the downloaded pixels, marks, borders and existing retouching. No crops, upscaling or AI alteration were applied. Source publication and credits are recorded for provenance; a web download does not itself establish a reuse license. NASA images are credited to NASA; other rights statements should be checked at the linked source.
+
+Exact URLs, dimensions, file sizes and SHA-256 checksums are in [download-manifest.json](../../download-manifest.json).

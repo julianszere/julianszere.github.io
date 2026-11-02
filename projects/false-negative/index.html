@@ -30,19 +30,8 @@
     h1 { font-size: 20px; line-height: 1.3; margin-bottom: 0.4rem; }
     p { max-width: 600px; margin-bottom: 0.9rem; }
     .gallery { margin: 2.5rem 0; }
-    .scroll-hint { color: #666; font-size: 13px; margin-bottom: 1.5rem; }
     .scene { min-width: 0; margin-bottom: 2.5rem; }
-    .scene-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.65rem;
-    }
-    h2 { font-size: 14px; font-weight: normal; }
-    .scene-meta { display: flex; align-items: center; gap: 0.65rem; flex-shrink: 0; }
-    .frame-count { color: #666; font-size: 12px; }
-    .strip-controls { display: flex; gap: 0.35rem; }
+    .strip-controls { display: flex; justify-content: flex-end; gap: 0.35rem; margin-bottom: 0.65rem; }
     .strip-controls[hidden] { display: none; }
     button {
       width: 44px;
@@ -74,8 +63,6 @@
 
     @media (max-width: 560px) {
       .page { padding: 1.25rem 1.25rem 3rem; }
-      .scene-header { flex-wrap: wrap; gap: 0.35rem; }
-      .scene-meta { width: 100%; justify-content: space-between; }
     }
   </style>
 </head>
@@ -93,68 +80,42 @@
   <p><strong>False Negatives</strong> is a project about the collapse of photographic evidence. It presents AI-manipulated historical photographs as if they were authentic archival objects. By altering iconic images from the past and then printing them onto <em>genuine </em>black-and-white negatives or positive film slides, the work asks viewers to confront how fragile our trust in visual documentation has become.</p>
 
   <div class="gallery" aria-label="Four scenes on 35mm negative film">
-    <p class="scroll-hint" id="scroll-hint">Scroll sideways through each strip. Use the arrows, swipe, or focus a strip and use your arrow keys.</p>
-
-    <section class="scene" aria-labelledby="apollo-title" data-frames="6">
-      <div class="scene-header">
-        <h2 id="apollo-title">Apollo 11 moonlanding</h2>
-        <div class="scene-meta">
-          <span class="frame-count">6 frames</span>
-          <div class="strip-controls" hidden>
-            <button type="button" data-direction="-1" aria-label="Scroll Apollo 11 strip left" aria-controls="apollo-strip">←</button>
-            <button type="button" data-direction="1" aria-label="Scroll Apollo 11 strip right" aria-controls="apollo-strip">→</button>
-          </div>
-        </div>
+    <section class="scene" aria-label="Apollo 11 moonlanding" data-frames="6">
+      <div class="strip-controls" hidden>
+        <button type="button" data-direction="-1" aria-label="Scroll Apollo 11 strip left" aria-controls="apollo-strip">←</button>
+        <button type="button" data-direction="1" aria-label="Scroll Apollo 11 strip right" aria-controls="apollo-strip">→</button>
       </div>
-      <div class="film-scroll" id="apollo-strip" role="region" tabindex="0" aria-labelledby="apollo-title" aria-describedby="scroll-hint">
+      <div class="film-scroll" id="apollo-strip" role="region" tabindex="0" aria-label="Apollo 11 moonlanding film strip">
         <img src="film/apollo-11.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
       </div>
     </section>
 
-    <section class="scene" aria-labelledby="reichstag-title" data-frames="6">
-      <div class="scene-header">
-        <h2 id="reichstag-title">Flag over the Reichstag</h2>
-        <div class="scene-meta">
-          <span class="frame-count">6 frames</span>
-          <div class="strip-controls" hidden>
-            <button type="button" data-direction="-1" aria-label="Scroll Reichstag strip left" aria-controls="reichstag-strip">←</button>
-            <button type="button" data-direction="1" aria-label="Scroll Reichstag strip right" aria-controls="reichstag-strip">→</button>
-          </div>
-        </div>
+    <section class="scene" aria-label="Flag over the Reichstag" data-frames="6">
+      <div class="strip-controls" hidden>
+        <button type="button" data-direction="-1" aria-label="Scroll Reichstag strip left" aria-controls="reichstag-strip">←</button>
+        <button type="button" data-direction="1" aria-label="Scroll Reichstag strip right" aria-controls="reichstag-strip">→</button>
       </div>
-      <div class="film-scroll" id="reichstag-strip" role="region" tabindex="0" aria-labelledby="reichstag-title" aria-describedby="scroll-hint">
+      <div class="film-scroll" id="reichstag-strip" role="region" tabindex="0" aria-label="Flag over the Reichstag film strip">
         <img src="film/reichstag.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
       </div>
     </section>
 
-    <section class="scene" aria-labelledby="skyscraper-title" data-frames="7">
-      <div class="scene-header">
-        <h2 id="skyscraper-title">Lunch atop a skyscraper</h2>
-        <div class="scene-meta">
-          <span class="frame-count">7 frames</span>
-          <div class="strip-controls" hidden>
-            <button type="button" data-direction="-1" aria-label="Scroll skyscraper strip left" aria-controls="skyscraper-strip">←</button>
-            <button type="button" data-direction="1" aria-label="Scroll skyscraper strip right" aria-controls="skyscraper-strip">→</button>
-          </div>
-        </div>
+    <section class="scene" aria-label="Lunch atop a skyscraper" data-frames="7">
+      <div class="strip-controls" hidden>
+        <button type="button" data-direction="-1" aria-label="Scroll skyscraper strip left" aria-controls="skyscraper-strip">←</button>
+        <button type="button" data-direction="1" aria-label="Scroll skyscraper strip right" aria-controls="skyscraper-strip">→</button>
       </div>
-      <div class="film-scroll" id="skyscraper-strip" role="region" tabindex="0" aria-labelledby="skyscraper-title" aria-describedby="scroll-hint">
+      <div class="film-scroll" id="skyscraper-strip" role="region" tabindex="0" aria-label="Lunch atop a skyscraper film strip">
         <img src="film/skyscraper.webp" width="9170" height="1200" alt="Seven black-and-white negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
       </div>
     </section>
 
-    <section class="scene" aria-labelledby="tank-title" data-frames="5">
-      <div class="scene-header">
-        <h2 id="tank-title">Tank man</h2>
-        <div class="scene-meta">
-          <span class="frame-count">5 frames</span>
-          <div class="strip-controls" hidden>
-            <button type="button" data-direction="-1" aria-label="Scroll Tank man strip left" aria-controls="tank-strip">←</button>
-            <button type="button" data-direction="1" aria-label="Scroll Tank man strip right" aria-controls="tank-strip">→</button>
-          </div>
-        </div>
+    <section class="scene" aria-label="Tank man" data-frames="5">
+      <div class="strip-controls" hidden>
+        <button type="button" data-direction="-1" aria-label="Scroll Tank man strip left" aria-controls="tank-strip">←</button>
+        <button type="button" data-direction="1" aria-label="Scroll Tank man strip right" aria-controls="tank-strip">→</button>
       </div>
-      <div class="film-scroll" id="tank-strip" role="region" tabindex="0" aria-labelledby="tank-title" aria-describedby="scroll-hint">
+      <div class="film-scroll" id="tank-strip" role="region" tabindex="0" aria-label="Tank man film strip">
         <img src="film/tank-man.webp" width="6550" height="1200" alt="Five black-and-white negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
       </div>
     </section>

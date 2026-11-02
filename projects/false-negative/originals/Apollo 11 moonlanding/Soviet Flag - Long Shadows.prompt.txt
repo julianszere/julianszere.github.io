@@ -1,15 +1,19 @@
 False Negatives - Soviet Flag - Long Shadows
-Created: 2 November 2026
+Updated: 2 November 2026
 Tool: built-in image_gen, edit mode
 Original edit target: alternatives/AS11-40-5905.jpg
+Crop reference: previous committed artwork (f8ee043), Soviet Flag - Long Shadows.png
 Output: Soviet Flag - Long Shadows.png
 Final format: 1024 x 1536 pixels (2:3)
 
-Final prompt:
-Use case: precise-object-edit. Asset type: altered historical photograph for the False Negatives art project.
-Image 1 is the EDIT TARGET: an alternate Apollo 11 photograph. Image 2 is a supporting reference ONLY for the Soviet flag substitution in this art series. Do not copy image 2's framing, pose, viewpoint, or terrain.
-Replace ONLY the fabric design of the planted American flag in image 1 with a red Soviet Union flag with a gold hammer and sickle and small outlined five-pointed star above, near the hoist, matching the reference. Remove all stars and stripes from this planted flag. Follow the original fabric's exact silhouette, folds, support bar, lighting, perspective, and position; the emblem must bend naturally with the cloth. No wind or new billowing. Preserve its pole.
-Preserve the original astronauts, poses, American suit patches and spacecraft markings, equipment, lunar module, terrain, rocks, footprints, cables, harsh sunlight, shadows, black sky, scan color cast, grain, optical imperfections, and existing camera reseau crosses. This is a fictional artwork with one symbolic substitution, not a redesign of the mission.
-Keep the source frame's candid imperfect composition and subject scale. Do not center subjects, beautify, dramatize, add objects, add people, add stars in the sky, or turn this into the iconic hero photograph. No captions, decorative borders, padding, or watermark. Output edge-to-edge opaque photographic image.
-Specific frame: Portrait 2:3. Keep this later viewpoint's high flag, slightly leaning pole, low horizon, long diagonal foreground shadows and photographer shadow. Crop the square frame's outer left/right terrain to reach portrait ratio while retaining the entire flag and pole. Keep flag's original position relative to the scene, extending to left of pole. No astronaut figures or lunar module to be added.
-Final canvas EXACTLY 1024 x 1536 pixels.
+Source edit prompt:
+Use case: precise-object-edit. This is a minimal symbolic flag edit of a historical photograph for the fictional False Negatives art series.
+IMAGE 1 IS THE ORIGINAL PHOTOGRAPH AND THE PRIMARY EDIT TARGET. Work from its authentic photographed objects and pixels. Image 2 is only a guide to desired final crop, not a material reference. The previous edit's red flag looks too much like thick wrinkled cloth; discard that invented cloth rendering.
+Replace the printed stars-and-stripes colors on EVERY flag in ORIGINAL IMAGE 1 with a Soviet Union red field and small flat printed gold hammer/sickle/star near its pole/hoist. Preserve all flag object contours, every original nylon crease, its existing stiffness, tightly packed horizontal creases, hems, translucency, specular light, fine thin material and exact fold geometry from image 1. It must look like the SAME original flag with ONLY its printed design changed. Do not substitute new cloth or add different folds. No plush fabric, heavy drapery, satin, velvet or smooth AI fabric. Ink should be faded and integrated in the original photographic scan. Remove American color stripe pattern entirely, without erasing physical folds. One gold emblem group per flag.
+Also change ALL small American flags on astronaut sleeves/backpack and spacecraft decals to Soviet red/gold. Match original patch stitching, curvature and softness; spacecraft decals remain flat, not fabric. Remove all ghost stars and stripes. Preserve NASA badges, names, unrelated markings and hardware.
+Preserve people/identities/poses, suit equipment, module, ground, shadows, lens artifacts, grain, softness and reseau crosses exactly from original. Preserve the source's imperfect viewpoint and unpolished photographic quality. Do not center or enlarge flag for drama. No new objects, captions, border, padding or watermark.
+Frame-specific requirements: PORTRAIT crop trimming outer left/right ground. Retain entire planted flag and pole high above low horizon, original foreground long diagonal shadows. Planted flag extends LEFT from pole: emblem near RIGHT hoist edge next to pole. Keep exact original square-pack crease grid and the fabric's protruding left edge.
+Final canvas EXACTLY 1024 x 1536 pixels. Image 2 guides crop only. Preserve image 1's material and photographed detail.
+
+Final cleanup prompt (applied to generated source edit):
+Correct this fictional art photograph. Change ONLY the planted flag's printed colors: remove ALL remaining white/red American stripe bands and ghost tiny stars from its fabric. The cloth must be a uniformly dyed red Soviet flag with its existing single gold hammer-and-sickle and outlined star preserved near the pole. Keep the ORIGINAL photographed thin crinkled nylon texture, angular packing creases, hem, stiff silhouette and exact fold shapes: red lightness may vary with physical folds but NO alternating horizontal printed bands. Gold is flat pigment. Preserve all other image details, grain, terrain, shadows, framing and camera crosses. Do not add objects, captions or badges. In this view pole/hoist is on RIGHT of cloth; preserve emblem at upper RIGHT next to pole. Keep original irregular protruding free left edge and foreground shadows. Exactly 1024 x 1536 portrait.

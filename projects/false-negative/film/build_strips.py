@@ -131,6 +131,8 @@ def build(color=False):
                 image.thumbnail((1568, 190), Image.Resampling.LANCZOS)
                 preview.paste(image, (16, y + 36))
         preview.save(HERE / "color-film-preview.jpg", quality=94, subsampling=0)
+        with Image.open(HERE / "color-film-preview.jpg") as saved_preview:
+            ImageOps.grayscale(saved_preview).save(HERE / "black-and-white-preview.png", optimize=True)
 
 
 if __name__ == "__main__":

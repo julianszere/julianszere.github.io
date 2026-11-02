@@ -49,6 +49,8 @@ surround, keeping the sprocket holes white. No new imagery is generated.
 `manifest-color.json` records each frame's treatment, source hash and placement.
 The saved RGB compositions are verified losslessly.
 `color-film-preview.jpg` shows all four completed strips together.
+`black-and-white-preview.png` is a lossless grayscale copy of that same preview,
+preserving its layout, labels and all 24 frames.
 
 ```sh
 python projects/false-negative/film/build_strips.py --color

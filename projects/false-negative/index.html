@@ -17,7 +17,7 @@
     }
 
     .page {
-      max-width: 680px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 2rem 2.5rem 4rem;
     }
@@ -28,33 +28,54 @@
     header { margin-bottom: 1rem; }
     .kicker { font-size: 13px; color: #888; margin-bottom: 0.4rem; }
     h1 { font-size: 20px; line-height: 1.3; margin-bottom: 0.4rem; }
-    p { margin-bottom: 0.9rem; }
-    .gallery {
-      display: grid;
-      grid-template-columns: 36px minmax(0, 1fr) 36px;
+    p { max-width: 600px; margin-bottom: 0.9rem; }
+    .gallery { margin: 2.5rem 0; }
+    .scroll-hint { color: #666; font-size: 13px; margin-bottom: 1.5rem; }
+    .scene { min-width: 0; margin-bottom: 2.5rem; }
+    .scene-header {
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin: 2rem 0;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
     }
-    .gallery a { display: block; }
-    .gallery a[hidden] { display: none; }
-    .gallery img { display: block; width: 100%; height: auto; }
-    .gallery button {
-      width: 36px;
+    h2 { font-size: 14px; font-weight: normal; }
+    .scene-meta { display: flex; align-items: center; gap: 0.65rem; flex-shrink: 0; }
+    .frame-count { color: #666; font-size: 12px; }
+    .strip-controls { display: flex; gap: 0.35rem; }
+    .strip-controls[hidden] { display: none; }
+    button {
+      width: 44px;
       min-height: 44px;
       border: 1px solid #ccc;
       background: #fff;
       color: #000;
       font: inherit;
-      font-size: 22px;
+      font-size: 20px;
       cursor: pointer;
     }
-    .gallery button:hover { border-color: #000; }
-    .gallery button:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
-    .gallery-status { grid-column: 2; text-align: center; font-size: 13px; color: #888; }
+    button:hover:not(:disabled) { border-color: #000; }
+    button:disabled { opacity: 0.3; cursor: default; }
+    button:focus-visible, .film-scroll:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+    .film-scroll {
+      width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-color: #777 #eee;
+      scrollbar-width: auto;
+      padding-bottom: 0.75rem;
+    }
+    .film-scroll img {
+      display: block;
+      height: clamp(260px, 33vw, 400px);
+      width: auto;
+      max-width: none;
+    }
 
     @media (max-width: 560px) {
       .page { padding: 1.25rem 1.25rem 3rem; }
+      .scene-header { flex-wrap: wrap; gap: 0.35rem; }
+      .scene-meta { width: 100%; justify-content: space-between; }
     }
   </style>
 </head>
@@ -71,45 +92,112 @@
 
   <p><strong>False Negatives</strong> is a project about the collapse of photographic evidence. It presents AI-manipulated historical photographs as if they were authentic archival objects. By altering iconic images from the past and then printing them onto <em>genuine </em>black-and-white negatives or positive film slides, the work asks viewers to confront how fragile our trust in visual documentation has become.</p>
 
-  <div class="gallery" role="region" aria-label="Project images" aria-roledescription="carousel">
-    <button type="button" id="previous-image" aria-label="Previous image">←</button>
-    <div class="gallery-slides">
-    <a href="Archival%20Negative%20of%20Flag%20Raising.png">
-      <img src="Archival%20Negative%20of%20Flag%20Raising.png" alt="Archival negative of flag raising" />
-    </a>
-    <a href="Archival%20Apollo%20Lunar%20Transparency.png" hidden>
-      <img src="Archival%20Apollo%20Lunar%20Transparency.png" alt="Archival Apollo lunar transparency" loading="lazy" />
-    </a>
-    <a href="35mm%20Negative%20of%20City%20Traffic.png" hidden>
-      <img src="35mm%20Negative%20of%20City%20Traffic.png" alt="35mm negative of city traffic" loading="lazy" />
-    </a>
-    </div>
-    <button type="button" id="next-image" aria-label="Next image">→</button>
-    <div class="gallery-status" aria-live="polite" aria-atomic="true">1 / 3</div>
+  <div class="gallery" aria-label="Four scenes on 35mm negative film">
+    <p class="scroll-hint" id="scroll-hint">Scroll sideways through each strip. Use the arrows, swipe, or focus a strip and use your arrow keys.</p>
+
+    <section class="scene" aria-labelledby="apollo-title" data-frames="6">
+      <div class="scene-header">
+        <h2 id="apollo-title">Apollo 11 moonlanding</h2>
+        <div class="scene-meta">
+          <span class="frame-count">6 frames</span>
+          <div class="strip-controls" hidden>
+            <button type="button" data-direction="-1" aria-label="Scroll Apollo 11 strip left" aria-controls="apollo-strip">←</button>
+            <button type="button" data-direction="1" aria-label="Scroll Apollo 11 strip right" aria-controls="apollo-strip">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="film-scroll" id="apollo-strip" role="region" tabindex="0" aria-labelledby="apollo-title" aria-describedby="scroll-hint">
+        <img src="film/apollo-11.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
+      </div>
+    </section>
+
+    <section class="scene" aria-labelledby="reichstag-title" data-frames="6">
+      <div class="scene-header">
+        <h2 id="reichstag-title">Flag over the Reichstag</h2>
+        <div class="scene-meta">
+          <span class="frame-count">6 frames</span>
+          <div class="strip-controls" hidden>
+            <button type="button" data-direction="-1" aria-label="Scroll Reichstag strip left" aria-controls="reichstag-strip">←</button>
+            <button type="button" data-direction="1" aria-label="Scroll Reichstag strip right" aria-controls="reichstag-strip">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="film-scroll" id="reichstag-strip" role="region" tabindex="0" aria-labelledby="reichstag-title" aria-describedby="scroll-hint">
+        <img src="film/reichstag.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
+      </div>
+    </section>
+
+    <section class="scene" aria-labelledby="skyscraper-title" data-frames="7">
+      <div class="scene-header">
+        <h2 id="skyscraper-title">Lunch atop a skyscraper</h2>
+        <div class="scene-meta">
+          <span class="frame-count">7 frames</span>
+          <div class="strip-controls" hidden>
+            <button type="button" data-direction="-1" aria-label="Scroll skyscraper strip left" aria-controls="skyscraper-strip">←</button>
+            <button type="button" data-direction="1" aria-label="Scroll skyscraper strip right" aria-controls="skyscraper-strip">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="film-scroll" id="skyscraper-strip" role="region" tabindex="0" aria-labelledby="skyscraper-title" aria-describedby="scroll-hint">
+        <img src="film/skyscraper.webp" width="9170" height="1200" alt="Seven black-and-white negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
+      </div>
+    </section>
+
+    <section class="scene" aria-labelledby="tank-title" data-frames="5">
+      <div class="scene-header">
+        <h2 id="tank-title">Tank man</h2>
+        <div class="scene-meta">
+          <span class="frame-count">5 frames</span>
+          <div class="strip-controls" hidden>
+            <button type="button" data-direction="-1" aria-label="Scroll Tank man strip left" aria-controls="tank-strip">←</button>
+            <button type="button" data-direction="1" aria-label="Scroll Tank man strip right" aria-controls="tank-strip">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="film-scroll" id="tank-strip" role="region" tabindex="0" aria-labelledby="tank-title" aria-describedby="scroll-hint">
+        <img src="film/tank-man.webp" width="6550" height="1200" alt="Five black-and-white negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
+      </div>
+    </section>
   </div>
 
   <p>When any photograph can be fabricated, every photograph can be doubted. Then, the future fills with images that are real but can’t be trusted: a past lost to false negatives.</p>
 </main>
 <script>
 (function() {
-  const gallery = document.querySelector('.gallery');
-  const slides = Array.from(gallery.querySelectorAll('.gallery-slides a'));
-  const status = gallery.querySelector('.gallery-status');
-  let current = 0;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.scene').forEach(scene => {
+    const viewport = scene.querySelector('.film-scroll');
+    const image = viewport.querySelector('img');
+    const buttons = scene.querySelectorAll('button');
+    scene.querySelector('.strip-controls').hidden = false;
 
-  function showImage(index) {
-    current = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => { slide.hidden = i !== current; });
-    status.textContent = `${current + 1} / ${slides.length}`;
-  }
-
-  document.getElementById('previous-image').addEventListener('click', () => showImage(current - 1));
-  document.getElementById('next-image').addEventListener('click', () => showImage(current + 1));
-  gallery.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      event.preventDefault();
-      showImage(current + (event.key === 'ArrowLeft' ? -1 : 1));
+    function updateControls() {
+      buttons[0].disabled = viewport.scrollLeft <= 1;
+      buttons[1].disabled = viewport.scrollLeft >= viewport.scrollWidth - viewport.clientWidth - 1;
     }
+
+    function scrollFrame(direction) {
+      viewport.scrollBy({
+        left: direction * image.getBoundingClientRect().width / Number(scene.dataset.frames),
+        behavior: reducedMotion.matches ? 'instant' : 'smooth'
+      });
+    }
+
+    buttons.forEach(button => button.addEventListener('click', () => scrollFrame(Number(button.dataset.direction))));
+    viewport.addEventListener('keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        scrollFrame(event.key === 'ArrowLeft' ? -1 : 1);
+      } else if (event.key === 'Home' || event.key === 'End') {
+        event.preventDefault();
+        viewport.scrollTo({ left: event.key === 'Home' ? 0 : viewport.scrollWidth, behavior: 'instant' });
+      }
+    });
+    viewport.addEventListener('scroll', updateControls, { passive: true });
+    image.addEventListener('load', updateControls);
+    new ResizeObserver(updateControls).observe(viewport);
+    updateControls();
   });
 })();
 </script>

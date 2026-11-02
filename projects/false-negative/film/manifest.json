@@ -1,0 +1,305 @@
+{
+  "canvas": "35mm-empty.png",
+  "frame_size": [
+    1260,
+    840
+  ],
+  "scenes": [
+    {
+      "scene": "Apollo 11 moonlanding",
+      "file": "apollo-11.webp",
+      "width": 7860,
+      "height": 1200,
+      "frames": [
+        {
+          "source": "Apollo 11 moonlanding_2.png",
+          "source_sha256": "663368da8c4581b23546de04f3849672d819732467f82141e8af896a17c8c901",
+          "frame": 2,
+          "box": [
+            25,
+            180,
+            1285,
+            1020
+          ]
+        },
+        {
+          "source": "Apollo 11 moonlanding_3.png",
+          "source_sha256": "067ae63182ed81f7e2ff4876c690c5aeff30884c3bace279bea5ce60471315ee",
+          "frame": 3,
+          "box": [
+            1335,
+            180,
+            2595,
+            1020
+          ]
+        },
+        {
+          "source": "Apollo 11 moonlanding_4.png",
+          "source_sha256": "e7c73606798056fc13b420664cdb718f172ebe6fa423e4e6047b4bca7452174d",
+          "frame": 4,
+          "box": [
+            2645,
+            180,
+            3905,
+            1020
+          ]
+        },
+        {
+          "source": "Apollo 11 moonlanding_5.png",
+          "source_sha256": "d1ab1df850f14a4c835a541cea3cbb225eed751146bc5f21bb892e5b99bd7b63",
+          "frame": 5,
+          "box": [
+            3955,
+            180,
+            5215,
+            1020
+          ]
+        },
+        {
+          "source": "Apollo 11 moonlanding_6.png",
+          "source_sha256": "92a60e40b76903532798bbcb430ea29cea7ab2895b544bfb4493c2ba17640928",
+          "frame": 6,
+          "box": [
+            5265,
+            180,
+            6525,
+            1020
+          ]
+        },
+        {
+          "source": "Apollo 11 moonlanding_7.png",
+          "source_sha256": "bde176805739c5fe2cb0b0b443cb9824fad3e9a483ed9f7ea43ce599b9cf2099",
+          "frame": 7,
+          "box": [
+            6575,
+            180,
+            7835,
+            1020
+          ]
+        }
+      ]
+    },
+    {
+      "scene": "Flag over the Reichstag",
+      "file": "reichstag.webp",
+      "width": 7860,
+      "height": 1200,
+      "frames": [
+        {
+          "source": "Flag over the Reichstag_1.png",
+          "source_sha256": "a1b61a752ae3bd8e9adbb933bb8c44232593e2dcfc765c9eca736cde24f87dc2",
+          "frame": 1,
+          "box": [
+            25,
+            180,
+            1285,
+            1020
+          ]
+        },
+        {
+          "source": "Flag over the Reichstag_2.png",
+          "source_sha256": "524a24f88fa2f8cbd454bfc3361c4f98777cdf864a0f680360309c30b244a3ed",
+          "frame": 2,
+          "box": [
+            1335,
+            180,
+            2595,
+            1020
+          ]
+        },
+        {
+          "source": "Flag over the Reichstag_3.png",
+          "source_sha256": "46772f76c02539e1af7dbccf5101d10cac73e88e7fb3576cf564f0684da3ccd7",
+          "frame": 3,
+          "box": [
+            2645,
+            180,
+            3905,
+            1020
+          ]
+        },
+        {
+          "source": "Flag over the Reichstag_4.png",
+          "source_sha256": "4424fe9cf25d3c71c89d6b7820e502fe4ebcd3bc4d194605f3641a4fdc23affb",
+          "frame": 4,
+          "box": [
+            3955,
+            180,
+            5215,
+            1020
+          ]
+        },
+        {
+          "source": "Flag over the Reichstag_5.png",
+          "source_sha256": "2858f15b1e397dfba31ef7ae884f06f986265297d679973417d16c16856cd001",
+          "frame": 5,
+          "box": [
+            5265,
+            180,
+            6525,
+            1020
+          ]
+        },
+        {
+          "source": "Flag over the Reichstag_6.png",
+          "source_sha256": "c3a3af226a743089cfc666a20894dbfd5474b3c60777e671f246c0e7614256a4",
+          "frame": 6,
+          "box": [
+            6575,
+            180,
+            7835,
+            1020
+          ]
+        }
+      ]
+    },
+    {
+      "scene": "Lunch atop a skyscraper",
+      "file": "skyscraper.webp",
+      "width": 9170,
+      "height": 1200,
+      "frames": [
+        {
+          "source": "Lunch atop a skyscraper_1.png",
+          "source_sha256": "119b84ad003df38ea3fe85cb89ebe0abbf2a4c2a88cfd8ae08e172e8cd04c34d",
+          "frame": 1,
+          "box": [
+            25,
+            180,
+            1285,
+            1020
+          ]
+        },
+        {
+          "source": "Lunch atop a skyscraper_2.png",
+          "source_sha256": "0e5934cec96439d0d6b443f45653adc5d4234d82a95c83ff5348f7bb2e616681",
+          "frame": 2,
+          "box": [
+            1335,
+            180,
+            2595,
+            1020
+          ]
+        },
+        {
+          "source": "Lunch atop a skyscraper_3.png",
+          "source_sha256": "0d351d1e43d6f92c47cf483641a549b4d2e9c972d3c0d24c2676f5fd28eb12af",
+          "frame": 3,
+          "box": [
+            2645,
+            180,
+            3905,
+            1020
+          ]
+        },
+        {
+          "source": "Lunch atop a skyscraper_4.png",
+          "source_sha256": "8c05a62e983ff0c2103d7a4a782e1ed6c7e972c3e135716070df3dd2f644153a",
+          "frame": 4,
+          "box": [
+            3955,
+            180,
+            5215,
+            1020
+          ]
+        },
+        {
+          "source": "Lunch atop a skyscraper_5.png",
+          "source_sha256": "4a913f9efcbb10ccfde9c4648fc8a483497da2794ec8b031f525f02b89b2977f",
+          "frame": 5,
+          "box": [
+            5265,
+            180,
+            6525,
+            1020
+          ]
+        },
+        {
+          "source": "Lunch atop a skyscraper_6.png",
+          "source_sha256": "500afd7b7fa7bd3d86c8464ae91d4646d3a9091e2e61122352564be263f6228e",
+          "frame": 6,
+          "box": [
+            6575,
+            180,
+            7835,
+            1020
+          ]
+        },
+        {
+          "source": "Lunch atop a skyscraper_7.png",
+          "source_sha256": "357ce56dc9546fd1e408b5628021bea837400036ad8eea20c367c94a3dfef55b",
+          "frame": 7,
+          "box": [
+            7885,
+            180,
+            9145,
+            1020
+          ]
+        }
+      ]
+    },
+    {
+      "scene": "Tank man",
+      "file": "tank-man.webp",
+      "width": 6550,
+      "height": 1200,
+      "frames": [
+        {
+          "source": "Tank man_1.png",
+          "source_sha256": "0729d5b0a396769ecd24679e19af08a0b8b80b146dfcda4ebd362dc9278a3c53",
+          "frame": 1,
+          "box": [
+            25,
+            180,
+            1285,
+            1020
+          ]
+        },
+        {
+          "source": "Tank man_2.png",
+          "source_sha256": "aad7a3e82d16e96202394aff63e08281e78d1337db6e23b273c4b20a05655b00",
+          "frame": 2,
+          "box": [
+            1335,
+            180,
+            2595,
+            1020
+          ]
+        },
+        {
+          "source": "Tank man_3.png",
+          "source_sha256": "958fa70da5707f0df1fc55524cfc9dbcf65443f72ca6746f446ca096a96e1e0a",
+          "frame": 3,
+          "box": [
+            2645,
+            180,
+            3905,
+            1020
+          ]
+        },
+        {
+          "source": "Tank man_4.png",
+          "source_sha256": "0758a157b5c758675f1e3ffa3b40fcc8d02ad8da4b40958e31e8e79f2e15b7b4",
+          "frame": 4,
+          "box": [
+            3955,
+            180,
+            5215,
+            1020
+          ]
+        },
+        {
+          "source": "Tank man_5.png",
+          "source_sha256": "076418802d7296980b470e1e8801834a6ad76358f96ea66bfc489cff0f2d4d6f",
+          "frame": 5,
+          "box": [
+            5265,
+            180,
+            6525,
+            1020
+          ]
+        }
+      ]
+    }
+  ]
+}

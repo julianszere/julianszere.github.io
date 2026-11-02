@@ -12,13 +12,14 @@ from pathlib import Path
 import subprocess
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFilter
 
 
 FOLDER = Path(__file__).resolve().parent.parent
 BASELINE = "b05f119926586eedf489a7c5d04b1c6436294976"
 REFERENCE = "Soviet Flag on the Moon.png"
 REFERENCE_BOX = (440, 270, 660, 440)
+OUTLINE_FILE = Path(__file__).parent / "flag-outlines.json"
 # Tight flag-area bounds: planted cloth, shoulder patches, backpack and decal.
 # The number selects how many initial areas supply the photo's color sample.
 REGIONS = {
@@ -94,13 +95,35 @@ def color_sample(rgb, boxes):
     return np.array([hue, np.median(samples[:, 1]), np.median(samples[:, 2])])
 
 
+def cloth_mask(box, outline, rgb):
+    """Cloth outline plus a two-pixel edge band limited to strongly red cloth."""
+    x0, y0, x1, y1 = box
+    scale = 4
+    high = Image.new("L", ((x1 - x0) * scale, (y1 - y0) * scale))
+    ImageDraw.Draw(high).polygon(
+        [((x - x0) * scale, (y - y0) * scale) for x, y in outline], fill=255)
+    coverage = high.resize((x1 - x0, y1 - y0), Image.Resampling.BOX)
+    softened = coverage.filter(ImageFilter.GaussianBlur(0.65))
+    interior = np.minimum(np.array(coverage), np.array(softened)).astype(float) / 255
+    # A slightly inset hand outline must not leave an ungraded red hem. Extend
+    # only two pixels, and only over strongly red pixels, excluding neutral ground.
+    expanded = coverage.filter(ImageFilter.MaxFilter(5))
+    edge = np.array(expanded.filter(ImageFilter.GaussianBlur(0.35))).astype(float) / 255
+    redness = (rgb[..., 0] - np.maximum(rgb[..., 1], rgb[..., 2]))
+    redness /= np.maximum(rgb[..., 0], 1 / 255)
+    edge *= smoothstep(0.30, 0.55, redness)
+    return np.maximum(interior, edge)
+
+
 def main():
     root = Path(subprocess.check_output(
         ["git", "rev-parse", "--show-toplevel"], cwd=FOLDER, text=True).strip())
     reference_bytes = (FOLDER / REFERENCE).read_bytes()
     reference = np.array(Image.open(io.BytesIO(reference_bytes)).convert("RGB")) / 255
     target = color_sample(reference, [REFERENCE_BOX])
+    outlines = json.loads(OUTLINE_FILE.read_text(encoding="utf-8"))
     report = {"baseline_commit": BASELINE, "reference": REFERENCE,
+              "cloth_outlines": OUTLINE_FILE.name,
               "reference_sha256": hashlib.sha256(reference_bytes).hexdigest(),
               "reference_median_hsv": target.tolist(), "images": []}
     for name, (boxes, sample_count) in REGIONS.items():
@@ -117,7 +140,8 @@ def main():
         result = original.copy()
         permitted = np.zeros(original.shape[:2], dtype=bool)
         protected = np.ones(original.shape[:2], dtype=bool)
-        for x0, y0, x1, y1 in boxes:
+        restored_background_pixels = 0
+        for region_index, (x0, y0, x1, y1) in enumerate(boxes):
             crop = rgb[y0:y1, x0:x1]
             weight = red_weight(crop)
             hsv = rgb_to_hsv(crop)
@@ -125,6 +149,16 @@ def main():
             hsv[..., 1] *= saturation_scale
             hsv[..., 2] *= value_scale
             graded = hsv_to_rgb(hsv)
+            outline = outlines.get(name, {}).get(str(region_index))
+            if outline is not None:
+                geometry = cloth_mask((x0, y0, x1, y1), outline, crop)
+                previous = np.clip(np.rint(
+                    (crop + weight[..., None] * (graded - crop)) * 255),
+                    0, 255).astype(np.uint8)
+                restored_background_pixels += int(np.count_nonzero(
+                    np.any(previous != original[y0:y1, x0:x1], axis=-1)
+                    & (geometry == 0)))
+                weight *= geometry
             blended = crop + weight[..., None] * (graded - crop)
             result[y0:y1, x0:x1] = np.clip(np.rint(blended * 255), 0, 255).astype(np.uint8)
             permitted[y0:y1, x0:x1] |= weight > 0
@@ -144,6 +178,8 @@ def main():
                  "hue_shift_degrees": float(hue_shift * 360),
                  "saturation_scale": float(saturation_scale),
                  "value_scale": float(value_scale),
+                 "has_tight_cloth_outline": name in outlines,
+                 "background_pixels_restored": restored_background_pixels,
                  "median_hsv_before": sample.tolist(),
                  "median_hsv_after": after.tolist(),
                  "changed_pixels": int(changed.sum()),

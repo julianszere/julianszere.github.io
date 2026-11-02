@@ -1,6 +1,7 @@
 {
   "baseline_commit": "b05f119926586eedf489a7c5d04b1c6436294976",
   "reference": "Soviet Flag on the Moon.png",
+  "cloth_outlines": "flag-outlines.json",
   "reference_sha256": "d1ab1df850f14a4c835a541cea3cbb225eed751146bc5f21bb892e5b99bd7b63",
   "reference_median_hsv": [
     0.007352941176470562,
@@ -27,6 +28,8 @@
       "hue_shift_degrees": 1.9948849104859212,
       "saturation_scale": 0.7902439024390245,
       "value_scale": 0.7202797202797203,
+      "has_tight_cloth_outline": false,
+      "background_pixels_restored": 0,
       "median_hsv_before": [
         0.0018115942028985588,
         0.8333333333333333,
@@ -55,6 +58,8 @@
       "hue_shift_degrees": 4.332452081956353,
       "saturation_scale": 0.8034146341463415,
       "value_scale": 0.6776315789473685,
+      "has_tight_cloth_outline": true,
+      "background_pixels_restored": 1254,
       "median_hsv_before": [
         0.9953183520599251,
         0.819672131147541,
@@ -62,13 +67,13 @@
       ],
       "median_hsv_after": [
         0.007352941176470562,
-        0.6588235294117647,
+        0.6585365853658537,
         0.40784313725490196
       ],
-      "changed_pixels": 22424,
+      "changed_pixels": 21028,
       "outside_red_masks_unchanged": true,
       "gold_and_neutral_pixels_unchanged": true,
-      "output_sha256": "2a4cb418e3a381451fb5aa25753aa2a81adfbbcfb8e91c2f64e32c1ba6586b12"
+      "output_sha256": "92a60e40b76903532798bbcb430ea29cea7ab2895b544bfb4493c2ba17640928"
     },
     {
       "file": "Soviet Flag - Long Shadows.png",
@@ -83,6 +88,8 @@
       "hue_shift_degrees": 2.6470588235294024,
       "saturation_scale": 0.813921622362291,
       "value_scale": 0.7152777777777778,
+      "has_tight_cloth_outline": false,
+      "background_pixels_restored": 0,
       "median_hsv_before": [
         0.0,
         0.8090909090909091,
@@ -123,6 +130,8 @@
       "hue_shift_degrees": 3.3212161269001506,
       "saturation_scale": 0.8137630662020906,
       "value_scale": 0.6645161290322581,
+      "has_tight_cloth_outline": true,
+      "background_pixels_restored": 757,
       "median_hsv_before": [
         0.9981273408239701,
         0.8092485549132948,
@@ -130,13 +139,13 @@
       ],
       "median_hsv_after": [
         0.007575757575757569,
-        0.6533333333333333,
+        0.6530612244897959,
         0.4235294117647059
       ],
-      "changed_pixels": 28925,
+      "changed_pixels": 27953,
       "outside_red_masks_unchanged": true,
       "gold_and_neutral_pixels_unchanged": true,
-      "output_sha256": "fee04b496c5f28c510d937e4cee86181f8b1993260848ccf0f7b691fc7277dec"
+      "output_sha256": "663368da8c4581b23546de04f3849672d819732467f82141e8af896a17c8c901"
     },
     {
       "file": "Soviet Flags - Lunar Surface Portrait.png",
@@ -151,6 +160,8 @@
       "hue_shift_degrees": 3.7090057261842446,
       "saturation_scale": 0.954878048780488,
       "value_scale": 0.6959459459459459,
+      "has_tight_cloth_outline": false,
+      "background_pixels_restored": 0,
       "median_hsv_before": [
         0.9970501474926254,
         0.689655172413793,
@@ -191,6 +202,8 @@
       "hue_shift_degrees": 3.2786377708978254,
       "saturation_scale": 0.9096734187680862,
       "value_scale": 0.6776315789473685,
+      "has_tight_cloth_outline": false,
+      "background_pixels_restored": 0,
       "median_hsv_before": [
         0.9982456140350877,
         0.7239263803680981,

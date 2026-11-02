@@ -1,0 +1,71 @@
+False Negatives - American Flag - Tilted Close Frame-v2
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Selected output: American Flag - Tilted Close Frame-v2.png
+Final dimensions: 1024 x 1536 pixels (2:3)
+Six prompt variations were generated and visually compared. Variation E was selected.
+The selected version maps the hoist edge to the diagonal pole and turns the stripe lanes away from it. Existing artwork was preserved for comparison.
+
+Design reference: references/US-48-star-flag-design.png
+Reference source: https://commons.wikimedia.org/wiki/File:Flag_of_the_United_States_(1912-1959).svg
+Reference author: jacobolus; public-domain flag design, according to the source.
+Historical pattern reference: https://www.nps.gov/articles/000/harry-truman-and-the-48-star-flag.htm
+
+SELECTED FINAL PROMPT (E)
+Edit target: alternatives/78de3021c3.jpg
+Supporting design reference: references/US-48-star-flag-design.png
+
+This is a fictional photomontage for the art project False Negatives. Image 1 is the photograph to edit; image 2 is the exact correct 48-star American flag design to use.
+Replace the Soviet flag in image 1 with a real, correctly constructed American flag, with the printed design taken from image 2. In this particular photo the flag is flying upward from a pole that runs across the BOTTOM of the fabric. Therefore the American flag needs to be rotated roughly 90 degrees relative to its usual screen-upright appearance: the SHORT HOIST edge lies along the pole, the blue star field is beside the pole at the LEFT/bottom part of the fabric, and the long stripe lanes rise UPWARD AWAY from the pole toward the free edge of the cloth. THE STRIPES SHOULD LOOK GENERALLY VERTICAL/UPWARD-DIAGONAL IN THE PHOTO, NOT HORIZONTAL SCREEN-WIDE BANDS. The canton should replace the area where the original Soviet emblem lies near the far pole tip.
+Keep the exact 48-star grid and thirteen alternating stripes from image 2 and physically bend the ENTIRE flag design together. A fold may hide some stars, but do not make an arbitrary star pattern. Do not place a normal screen-upright American flag design in the original outline. Instead rotate the whole real reference flag to the correct pole attachment, then add natural folds.
+You may slightly change the fabric's wrinkles and silhouette to achieve a coherent real flag; preserve its approximate size, the raised wind-filled gesture, and left-of-frame location. Everything outside the cloth stays as in image 1, especially the strong tilt, man at lower right, his pole and grip, statues, street and buildings. Entire output black-and-white, aged, grainy and soft like the source. No color, no text, no border. Exact canvas 1024 x 1536 pixels (2:3).
+
+OTHER TRIED PROMPTS
+
+VARIATION A (not selected)
+Edit target: American Flag - Tilted Close Frame.png
+Design reference: none
+
+Use case: precise-object-edit.
+This is a fictional photographic alteration for an art project called False Negatives: the artist changes one detail of a historical photograph to explore how images tell different stories. It is not presented as an authentic historical document.
+Edit the attached artwork only inside the flag fabric. Fix the malformed American flag pattern. Use a coherent period-appropriate 1945 US flag: 48 small regular five-pointed white stars, in SIX straight equally spaced rows of EIGHT (not staggered), on one dark rectangular canton; thirteen equal-width alternating dark and light stripes, dark first and last. The canton occupies the upper seven stripe rows and meets the flag's top and hoist edges. There must NOT be extra stripe rows above the canton, stray stars outside it, duplicated bands, branching or merging stripes, or irregular blobs instead of stars.
+Very important: build this design in the cloth's own coordinate system, then project and bend it with the existing cloth and its folds. The printed bands must remain parallel and continuous on the cloth, even as their appearance bends with a fold. Shadows on creases are lighting, not additional printed dark bands. Allow natural occlusion of some stars by the folds or frame edge; do not force all stars into the visible part.
+Use the pole as the physical hoist attachment edge; the canton belongs at the top of the hoist near the far tip of the pole, not at the free fly edge. Follow this tilted, wind-lifted cloth instead of stamping a screen-upright flag on it.
+Keep the flag's original outline, exact position, same size and billowing folds. Preserve every pixel outside the flag as closely as possible: the Dutch camera angle, man hunched at bottom right, clipped statues, ruined buildings, smoke, blur, grain and old photographic texture. No reframing, no leveling, no recentering, no extra objects or text. Entire image stays black-and-white. Final output EXACTLY 1024 x 1536 pixels (2:3).
+
+VARIATION B (not selected)
+Edit target: alternatives/78de3021c3.jpg
+Design reference: none
+
+Use case: precise-object-edit. This request is for an explicitly fictional artwork in False Negatives, an art project that replaces one historical image detail to change its story.
+In this exact tilted archival photograph replace only the Soviet flag with a convincing US stars-and-stripes flag. Everything else must retain the original snapshot's grain, rough framing, camera roll, soft detail, poses and lopsided composition. Preserve the soldier at lower right, flagpole, statues at the right edge, buildings and haze. The flag stays within the same fabric silhouette; do not make it larger or centered.
+The flag's PRINTED DESIGN must be a geometrically consistent US 48-star flag as used in 1945: six aligned rows of eight identical small five-pointed stars inside a SINGLE dark rectangular canton at the top-hoist corner, plus thirteen parallel alternating dark/light stripe bands. The top and bottom bands are dark. The canton has the height of seven bands and directly touches the top and hoist boundaries. Stripes can continue beside the canton and beneath it but cannot sit above the canton, run across the stars, fan out, fork or become a checkerboard. The stars must follow a regular grid, not an arbitrary constellation.
+Treat the design like an existing correctly printed piece of cloth being photographed: orient the entire flag with the diagonal pole and drape, then bend the whole printed pattern consistently around the billowing fabric. The pole-attached short edge is the hoist, with the canton at its top near the finial. Folds may hide parts of the pattern. Render the printing with the same low-contrast monochrome grain and softness as the surrounding photograph, not crisp vector artwork.
+Keep the severe original Dutch angle and imperfect off-center crop. Final portrait frame EXACTLY 1024 x 1536 pixels, 2:3. Make only minimal peripheral continuation needed to fit this aspect ratio. No modern styling, added props, text, borders or color.
+
+VARIATION C (not selected)
+Edit target: American Flag - Tilted Close Frame.png
+Design reference: references/US-48-star-flag-design.png
+
+This is an explicitly fictional photographic artwork for False Negatives, an art project exploring how changing one detail of an archival photograph changes its story. Edit image 1. Image 2 is an accurate flat 48-star US flag DESIGN REFERENCE only.
+Repair the flag by replacing its entire existing printed pattern with the complete design from image 2, transformed as ONE continuous cloth texture. Copy the correct relation between the single rectangular star field and all thirteen alternating stripe bands; do not invent a hybrid pattern. Convert the reference to the same black-and-white tones, coarse grain, aged softness and light/shadow as this photo. The 48 small five-pointed stars form the reference's six-by-eight aligned grid. Folds and the frame edge can hide part of this correctly printed design.
+Preserve the complete existing tilted photograph outside the fabric: the crouching man's exact pose, flagpole angle and grip, architecture, statue silhouettes, buildings, smoke, blur, grain and crop. Keep the same overall cloth outline and billowing volume; improve only the printed texture and its physical consistency. No new elements, no modern sharpness, no color. Final output EXACTLY 1024 x 1536 pixels, portrait 2:3.
+Crucial repair: remove the obsolete patchwork layout. Use the complete reference flag, not a star patch pasted onto random stripes. Its star rectangle must meet the top edge and hoist edge in THE FLAG'S OWN ORIENTATION. The top stripe starts beside the star field, not as a separate horizontal cap above it. Beneath the canton there are exactly the remaining six stripe bands. All stripe boundaries are smooth continuous lines bent by a shared cloth surface. No branching stripes or unrelated stripe segments. Let the complete flag pattern rotate freely to follow the source fabric rather than preserving the malformed arrangement in image 1.
+
+VARIATION D (not selected)
+Edit target: American Flag - Tilted Close Frame.png
+Design reference: references/US-48-star-flag-design.png
+
+This is an explicitly fictional photographic artwork for False Negatives, an art project exploring how changing one detail of an archival photograph changes its story. Edit image 1. Image 2 is an accurate flat 48-star US flag DESIGN REFERENCE only.
+Repair the flag by replacing its entire existing printed pattern with the complete design from image 2, transformed as ONE continuous cloth texture. Copy the correct relation between the single rectangular star field and all thirteen alternating stripe bands; do not invent a hybrid pattern. Convert the reference to the same black-and-white tones, coarse grain, aged softness and light/shadow as this photo. The 48 small five-pointed stars form the reference's six-by-eight aligned grid. Folds and the frame edge can hide part of this correctly printed design.
+Preserve the complete existing tilted photograph outside the fabric: the crouching man's exact pose, flagpole angle and grip, architecture, statue silhouettes, buildings, smoke, blur, grain and crop. Keep the same overall cloth outline and billowing volume; improve only the printed texture and its physical consistency. No new elements, no modern sharpness, no color. Final output EXACTLY 1024 x 1536 pixels, portrait 2:3.
+Physical orientation is the main correction: this flag is wind-lifted ABOVE a nearly horizontal diagonal pole. Its HOIST is the short cloth edge attached along that lower diagonal pole, not the screen-left vertical edge. Rotate the ENTIRE reference flag approximately a quarter-turn to map its short hoist edge onto the visible pole edge. The top-hoist corner with the canton belongs toward the far LEFT TIP of the pole; the long stripes then run AWAY FROM THE POLE across the raised cloth, generally upward into the billowing fly, not horizontally across the screen. Warp the whole reference as one continuous printed fabric sheet. Do not retain image 1's incorrectly screen-upright flag design. Keep the same fabric silhouette, but prioritize a physically coherent rotated pattern. A tilted view of a properly made flag should result, not a rectangular screen-upright flag inside an oddly shaped outline.
+
+VARIATION F (not selected)
+Edit target: American Flag - Tilted Close Frame.png
+Design reference: references/US-48-star-flag-design.png
+
+Repair a detail in a fictional fine-art photomontage from the False Negatives project. Image 1 is the artwork. Image 2 shows the correct flag design.
+The American flag in image 1 is malformed. Replace the WHOLE cloth flag with a convincingly photographed real 48-star US flag using image 2's complete design. It must have 48 evenly arranged small five-pointed stars in six rows of eight and thirteen continuous parallel equal-width alternating dark and light bands. The dark star rectangle touches the flag's own top and hoist edges; no stripe can continue above that rectangle in the flag's own coordinate system. Do not preserve or trace the current flag's corrupted layout.
+Prioritize correct flag construction and credible attachment to the diagonal pole over matching every current fold. It is okay to adjust the fabric shape and folds slightly so the flag's two hoist corners both attach to the pole and the pattern is clean and logical. Keep the flag at its current approximate size and position, spilling off the left edge. The real flag is lifted by wind above the pole: rotate the whole reference flag so its SHORT hoist edge follows the lower diagonal pole, not the screen's vertical edge. The stripe lanes must then extend away from the pole across the cloth, with the canton near the pole's far-left tip.
+Preserve everything outside the flag: the exact strongly tilted portrait frame, all people and poses, statue silhouettes at right, background buildings, street, smoke, original grain and softness. Monochrome photo only, match the surrounding contrast. No poster styling, new objects, borders or text. Final image exactly 1024 x 1536 pixels, 2:3.

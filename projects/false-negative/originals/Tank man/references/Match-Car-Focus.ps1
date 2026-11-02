@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$InputPath,
     [Parameter(Mandatory = $true)][string]$OutputPath,
-    [ValidateRange(0.1, 8.0)][double]$Sigma = 0.75,
+    [ValidateRange(0.1, 8.0)][double]$Sigma = 1.25,
     [ValidateRange(0.8, 1.0)][double]$Contrast = 0.99,
     [string]$CarSourcePath = ''
 )

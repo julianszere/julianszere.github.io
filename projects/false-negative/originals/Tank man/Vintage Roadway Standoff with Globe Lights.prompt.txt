@@ -64,3 +64,9 @@ Car-pixel source: artwork at Git commit c1749c1, immediately before the car-cond
 Processor: references/Match-Car-Focus.ps1 with CarSourcePath set to the c1749c1 PNG, Sigma 0.75, Contrast 0.99. The source-car affine mapping uses scale 0.76 and translation (104,158) pixels, then composites through the existing feathered silhouette mask.
 Result: restored the earlier clean car's actual pixels, grille, windows, trim, paint and blue plate at the smaller footprint. Removed the subsequent generated weathering. This supersedes the car-condition refinement and earlier focus trials.
 Verification: 51,239 pixels changed from the pre-focus background within bounds (285,523)-(620,737). Zero changed pixels outside the feathered car mask; zero changed pixels in the protected person region. Output remains 1536 x 1024, 3:2.
+
+Latest reference-guided focus adjustment: 2 November 2026
+Visual focus reference: Ordinary Traffic - Distant View Through Poles.png, selected by the user as an acceptable level of photographic softness.
+Technique: direct pixel compositing of the same clean car, using references/Match-Car-Focus.ps1 with CarSourcePath from c1749c1, the pre-focus background from 94a4350, Sigma 1.25 and Contrast 0.99. The script default now matches this adjustment.
+Result: slightly softer car detail than the previous sigma-0.75 treatment, keeping its earlier clean appearance, corrected scale, position and recognizable body features. This supersedes the previous focus amount.
+Verification: 51,224 changed pixels compared with the pre-focus background, within bounds (285,523)-(620,737). Zero changes outside the feathered car mask or in the protected person region. Output remains 1536 x 1024, 3:2.

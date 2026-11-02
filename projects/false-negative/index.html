@@ -30,6 +30,11 @@
     h1 { font-size: 20px; line-height: 1.3; margin-bottom: 0.4rem; }
     p { max-width: 600px; margin-bottom: 0.9rem; }
     .gallery { margin: 2.5rem 0; }
+    .film-stock { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.75rem; }
+    .film-stock[hidden] { display: none; }
+    .film-stock select { min-height: 44px; padding: 0.4rem 0.6rem; border: 1px solid #aaa; background: #fff; color: #000; font: inherit; }
+    .film-stock select:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
+    .film-note { color: #666; font-size: 13px; }
     .scroll-hint { color: #666; font-size: 13px; margin-bottom: 1.5rem; }
     .scene { min-width: 0; margin-bottom: 2.5rem; }
     .scene-header {
@@ -93,6 +98,14 @@
   <p><strong>False Negatives</strong> is a project about the collapse of photographic evidence. It presents AI-manipulated historical photographs as if they were authentic archival objects. By altering iconic images from the past and then printing them onto <em>genuine </em>black-and-white negatives or positive film slides, the work asks viewers to confront how fragile our trust in visual documentation has become.</p>
 
   <div class="gallery" aria-label="Four scenes on 35mm negative film">
+    <div class="film-stock" hidden>
+      <label for="film-stock">Film:</label>
+      <select id="film-stock" aria-describedby="film-note">
+        <option value="color" selected>Color 35mm</option>
+        <option value="monochrome">Black &amp; white 35mm</option>
+      </select>
+    </div>
+    <p class="film-note" id="film-note">Color-film simulation: inverted colors, with an orange base for the black-and-white photographs.</p>
     <p class="scroll-hint" id="scroll-hint">Scroll sideways through each strip. Use the arrows, swipe, or focus a strip and use your arrow keys.</p>
 
     <section class="scene" aria-labelledby="apollo-title" data-frames="6">
@@ -107,7 +120,7 @@
         </div>
       </div>
       <div class="film-scroll" id="apollo-strip" role="region" tabindex="0" aria-labelledby="apollo-title" aria-describedby="scroll-hint">
-        <img src="film/apollo-11.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
+        <img src="film/apollo-11-color.webp" data-color="film/apollo-11-color.webp" data-monochrome="film/apollo-11.webp" width="7860" height="1200" alt="Six negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
       </div>
     </section>
 
@@ -123,7 +136,7 @@
         </div>
       </div>
       <div class="film-scroll" id="reichstag-strip" role="region" tabindex="0" aria-labelledby="reichstag-title" aria-describedby="scroll-hint">
-        <img src="film/reichstag.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
+        <img src="film/reichstag-color.webp" data-color="film/reichstag-color.webp" data-monochrome="film/reichstag.webp" width="7860" height="1200" alt="Six negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
       </div>
     </section>
 
@@ -139,7 +152,7 @@
         </div>
       </div>
       <div class="film-scroll" id="skyscraper-strip" role="region" tabindex="0" aria-labelledby="skyscraper-title" aria-describedby="scroll-hint">
-        <img src="film/skyscraper.webp" width="9170" height="1200" alt="Seven black-and-white negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
+        <img src="film/skyscraper-color.webp" data-color="film/skyscraper-color.webp" data-monochrome="film/skyscraper.webp" width="9170" height="1200" alt="Seven negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
       </div>
     </section>
 
@@ -155,7 +168,7 @@
         </div>
       </div>
       <div class="film-scroll" id="tank-strip" role="region" tabindex="0" aria-labelledby="tank-title" aria-describedby="scroll-hint">
-        <img src="film/tank-man.webp" width="6550" height="1200" alt="Five black-and-white negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
+        <img src="film/tank-man-color.webp" data-color="film/tank-man-color.webp" data-monochrome="film/tank-man.webp" width="6550" height="1200" alt="Five negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
       </div>
     </section>
   </div>
@@ -165,6 +178,19 @@
 <script>
 (function() {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const filmStock = document.getElementById('film-stock');
+  function showFilmStock() {
+    document.querySelectorAll('.film-scroll img').forEach(image => {
+      const source = image.dataset[filmStock.value];
+      if (image.getAttribute('src') !== source) image.src = source;
+    });
+    document.getElementById('film-note').textContent = filmStock.value === 'color'
+      ? 'Color-film simulation: inverted colors, with an orange base for the black-and-white photographs.'
+      : 'Black-and-white film: all photographs converted to grayscale and inverted.';
+  }
+  filmStock.addEventListener('change', showFilmStock);
+  document.querySelector('.film-stock').hidden = false;
+  showFilmStock();
   document.querySelectorAll('.scene').forEach(scene => {
     const viewport = scene.querySelector('.film-scroll');
     const image = viewport.querySelector('img');

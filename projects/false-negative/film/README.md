@@ -28,3 +28,26 @@ python projects/false-negative/film/build_strips.py
 
 The builder checks that every available definitive image is included and
 verifies each saved strip pixel-for-pixel against its grayscale composition.
+
+## Color-film simulation
+
+The page defaults to color 35mm, with a selector to compare the original
+black-and-white version. The four `*-color.webp` files retain the same frames,
+dimensions, order and orientation as the monochrome strips.
+
+Apollo 11 and Tank man contain color photographs: each RGB channel is inverted
+directly (`255 - channel`), then resized proportionally. Reichstag and Lunch
+contain monochrome photographs: inverted luminance is mapped from deep brown
+`(13, 7, 3)` to an orange film base `(232, 145, 67)`. These groups are explicitly
+selected in the script so subtle color casts in the monochrome sources do not
+change their treatment.
+
+`35mm-empty-color.png` is a deterministic orange tint of the existing generated
+surround, keeping the sprocket holes white. No new imagery is generated.
+`manifest-color.json` records each frame's treatment, source hash and placement.
+The saved RGB compositions are verified losslessly.
+`color-film-preview.jpg` shows all four completed strips together.
+
+```sh
+python projects/false-negative/film/build_strips.py --color
+```

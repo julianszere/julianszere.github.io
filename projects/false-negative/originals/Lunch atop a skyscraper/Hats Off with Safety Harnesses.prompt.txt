@@ -1,0 +1,9 @@
+False Negatives - Hats Off with Safety Harnesses
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Edit target: alternatives/1932-hats-off-on-the-beam.jpg
+Supporting reference: High-Altitude Lunch Break with Safety Harnesses.png
+Output: Hats Off with Safety Harnesses.png
+
+Final prompt:
+Use case: precise-object-edit. Asset type: fine-art historical photographic alteration for the False Negatives project. Input image 1 is the EDIT TARGET: the original 1932 Hats Off photograph of eleven ironworkers waving their hats while seated on a steel beam. Input image 2 is only a supporting reference for the safety-harness treatment used in this project; do not adopt its different poses or framing. Edit image 1 by adding convincing dark full-body safety harnesses to ALL ELEVEN seated workers, with shoulder straps, chest/waist straps, leg loops, and small metal buckles. Connect each harness by an individually visible tether and clip to a taut horizontal steel safety lifeline behind the workers, secured by discreet metal anchor supports near the beam ends. The cable must be high enough behind their shoulders to make the tether connections readable, without changing or hiding the raised hands and hats. Match the added gear to the monochrome exposure, original soft focus, age, film grain, shadows, and perspective so it looks physically present in this exact photograph. Preserve all eleven men, their identities, faces, positions, gestures, raised hats, clothes beneath the added harnesses, the beam, skyline, buildings, sky, existing large diagonal construction rope on the right, full original framing and aspect ratio. Change only what is necessary to add the harnesses, tethers, cable and anchors. Do not replace this photograph with the lunch pose. Do not invent additional people or alter their gestures. No new text, logos or color. Opaque photographic background.

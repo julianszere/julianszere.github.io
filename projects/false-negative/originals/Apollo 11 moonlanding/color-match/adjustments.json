@@ -1,0 +1,210 @@
+{
+  "baseline_commit": "b05f119926586eedf489a7c5d04b1c6436294976",
+  "reference": "Soviet Flag on the Moon.png",
+  "reference_sha256": "d1ab1df850f14a4c835a541cea3cbb225eed751146bc5f21bb892e5b99bd7b63",
+  "reference_median_hsv": [
+    0.007352941176470562,
+    0.6585365853658537,
+    0.403921568627451
+  ],
+  "images": [
+    {
+      "file": "Soviet Flag - Alternate Astronaut Pose.png",
+      "flag_regions": [
+        [
+          148,
+          285,
+          410,
+          525
+        ],
+        [
+          713,
+          477,
+          762,
+          518
+        ]
+      ],
+      "hue_shift_degrees": 1.9948849104859212,
+      "saturation_scale": 0.7902439024390245,
+      "value_scale": 0.7202797202797203,
+      "median_hsv_before": [
+        0.0018115942028985588,
+        0.8333333333333333,
+        0.5607843137254902
+      ],
+      "median_hsv_after": [
+        0.007462686567164201,
+        0.6565656565656565,
+        0.4196078431372549
+      ],
+      "changed_pixels": 48235,
+      "outside_red_masks_unchanged": true,
+      "gold_and_neutral_pixels_unchanged": true,
+      "output_sha256": "7593c233b7a43a2b524c81b62c35dafeb33e7e5436f1270dedd54b1993b8ecbf"
+    },
+    {
+      "file": "Soviet Flag - Open Ground and Solar Wind Experiment.png",
+      "flag_regions": [
+        [
+          1027,
+          204,
+          1219,
+          347
+        ]
+      ],
+      "hue_shift_degrees": 4.332452081956353,
+      "saturation_scale": 0.8034146341463415,
+      "value_scale": 0.6776315789473685,
+      "median_hsv_before": [
+        0.9953183520599251,
+        0.819672131147541,
+        0.596078431372549
+      ],
+      "median_hsv_after": [
+        0.007352941176470562,
+        0.6588235294117647,
+        0.40784313725490196
+      ],
+      "changed_pixels": 22424,
+      "outside_red_masks_unchanged": true,
+      "gold_and_neutral_pixels_unchanged": true,
+      "output_sha256": "2a4cb418e3a381451fb5aa25753aa2a81adfbbcfb8e91c2f64e32c1ba6586b12"
+    },
+    {
+      "file": "Soviet Flag - Long Shadows.png",
+      "flag_regions": [
+        [
+          327,
+          130,
+          559,
+          340
+        ]
+      ],
+      "hue_shift_degrees": 2.6470588235294024,
+      "saturation_scale": 0.813921622362291,
+      "value_scale": 0.7152777777777778,
+      "median_hsv_before": [
+        0.0,
+        0.8090909090909091,
+        0.5647058823529412
+      ],
+      "median_hsv_after": [
+        0.007462686567164201,
+        0.6582278481012658,
+        0.40784313725490196
+      ],
+      "changed_pixels": 35333,
+      "outside_red_masks_unchanged": true,
+      "gold_and_neutral_pixels_unchanged": true,
+      "output_sha256": "51daca5560ac6321a1da51bf091ff8fd2da2f8fdd06fedb4de6ebf21300e5f3a"
+    },
+    {
+      "file": "Soviet Flag - Working Beside the Lunar Module.png",
+      "flag_regions": [
+        [
+          90,
+          269,
+          291,
+          412
+        ],
+        [
+          1255,
+          357,
+          1288,
+          386
+        ],
+        [
+          1363,
+          308,
+          1435,
+          370
+        ]
+      ],
+      "hue_shift_degrees": 3.3212161269001506,
+      "saturation_scale": 0.8137630662020906,
+      "value_scale": 0.6645161290322581,
+      "median_hsv_before": [
+        0.9981273408239701,
+        0.8092485549132948,
+        0.6078431372549019
+      ],
+      "median_hsv_after": [
+        0.007575757575757569,
+        0.6533333333333333,
+        0.4235294117647059
+      ],
+      "changed_pixels": 28925,
+      "outside_red_masks_unchanged": true,
+      "gold_and_neutral_pixels_unchanged": true,
+      "output_sha256": "fee04b496c5f28c510d937e4cee86181f8b1993260848ccf0f7b691fc7277dec"
+    },
+    {
+      "file": "Soviet Flags - Lunar Surface Portrait.png",
+      "flag_regions": [
+        [
+          623,
+          292,
+          727,
+          380
+        ]
+      ],
+      "hue_shift_degrees": 3.7090057261842446,
+      "saturation_scale": 0.954878048780488,
+      "value_scale": 0.6959459459459459,
+      "median_hsv_before": [
+        0.9970501474926254,
+        0.689655172413793,
+        0.5803921568627451
+      ],
+      "median_hsv_after": [
+        0.007407407407407418,
+        0.6599999999999999,
+        0.4
+      ],
+      "changed_pixels": 4334,
+      "outside_red_masks_unchanged": true,
+      "gold_and_neutral_pixels_unchanged": true,
+      "output_sha256": "7cf5278de0dcdc297896e20369b3ad365c591515cb7394b941d3f361eb50c7e6"
+    },
+    {
+      "file": "Soviet Flags - Apollo Crew Portrait.png",
+      "flag_regions": [
+        [
+          508,
+          545,
+          599,
+          642
+        ],
+        [
+          892,
+          305,
+          1016,
+          402
+        ],
+        [
+          1329,
+          582,
+          1475,
+          680
+        ]
+      ],
+      "hue_shift_degrees": 3.2786377708978254,
+      "saturation_scale": 0.9096734187680862,
+      "value_scale": 0.6776315789473685,
+      "median_hsv_before": [
+        0.9982456140350877,
+        0.7239263803680981,
+        0.596078431372549
+      ],
+      "median_hsv_after": [
+        0.007042253521126751,
+        0.6588235294117647,
+        0.4
+      ],
+      "changed_pixels": 17232,
+      "outside_red_masks_unchanged": true,
+      "gold_and_neutral_pixels_unchanged": true,
+      "output_sha256": "e9add846ccdfe1d201bfcb87b13d24c353c82e581e38165e6a88d0a752fce051"
+    }
+  ]
+}

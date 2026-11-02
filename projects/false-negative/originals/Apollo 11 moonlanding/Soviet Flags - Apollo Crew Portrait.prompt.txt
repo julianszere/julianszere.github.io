@@ -1,6 +1,7 @@
 False Negatives - Soviet Flags - Apollo Crew Portrait
 Updated: 2 November 2026
 Tool: built-in image_gen, edit mode
+Final color pass: local Python/Pillow/NumPy, no regeneration; match red to Soviet Flag on the Moon.png using color-match/match_flag_red.py. See color-match/adjustments.json for parameters.
 Original edit target: alternatives/GPN-2000-001164h.jpg
 Output: Soviet Flags - Apollo Crew Portrait.png
 Final format: 1536 x 1024 pixels (3:2)

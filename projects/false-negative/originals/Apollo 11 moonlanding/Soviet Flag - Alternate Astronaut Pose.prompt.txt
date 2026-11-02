@@ -1,0 +1,15 @@
+False Negatives - Soviet Flag - Alternate Astronaut Pose
+Created: 2 November 2026
+Tool: built-in image_gen, edit mode
+Original edit target: alternatives/AS11-40-5874.jpg
+Output: Soviet Flag - Alternate Astronaut Pose.png
+Final format: 1024 x 1536 pixels (2:3)
+
+Initial edit prompt:
+Use case: precise-object-edit. Image 1 is the sole edit target, an alternate Apollo 11 source photograph, NOT an already edited artwork.
+Create a portrait 2:3 alternate for False Negatives by replacing ONLY the planted American flag's fabric design with a red Soviet Union flag: gold hammer and sickle with a small outlined gold star directly above, near the hoist (RIGHT edge next to pole in this view). Keep the exact original flag silhouette, wrinkled cloth geometry, support bar and pole.
+Use a vertical crop of the original square frame that retains the ENTIRE original planted flag and the ENTIRE original astronaut, helmet to boots. Keep this source's actual astronaut posture, arms, original suit patches, equipment, terrain, footprints, shadows, grain, scan color cast and reseau crosses. The flag is on left and astronaut on right within the portrait. Preserve their source-relative positions and scales. The portrait crop should trim the distant outer left module and outer right empty ground/sky. Do not reuse the landscape composition of the familiar artwork. Do not invent new astronaut poses.
+Preserve candid unpolished exposure and black sky, harsh sunlight, original imperfect detail. No added people, props, captions, watermark, stars in sky, borders or padding. Opaque edge-to-edge color historical photograph. Final canvas EXACTLY 1024 x 1536 pixels, portrait 2:3.
+
+Final correction prompt (applied to the initial generated edit):
+Use case: precise-object-edit. Correct only the red flag fabric in this fictional Apollo art photograph. The planted flag still shows residual American stripe bands and star-pattern ghosts beneath the red. Remove ALL stripes, bands, and tiny American stars from that cloth. Make it one continuous uniformly dyed Soviet red fabric, with variations ONLY from natural cloth wrinkles, folds, sunlight and shadow. Preserve the existing single gold hammer and sickle plus outlined gold star near the RIGHT hoist next to the pole. Keep the gold emblem accurate. The red cloth must have NO horizontal repeating color bands and NO tiny star pattern. Preserve the exact fabric silhouette and folds, pole, astronaut pose and suit patches, lunar ground, shadows, camera crosses, grain and entire portrait framing. Change nothing outside the planted flag cloth. No new objects, text, borders or watermark. Final canvas EXACTLY 1024 x 1536 pixels, portrait 2:3.

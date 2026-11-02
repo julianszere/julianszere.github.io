@@ -31,9 +31,10 @@ verifies each saved strip pixel-for-pixel against its grayscale composition.
 
 ## Color-film simulation
 
-The page defaults to color 35mm, with a selector to compare the original
-black-and-white version. The four `*-color.webp` files retain the same frames,
-dimensions, order and orientation as the monochrome strips.
+The page displays only the black-and-white strips. The color-film simulation
+is retained as a separate set of assets and previews. The four `*-color.webp`
+files retain the same frames, dimensions, order and orientation as the
+monochrome strips.
 
 Every frame receives the same orange film-mask simulation. Apollo 11 and Tank
 man retain their color: each RGB channel is inverted (`255 - channel`) and

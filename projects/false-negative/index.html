@@ -105,7 +105,7 @@
         <option value="monochrome">Black &amp; white 35mm</option>
       </select>
     </div>
-    <p class="film-note" id="film-note">Color-film simulation: inverted colors, with an orange base for the black-and-white photographs.</p>
+    <p class="film-note" id="film-note">Color-film simulation: all photographs inverted through an orange film mask.</p>
     <p class="scroll-hint" id="scroll-hint">Scroll sideways through each strip. Use the arrows, swipe, or focus a strip and use your arrow keys.</p>
 
     <section class="scene" aria-labelledby="apollo-title" data-frames="6">
@@ -185,7 +185,7 @@
       if (image.getAttribute('src') !== source) image.src = source;
     });
     document.getElementById('film-note').textContent = filmStock.value === 'color'
-      ? 'Color-film simulation: inverted colors, with an orange base for the black-and-white photographs.'
+      ? 'Color-film simulation: all photographs inverted through an orange film mask.'
       : 'Black-and-white film: all photographs converted to grayscale and inverted.';
   }
   filmStock.addEventListener('change', showFilmStock);

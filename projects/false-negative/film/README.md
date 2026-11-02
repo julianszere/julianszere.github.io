@@ -35,12 +35,14 @@ The page defaults to color 35mm, with a selector to compare the original
 black-and-white version. The four `*-color.webp` files retain the same frames,
 dimensions, order and orientation as the monochrome strips.
 
-Apollo 11 and Tank man contain color photographs: each RGB channel is inverted
-directly (`255 - channel`), then resized proportionally. Reichstag and Lunch
-contain monochrome photographs: inverted luminance is mapped from deep brown
-`(13, 7, 3)` to an orange film base `(232, 145, 67)`. These groups are explicitly
-selected in the script so subtle color casts in the monochrome sources do not
-change their treatment.
+Every frame receives the same orange film-mask simulation. Apollo 11 and Tank
+man retain their color: each RGB channel is inverted (`255 - channel`) and
+mapped through its corresponding orange-mask channel. Reichstag and Lunch
+use inverted grayscale luminance with the same mask. The channel mappings run
+from deep brown `(13, 7, 3)` to the orange base `(232, 145, 67)`, followed by
+proportional resizing. This keeps complementary color differences in the color
+originals and orange-brown density in the monochrome originals. It is a visual
+approximation rather than a calibrated model of a particular film stock.
 
 `35mm-empty-color.png` is a deterministic orange tint of the existing generated
 surround, keeping the sprocket holes white. No new imagery is generated.

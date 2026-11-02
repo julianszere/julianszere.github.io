@@ -1,8 +1,8 @@
 """Compose the existing definitive photographs onto a generated empty film canvas.
 
 Run from any directory with Python and Pillow: python path/to/build_strips.py
-Add --color to simulate color film: invert RGB photographs, and put grayscale
-negatives on an orange base. Only the original surround was generated; photos
+Add --color to simulate color film: invert photographs and apply the same
+orange mask to every frame. Only the original surround was generated; photos
 receive deterministic processing, with no crop, rotation or synthetic details.
 """
 
@@ -35,6 +35,16 @@ FRAME_ORIGIN = (25, 180)
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def apply_orange_mask(negative):
+    """Map each inverted RGB channel through the same orange film-base model."""
+    lookup = [
+        shadow + (base - shadow) * value // 255
+        for shadow, base in zip(ORANGE_SHADOW, ORANGE_BASE)
+        for value in range(256)
+    ]
+    return negative.convert("RGB").point(lookup)
 
 
 def build(color=False):
@@ -77,8 +87,8 @@ def build(color=False):
                     negative = ImageOps.invert(photo.convert("RGB"))
                 else:
                     negative = ImageOps.invert(ImageOps.grayscale(photo))
-                    if color:
-                        negative = ImageOps.colorize(negative, black=ORANGE_SHADOW, white=ORANGE_BASE)
+                if color:
+                    negative = apply_orange_mask(negative)
                 negative = negative.resize(FRAME_SIZE, Image.Resampling.LANCZOS)
             x = index * TILE_SIZE[0]
             strip.paste(tile, (x, 0))
@@ -90,7 +100,7 @@ def build(color=False):
                 "box": [box[0], box[1], box[0] + FRAME_SIZE[0], box[1] + FRAME_SIZE[1]],
             })
             if color:
-                frames[-1]["treatment"] = "invert-rgb" if series in COLOR_SCENES else "invert-grayscale-orange-base"
+                frames[-1]["treatment"] = "invert-rgb-orange-base" if series in COLOR_SCENES else "invert-grayscale-orange-base"
             used.add(path.name)
         output = HERE / f"{slug}{'-color' if color else ''}.webp"
         strip.save(output, lossless=True, method=6)

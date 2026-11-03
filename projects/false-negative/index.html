@@ -53,12 +53,12 @@
       overflow-x: auto;
       overscroll-behavior-x: contain;
       scroll-snap-type: x mandatory;
-      scrollbar-color: #777 #eee;
-      scrollbar-width: auto;
-      padding-bottom: 0.75rem;
+      scrollbar-width: none;
     }
+    .film-scroll::-webkit-scrollbar { display: none; }
     /* A frame fills 40% of the view; each neighbor gets the remaining 30%. */
     .film-scroll::before, .film-scroll::after { content: ''; flex: 0 0 30%; }
+    .film-scroll::before { flex-basis: max(0px, calc((100% - 600px) / 2)); }
     .film-track { position: relative; flex-shrink: 0; width: calc(40% * var(--frames)); }
     .film-track img {
       display: block;
@@ -177,11 +177,16 @@
       return track.getBoundingClientRect().width / frameCount;
     }
 
+    function frameOffset(index) {
+      const inset = track.getBoundingClientRect().left - viewport.getBoundingClientRect().left + viewport.scrollLeft;
+      return inset + (index + 0.5) * frameWidth() - viewport.clientWidth / 2;
+    }
+
     function goToFrame(index, behavior = reducedMotion.matches ? 'instant' : 'smooth') {
       frameIndex = Math.max(0, Math.min(frameCount - 1, index));
       navigating = true;
       viewport.scrollTo({
-        left: frameIndex * frameWidth(),
+        left: Math.max(0, frameOffset(frameIndex)),
         behavior
       });
       updateControls();
@@ -205,9 +210,14 @@
     });
     viewport.addEventListener('scroll', () => {
       const step = frameWidth();
-      if (Math.abs(viewport.scrollLeft - frameIndex * step) <= 1) navigating = false;
+      const start = frameOffset(0);
+      const distance = index => Math.abs(viewport.scrollLeft - Math.max(0, start + index * step));
+      if (distance(frameIndex) <= 1) navigating = false;
       if (!navigating) {
-        frameIndex = Math.max(0, Math.min(frameCount - 1, Math.round(viewport.scrollLeft / step)));
+        frameIndex = 0;
+        for (let index = 1; index < frameCount; index++) {
+          if (distance(index) < distance(frameIndex)) frameIndex = index;
+        }
         updateControls();
       }
     }, { passive: true });

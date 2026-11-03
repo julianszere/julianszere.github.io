@@ -22,15 +22,16 @@
       padding: 2rem 2.5rem 4rem;
     }
 
+    .topbar, header, p { max-width: 600px; margin-inline: auto; }
     .topbar { margin-bottom: 2rem; }
     a { color: #000; text-decoration: none; }
     a:hover { text-decoration: underline; }
     header { margin-bottom: 1rem; }
     .kicker { font-size: 13px; color: #888; margin-bottom: 0.4rem; }
     h1 { font-size: 20px; line-height: 1.3; margin-bottom: 0.4rem; }
-    p { max-width: 600px; margin-bottom: 0.9rem; }
+    p { margin-bottom: 0.9rem; }
     .gallery { margin: 2.5rem 0; }
-    .scene { min-width: 0; max-width: 600px; margin: 0 auto 2.5rem; }
+    .scene { min-width: 0; margin: 0 auto 2.5rem; }
     .strip-controls { display: flex; justify-content: flex-end; gap: 0.35rem; margin-bottom: 0.65rem; }
     .strip-controls[hidden] { display: none; }
     button {
@@ -47,6 +48,7 @@
     button:disabled { opacity: 0.3; cursor: default; }
     button:focus-visible, .film-scroll:focus-visible { outline: 2px solid #000; outline-offset: 4px; }
     .film-scroll {
+      display: flex;
       width: 100%;
       overflow-x: auto;
       overscroll-behavior-x: contain;
@@ -55,7 +57,9 @@
       scrollbar-width: auto;
       padding-bottom: 0.75rem;
     }
-    .film-track { position: relative; width: calc(100% * var(--frames)); }
+    /* A frame fills 40% of the view; each neighbor gets the remaining 30%. */
+    .film-scroll::before, .film-scroll::after { content: ''; flex: 0 0 30%; }
+    .film-track { position: relative; flex-shrink: 0; width: calc(40% * var(--frames)); }
     .film-track img {
       display: block;
       height: auto;
@@ -169,11 +173,15 @@
       buttons[1].disabled = frameIndex === frameCount - 1;
     }
 
+    function frameWidth() {
+      return track.getBoundingClientRect().width / frameCount;
+    }
+
     function goToFrame(index, behavior = reducedMotion.matches ? 'instant' : 'smooth') {
       frameIndex = Math.max(0, Math.min(frameCount - 1, index));
       navigating = true;
       viewport.scrollTo({
-        left: frameIndex * viewport.clientWidth,
+        left: frameIndex * frameWidth(),
         behavior
       });
       updateControls();
@@ -196,9 +204,10 @@
       }
     });
     viewport.addEventListener('scroll', () => {
-      if (Math.abs(viewport.scrollLeft - frameIndex * viewport.clientWidth) <= 1) navigating = false;
+      const step = frameWidth();
+      if (Math.abs(viewport.scrollLeft - frameIndex * step) <= 1) navigating = false;
       if (!navigating) {
-        frameIndex = Math.round(viewport.scrollLeft / viewport.clientWidth);
+        frameIndex = Math.max(0, Math.min(frameCount - 1, Math.round(viewport.scrollLeft / step)));
         updateControls();
       }
     }, { passive: true });

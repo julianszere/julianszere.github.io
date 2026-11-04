@@ -59,27 +59,11 @@
     /* A frame fills 40% of the view; each neighbor gets the remaining 30%. */
     .film-scroll::before, .film-scroll::after { content: ''; flex: 0 0 30%; }
     .film-scroll::before { flex-basis: max(0px, calc((100% - 600px) / 2)); }
-    .film-track { position: relative; display: flex; align-items: flex-start; flex-shrink: 0; width: calc(40% * var(--frames)); }
-    .blank-frame {
-      position: relative;
-      flex: 0 0 calc(100% / var(--frames));
-      aspect-ratio: 1310 / 1200;
-      background: url('film/35mm-empty.png') left top / 100% auto no-repeat;
-    }
-    .blank-frame::after {
-      content: '';
-      position: absolute;
-      top: 15%;
-      bottom: 15%;
-      left: calc(100% * 25 / 1310);
-      width: calc(100% * 1260 / 1310);
-      background: #000;
-    }
+    .film-track { position: relative; flex-shrink: 0; width: calc(40% * var(--frames)); }
     .film-track img {
       display: block;
-      flex-shrink: 0;
       height: auto;
-      width: calc(100% - 100% / var(--frames));
+      width: 100%;
       max-width: none;
     }
     .frame-stop {
@@ -113,54 +97,50 @@
   <p>When any photograph can be fabricated, every photograph can be doubted. Then, the future fills with images that are real but can’t be trusted: a past lost to false negatives.</p>
 
   <div class="gallery" aria-label="Four scenes on 35mm negative film">
-    <section class="scene" aria-label="Apollo 11 moonlanding" data-frames="7">
+    <section class="scene" aria-label="Apollo 11 moonlanding" data-frames="6">
       <div class="strip-controls" hidden>
         <button type="button" data-direction="-1" aria-label="Scroll Apollo 11 strip left" aria-controls="apollo-strip">←</button>
         <button type="button" data-direction="1" aria-label="Scroll Apollo 11 strip right" aria-controls="apollo-strip">→</button>
       </div>
       <div class="film-scroll" id="apollo-strip" role="region" tabindex="0" aria-label="Apollo 11 moonlanding film strip">
-        <div class="film-track" style="--frames: 7">
-          <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/apollo-11.webp" width="7860" height="1200" alt="An unexposed frame followed by six black-and-white negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
+        <div class="film-track" style="--frames: 6">
+          <img src="film/apollo-11.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
         </div>
       </div>
     </section>
 
-    <section class="scene" aria-label="Flag over the Reichstag" data-frames="7">
+    <section class="scene" aria-label="Flag over the Reichstag" data-frames="6">
       <div class="strip-controls" hidden>
         <button type="button" data-direction="-1" aria-label="Scroll Reichstag strip left" aria-controls="reichstag-strip">←</button>
         <button type="button" data-direction="1" aria-label="Scroll Reichstag strip right" aria-controls="reichstag-strip">→</button>
       </div>
       <div class="film-scroll" id="reichstag-strip" role="region" tabindex="0" aria-label="Flag over the Reichstag film strip">
-        <div class="film-track" style="--frames: 7">
-          <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/reichstag.webp" width="7860" height="1200" alt="An unexposed frame followed by six black-and-white negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
+        <div class="film-track" style="--frames: 6">
+          <img src="film/reichstag.webp" width="7860" height="1200" alt="Six black-and-white negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
         </div>
       </div>
     </section>
 
-    <section class="scene" aria-label="Lunch atop a skyscraper" data-frames="8">
+    <section class="scene" aria-label="Lunch atop a skyscraper" data-frames="7">
       <div class="strip-controls" hidden>
         <button type="button" data-direction="-1" aria-label="Scroll skyscraper strip left" aria-controls="skyscraper-strip">←</button>
         <button type="button" data-direction="1" aria-label="Scroll skyscraper strip right" aria-controls="skyscraper-strip">→</button>
       </div>
       <div class="film-scroll" id="skyscraper-strip" role="region" tabindex="0" aria-label="Lunch atop a skyscraper film strip">
-        <div class="film-track" style="--frames: 8">
-          <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/skyscraper.webp" width="9170" height="1200" alt="An unexposed frame followed by seven black-and-white negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
+        <div class="film-track" style="--frames: 7">
+          <img src="film/skyscraper.webp" width="9170" height="1200" alt="Seven black-and-white negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
         </div>
       </div>
     </section>
 
-    <section class="scene" aria-label="Tank man" data-frames="6">
+    <section class="scene" aria-label="Tank man" data-frames="5">
       <div class="strip-controls" hidden>
         <button type="button" data-direction="-1" aria-label="Scroll Tank man strip left" aria-controls="tank-strip">←</button>
         <button type="button" data-direction="1" aria-label="Scroll Tank man strip right" aria-controls="tank-strip">→</button>
       </div>
       <div class="film-scroll" id="tank-strip" role="region" tabindex="0" aria-label="Tank man film strip">
-        <div class="film-track" style="--frames: 6">
-          <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/tank-man.webp" width="6550" height="1200" alt="An unexposed frame followed by five black-and-white negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
+        <div class="film-track" style="--frames: 5">
+          <img src="film/tank-man.webp" width="6550" height="1200" alt="Five black-and-white negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
         </div>
       </div>
     </section>
@@ -175,8 +155,7 @@
     const track = viewport.querySelector('.film-track');
     const frameCount = Number(scene.dataset.frames);
     const buttons = scene.querySelectorAll('button');
-    // Open on the first photograph, keeping the blank frame to its left.
-    let frameIndex = 1;
+    let frameIndex = 0;
     let navigating = false;
 
     // Snap to each tile in the continuous strip without altering the image.
@@ -199,6 +178,8 @@
     }
 
     function frameOffset(index) {
+      // Keep the first frame at the text margin; center subsequent frames.
+      if (index === 0) return 0;
       const inset = track.getBoundingClientRect().left - viewport.getBoundingClientRect().left + viewport.scrollLeft;
       return inset + (index + 0.5) * frameWidth() - viewport.clientWidth / 2;
     }
@@ -230,9 +211,7 @@
       }
     });
     viewport.addEventListener('scroll', () => {
-      const step = frameWidth();
-      const start = frameOffset(0);
-      const distance = index => Math.abs(viewport.scrollLeft - Math.max(0, start + index * step));
+      const distance = index => Math.abs(viewport.scrollLeft - Math.max(0, frameOffset(index)));
       if (distance(frameIndex) <= 1) navigating = false;
       if (!navigating) {
         frameIndex = 0;

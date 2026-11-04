@@ -73,11 +73,7 @@
       bottom: 15%;
       left: calc(100% * 25 / 1310);
       width: calc(100% * 1260 / 1310);
-      /* Slight base density and texture, like developed, unexposed negative film. */
-      background:
-        radial-gradient(ellipse at 45% 40%, rgb(245 245 245 / 94%), rgb(222 222 222 / 94%)),
-        url('film/35mm-empty.png') center / calc(100% * 1310 / 1260) calc(100% * 1201 / 840) no-repeat;
-      box-shadow: inset 0 0 6px rgb(0 0 0 / 12%);
+      background: #000;
     }
     .film-track img {
       display: block;
@@ -179,7 +175,8 @@
     const track = viewport.querySelector('.film-track');
     const frameCount = Number(scene.dataset.frames);
     const buttons = scene.querySelectorAll('button');
-    let frameIndex = 0;
+    // Open on the first photograph, keeping the blank frame to its left.
+    let frameIndex = 1;
     let navigating = false;
 
     // Snap to each tile in the continuous strip without altering the image.
@@ -249,7 +246,7 @@
       navigating = false;
     }, { passive: true }));
     new ResizeObserver(() => goToFrame(frameIndex, 'instant')).observe(viewport);
-    updateControls();
+    goToFrame(frameIndex, 'instant');
   });
 })();
 </script>

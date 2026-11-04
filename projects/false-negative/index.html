@@ -73,7 +73,11 @@
       bottom: 15%;
       left: calc(100% * 25 / 1310);
       width: calc(100% * 1260 / 1310);
-      background: #fff;
+      /* Slight base density and texture, like developed, unexposed negative film. */
+      background:
+        radial-gradient(ellipse at 45% 40%, rgb(245 245 245 / 94%), rgb(222 222 222 / 94%)),
+        url('film/35mm-empty.png') center / calc(100% * 1310 / 1260) calc(100% * 1201 / 840) no-repeat;
+      box-shadow: inset 0 0 6px rgb(0 0 0 / 12%);
     }
     .film-track img {
       display: block;
@@ -121,7 +125,7 @@
       <div class="film-scroll" id="apollo-strip" role="region" tabindex="0" aria-label="Apollo 11 moonlanding film strip">
         <div class="film-track" style="--frames: 7">
           <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/apollo-11.webp" width="7860" height="1200" alt="A blank white frame followed by six black-and-white negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
+          <img src="film/apollo-11.webp" width="7860" height="1200" alt="An unexposed frame followed by six black-and-white negative frames of the altered Apollo 11 scenes, in their selected film orientation." fetchpriority="high" draggable="false" />
         </div>
       </div>
     </section>
@@ -134,7 +138,7 @@
       <div class="film-scroll" id="reichstag-strip" role="region" tabindex="0" aria-label="Flag over the Reichstag film strip">
         <div class="film-track" style="--frames: 7">
           <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/reichstag.webp" width="7860" height="1200" alt="A blank white frame followed by six black-and-white negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
+          <img src="film/reichstag.webp" width="7860" height="1200" alt="An unexposed frame followed by six black-and-white negative frames of the altered flag-raising scenes over the Reichstag, preserving the sideways portrait frames." loading="lazy" decoding="async" draggable="false" />
         </div>
       </div>
     </section>
@@ -147,7 +151,7 @@
       <div class="film-scroll" id="skyscraper-strip" role="region" tabindex="0" aria-label="Lunch atop a skyscraper film strip">
         <div class="film-track" style="--frames: 8">
           <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/skyscraper.webp" width="9170" height="1200" alt="A blank white frame followed by seven black-and-white negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
+          <img src="film/skyscraper.webp" width="9170" height="1200" alt="An unexposed frame followed by seven black-and-white negative frames of workers above Manhattan, in the selected sequence." loading="lazy" decoding="async" draggable="false" />
         </div>
       </div>
     </section>
@@ -160,7 +164,7 @@
       <div class="film-scroll" id="tank-strip" role="region" tabindex="0" aria-label="Tank man film strip">
         <div class="film-track" style="--frames: 6">
           <span class="blank-frame" aria-hidden="true"></span>
-          <img src="film/tank-man.webp" width="6550" height="1200" alt="A blank white frame followed by five black-and-white negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
+          <img src="film/tank-man.webp" width="6550" height="1200" alt="An unexposed frame followed by five black-and-white negative frames of the altered Tank man street scenes, moving from distant views to a close view." loading="lazy" decoding="async" draggable="false" />
         </div>
       </div>
     </section>
